@@ -2,9 +2,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.Audio;
+using static System.Net.Mime.MediaTypeNames;
 
 public class GameManager : MonoBehaviour
 {
+    //audio settings
+    [SerializeField] private Slider bgm;
+    [SerializeField] private Slider sfx;
+    [SerializeField] private AudioMixer mixer;
+
     public static GameManager instance;
     [SerializeField] private TextMeshProUGUI DayText;
     [SerializeField] private TextMeshProUGUI TimerText;
@@ -12,8 +19,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject settingsPanel;
 
     private int currentDay = 1;
-    private float currentTime = 540; // 09:00 in minutes (9 * 60)
-    private float endTime = 1260; // 21:00 in minutes (21 * 60)
+    private float currentTime = 540f; // 09:00 in minutes (9 * 60)
+    private float endTime = 1260f; // 21:00 in minutes (21 * 60)
     private float timeScale = 5f;
 
     private void Awake()
@@ -30,6 +37,15 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        //audio settings
+        if (!PlayerPrefs.HasKey("bgm") || !PlayerPrefs.HasKey("sfx"))
+        {
+            PlayerPrefs.SetFloat("bgm", 1);
+            PlayerPrefs.SetFloat("sfx", 1);
+        }
+        bgm.value = PlayerPrefs.GetFloat("bgm");
+        sfx.value = PlayerPrefs.GetFloat("sfx");
+
         UpdateDayText();
         UpdateTimer();
     }
@@ -60,11 +76,17 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        //audio settings
+        PlayerPrefs.SetFloat("bgm", bgm.value);
+        PlayerPrefs.SetFloat("sfx", sfx.value);
+        mixer.SetFloat("bgm", Mathf.Log10(PlayerPrefs.GetFloat("bgm")) * 20);
+        mixer.SetFloat("sfx", Mathf.Log10(PlayerPrefs.GetFloat("sfx")) * 20);
+
         currentTime += Time.deltaTime / timeScale * 15;
 
         if (currentTime >= endTime)
         {
-            currentTime = 540;
+            currentTime = 540f;
             currentDay++;
             UpdateDayText();
         }
@@ -74,7 +96,14 @@ public class GameManager : MonoBehaviour
 
     private void UpdateDayText()
     {
-        DayText.text = "Day " + currentDay.ToString();
+        if (!PlayerPrefs.HasKey("language") || PlayerPrefs.GetString("language") == "Indonesia")
+        {
+            DayText.text = "Hari: " + currentDay.ToString();
+        }
+        else if (PlayerPrefs.GetString("language") == "English")
+        {
+            DayText.text = "Day: " + currentDay.ToString();
+        }
     }
 
     private void UpdateTimer()

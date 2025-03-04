@@ -6,6 +6,7 @@ using System.Collections;
 
 public class Customer : MonoBehaviour
 {
+    //disini dialognya 1 aja gpp, nnt ganti bahasanya itu cmn bs di main menu soalnya
     public List<string> dialogues;
     public string orderName;
     public List<string> ingredients;
@@ -76,7 +77,7 @@ public class Customer : MonoBehaviour
             dialogueText.text = dialogues[dialogues.Count - 1].ToString();
             currentIdx++;
             isWaitingForOrder = false;
-            StartCoroutine(CompleteOrderAfterDelay(2f));
+            StartCoroutine(CompleteOrderAfterDelay(3f));
         }
     }
 

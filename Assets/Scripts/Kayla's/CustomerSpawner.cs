@@ -11,7 +11,9 @@ public class CustomerSpawner : MonoBehaviour
     [SerializeField] private GameObject customerPrefab;
     [Serializable] public struct CustomerDialogues
     {
-        [TextArea] public List<string> dialogue;
+        //indonesia sm b.ing
+        [TextArea] public List<string> dialogueIND;
+        [TextArea] public List<string> dialogueENG;
     };
     [SerializeField] private CustomerDialogues[] customerDialogues;
     [SerializeField] private CustomerDialogues currentCustomerDialogues;
@@ -20,8 +22,10 @@ public class CustomerSpawner : MonoBehaviour
     // [SerializeField] private float spawnInterval = 5f;
     [Serializable] public struct Orders
     {
-        public string orderName;
-        public List<string> ingredients;
+        public string orderName_IND;
+        public string orderName_ENG;
+        public List<string> ingredientsIND;
+        public List<string> ingredientsENG;
         public float price;
     }
     [SerializeField] private Orders[] orders;
@@ -35,7 +39,9 @@ public class CustomerSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        //di aku bisa kok, mungkin unitymu lg ngebug kali :')
+        //btw ku bru nyadar, kt kan nnt mau di mobile. Code ini km mau pake buat apa? yg input spacebar
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("hehe");
             if (currentCustomer != null)
@@ -62,13 +68,24 @@ public class CustomerSpawner : MonoBehaviour
             currentCustomerDialogues = customerDialogues[randomIdxDialogue];
             currentOrder = orders[randomIdxOrder];
             
-            GameObject customer = Instantiate(customerPrefab, spawnPoint.position, Quaternion.identity);
-            customer.transform.SetParent(canvas.transform, false);
+            GameObject customer = Instantiate(customerPrefab, canvas.transform);
+            //customer.transform.localScale = Vector3.one;
+            //customer.transform.SetParent(canvas.transform, false);
 
             customer.GetComponent<Image>().sprite = customerSprites[randomIdxSprite];
-            customer.GetComponent<Customer>().dialogues = currentCustomerDialogues.dialogue;
-            customer.GetComponent<Customer>().orderName = currentOrder.orderName;
-            customer.GetComponent<Customer>().ingredients = currentOrder.ingredients;
+            if (!PlayerPrefs.HasKey("language") || PlayerPrefs.GetString("language") == "Indonesia")
+            {
+                customer.GetComponent<Customer>().dialogues = currentCustomerDialogues.dialogueIND;
+                customer.GetComponent<Customer>().orderName = currentOrder.orderName_IND;
+                customer.GetComponent<Customer>().ingredients = currentOrder.ingredientsIND;
+            }
+            else
+            {
+                customer.GetComponent<Customer>().dialogues = currentCustomerDialogues.dialogueENG;
+                customer.GetComponent<Customer>().orderName = currentOrder.orderName_ENG;
+                customer.GetComponent<Customer>().ingredients = currentOrder.ingredientsENG;
+            }
+
             customer.GetComponent<Customer>().price = currentOrder.price;
             customer.GetComponent<Customer>().OnOrderCompleted += HandleOrderCompleted;
             currentCustomer = customer;

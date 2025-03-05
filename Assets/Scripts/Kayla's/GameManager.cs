@@ -50,29 +50,27 @@ public class GameManager : MonoBehaviour
         UpdateTimer();
     }
 
-    public void OpenPause()
+
+    public bool isPaused = false;
+    public void Pause()
     {
-        pausePanel.SetActive(true);
-        Time.timeScale = 0f;
+        isPaused = !isPaused;
+        pausePanel.SetActive(isPaused);
+        if (isPaused)
+        {
+            Time.timeScale = 0f;
+        }
+        Time.timeScale = isPaused ? 0 : 1;
     }
 
-    public void ClosePause()
-    {
-        pausePanel.SetActive(false);
-        Time.timeScale = 1f;
-    }
-
+    bool isSettings = false;
     public void OpenSettings()
     {
-        pausePanel.SetActive(false);
-        settingsPanel.SetActive(true);
+        isSettings = !isSettings;
+        pausePanel.SetActive(!isSettings);
+        settingsPanel.SetActive(isSettings);
     }
 
-    public void CloseSettings()
-    {
-        settingsPanel.SetActive(false);
-        pausePanel.SetActive(true);
-    }
 
     private void Update()
     {

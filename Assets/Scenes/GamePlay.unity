@@ -4038,9 +4038,10 @@ MonoBehaviour:
   customerPrefab: {fileID: 6401807441409568572, guid: 780e62900902ff24ebd1166ed3648bdd, type: 3}
   customerDialogues:
   - dialogueIND:
-    - indonesiaaaaa
-    - raya
-    - selamanya
+    - Bakso dong
+    - Bakso lo, masa ga paham
+    - BAKSOOOO
+    - '****'
     - hehe makasih
     dialogueENG:
     - "Hi! I heard you have new set menus today. Can I try one? I\u2019m in the mood
@@ -4051,9 +4052,10 @@ MonoBehaviour:
       be baby, please.
     - "UHHH! Nevermind I\u2019ll just order elsewhere"
   - dialogueIND:
-    - kenapaaaa
-    - hidup itu
-    - susah banget
+    - seblak dong
+    - seblak masa ga tau
+    - se-blak tau kan seblak?
+    - dahla cape
     - terima kasih sudah dengarin :')
     dialogueENG:
     - "Hi! I heard you have new set menus today. Can I try one? I\u2019m in the mood
@@ -4064,9 +4066,10 @@ MonoBehaviour:
       be baby, please.
     - "UHHH! Nevermind I\u2019ll just order elsewhere"
   - dialogueIND:
-    - walawe
-    - ini
-    - kenapa
+    - anakku mau batagor
+    - batagor dengan saus kacang
+    - kurang jelas gimana sih, batagor. saus. kacang.
+    - hadeh...
     - byeeee
     dialogueENG:
     - "Hi! I heard you have new set menus today. Can I try one? I\u2019m in the mood

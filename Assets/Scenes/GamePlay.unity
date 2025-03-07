@@ -232,7 +232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &97375357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1192,6 +1192,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5279684857279148064, guid: 780e62900902ff24ebd1166ed3648bdd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1619426714}
     - target: {fileID: 6401807441409568572, guid: 780e62900902ff24ebd1166ed3648bdd, type: 3}
       propertyPath: m_Name
       value: Customer
@@ -4035,9 +4039,35 @@ MonoBehaviour:
   customerDialogues:
   - dialogueIND:
     - indonesiaaaaa
-    - .....
-    - .....
-    - .....
+    - raya
+    - selamanya
+    - hehe makasih
+    dialogueENG:
+    - "Hi! I heard you have new set menus today. Can I try one? I\u2019m in the mood
+      for something brothy, nothing too dry."
+    - I would like to order 1 set of your special soup menu for me and my soon to
+      be baby, please.
+    - I would like to order 1 set of your special soup menu for me and my soon to
+      be baby, please.
+    - "UHHH! Nevermind I\u2019ll just order elsewhere"
+  - dialogueIND:
+    - kenapaaaa
+    - hidup itu
+    - susah banget
+    - terima kasih sudah dengarin :')
+    dialogueENG:
+    - "Hi! I heard you have new set menus today. Can I try one? I\u2019m in the mood
+      for something brothy, nothing too dry."
+    - I would like to order 1 set of your special soup menu for me and my soon to
+      be baby, please.
+    - I would like to order 1 set of your special soup menu for me and my soon to
+      be baby, please.
+    - "UHHH! Nevermind I\u2019ll just order elsewhere"
+  - dialogueIND:
+    - walawe
+    - ini
+    - kenapa
+    - byeeee
     dialogueENG:
     - "Hi! I heard you have new set menus today. Can I try one? I\u2019m in the mood
       for something brothy, nothing too dry."

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine.UI;
-// using System.Diagnostics;
 
 public class CustomerSpawner : MonoBehaviour
 {
@@ -35,20 +34,6 @@ public class CustomerSpawner : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SpawnCustomer());
-    }
-
-    private void Update()
-    {
-        //di aku bisa kok, mungkin unitymu lg ngebug kali :')
-        //btw ku bru nyadar, kt kan nnt mau di mobile. Code ini km mau pake buat apa? yg input spacebar
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("hehe");
-            if (currentCustomer != null)
-            {
-                currentCustomer.GetComponent<Customer>().SubmitOrder();
-            }
-        }
     }
 
     private IEnumerator SpawnCustomer()
@@ -99,5 +84,13 @@ public class CustomerSpawner : MonoBehaviour
     private void HandleOrderCompleted()
     {
         currentCustomer = null;
+    }
+
+    public void SubmitOrderNow()
+    {
+        if (currentCustomer != null)
+        {
+            currentCustomer.GetComponent<Customer>().SubmitOrder();
+        }
     }
 }

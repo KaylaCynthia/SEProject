@@ -13,6 +13,8 @@ public class Customer : MonoBehaviour
     public float price;
     public string currentOrder;
     private TextMeshProUGUI dialogueText;
+    private Button OKButton;
+    private Button WHATButton;
     private GameObject dialogueBubble;
     private int currentIdx;
     private bool isWaitingForOrder = false;
@@ -24,18 +26,20 @@ public class Customer : MonoBehaviour
     {
         dialogueBubble = transform.Find("DialogueBubble").gameObject;
         dialogueText = dialogueBubble.transform.Find("DialogueText").GetComponent<TextMeshProUGUI>();
+        OKButton = transform.Find("OKButton").GetComponent<Button>();
+        WHATButton = transform.Find("WHATButton").GetComponent<Button>();
         StartDialogue();
     }
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            if (!isWaitingForOrder)
-            {
-                NextDialogue();
-            }
-        }
+        // if(Input.GetMouseButtonDown(0))
+        // {
+        //     if (!isWaitingForOrder)
+        //     {
+        //         NextDialogue();
+        //     }
+        // }
     }
 
     public void StartDialogue()
@@ -43,11 +47,10 @@ public class Customer : MonoBehaviour
         currentIdx = 0;
         dialogueBubble.SetActive(true);
         dialogueText.text = dialogues[currentIdx];
-        if (currentIdx == dialogues.Count - 2)
-        {
-            isWaitingForOrder = true;
-            StartCoroutine(CloseDialogue());
-        }
+        isWaitingForOrder = true;
+        OKButton.interactable = true;
+        WHATButton.interactable = true;
+        // StartCoroutine(CloseDialogue());
     }
 
     public void NextDialogue()
@@ -59,7 +62,7 @@ public class Customer : MonoBehaviour
 
             if (currentIdx == dialogues.Count - 2)
             {
-                isWaitingForOrder = true;
+                CustomerLeaves();
             }
         }
         else
@@ -70,15 +73,26 @@ public class Customer : MonoBehaviour
 
     public void SubmitOrder()
     {
-        Debug.Log("This is passed");
         if (isWaitingForOrder)
         {
+            OKButton.interactable = false;
+            WHATButton.interactable = false;
             dialogueBubble.SetActive(true);
             dialogueText.text = dialogues[dialogues.Count - 1].ToString();
-            currentIdx++;
+            currentIdx = dialogues.Count - 1;
             isWaitingForOrder = false;
-            StartCoroutine(CompleteOrderAfterDelay(3f));
+            StartCoroutine(CompleteOrderAfterDelay(2f));
         }
+    }
+
+    public void CustomerLeaves()
+    {
+        dialogueText.text = dialogues[dialogues.Count - 2].ToString();
+        currentIdx = dialogues.Count - 2;
+        isWaitingForOrder = false;
+        OKButton.interactable = false;
+        WHATButton.interactable = false;
+        StartCoroutine(CompleteOrderAfterDelay(2f));
     }
 
     private IEnumerator CompleteOrderAfterDelay(float delay)

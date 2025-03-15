@@ -726,7 +726,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8374016062083413695}
         m_TargetAssemblyTypeName: Customer, Assembly-CSharp
         m_MethodName: SubmitOrder
         m_Mode: 1

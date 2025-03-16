@@ -6,6 +6,8 @@ using System.Collections;
 
 public class Customer : MonoBehaviour
 {
+    private TextMeshProUGUI patienceText;
+    public float patience = 100f;
     //disini dialognya 1 aja gpp, nnt ganti bahasanya itu cmn bs di main menu soalnya
     public List<string> dialogues;
     public string orderName;
@@ -24,6 +26,7 @@ public class Customer : MonoBehaviour
 
     private void Start()
     {
+        patienceText = GameObject.Find("PatienceText").GetComponent<TextMeshProUGUI>();
         dialogueBubble = transform.Find("DialogueBubble").gameObject;
         dialogueText = dialogueBubble.transform.Find("DialogueText").GetComponent<TextMeshProUGUI>();
         OKButton = transform.Find("OKButton").GetComponent<Button>();
@@ -33,6 +36,7 @@ public class Customer : MonoBehaviour
 
     private void Update()
     {
+        patienceText.text = patience.ToString() + "%";
         // if(Input.GetMouseButtonDown(0))
         // {
         //     if (!isWaitingForOrder)

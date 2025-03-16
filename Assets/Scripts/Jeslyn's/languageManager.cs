@@ -14,11 +14,11 @@ public class languageManager : MonoBehaviour
     void Awake()
     {
         text = GetComponent<TextMeshProUGUI>();
-        if (!PlayerPrefs.HasKey("language") || PlayerPrefs.GetString("language") == "Indonesia")
+        if (PlayerPrefs.GetString("language") == "Indonesia")
         {
             text.text = indonesia;
         }
-        else if (PlayerPrefs.GetString("language") == "English")
+        else if (!PlayerPrefs.HasKey("language") || PlayerPrefs.GetString("language") == "English")
         {
             text.text = english;
         }
@@ -29,11 +29,11 @@ public class languageManager : MonoBehaviour
     {
         if (!onlyInStart)
         {
-            if (!PlayerPrefs.HasKey("language") || PlayerPrefs.GetString("language") == "Indonesia")
+            if (PlayerPrefs.GetString("language") == "Indonesia")
             {
                 text.text = indonesia;
             }
-            else if(PlayerPrefs.GetString("language") == "English")
+            else if(!PlayerPrefs.HasKey("language") || PlayerPrefs.GetString("language") == "English")
             {
                 text.text = english;
             }

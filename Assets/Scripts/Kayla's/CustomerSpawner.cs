@@ -8,6 +8,7 @@ public class CustomerSpawner : MonoBehaviour
 {
     [SerializeField] private List<Sprite> customerSprites;
     [SerializeField] private GameObject customerPrefab;
+    order_notes order_note;
     [Serializable] public struct CustomerDialogues
     {
         //indonesia sm b.ing
@@ -25,6 +26,10 @@ public class CustomerSpawner : MonoBehaviour
         public string orderName_ENG;
         public List<string> ingredientsIND;
         public List<string> ingredientsENG;
+        [TextArea] public List<string> stepsIND;
+        [TextArea] public List<string> stepsENG;
+        public List<string> toolsENG;
+        public List<string> toolsIND;
         public float price;
     }
     [SerializeField] private Orders[] orders;
@@ -33,6 +38,7 @@ public class CustomerSpawner : MonoBehaviour
 
     private void Start()
     {
+        order_note = FindObjectOfType<order_notes>();
         StartCoroutine(SpawnCustomer());
     }
 
@@ -48,27 +54,32 @@ public class CustomerSpawner : MonoBehaviour
 
             int randomIdxSprite = UnityEngine.Random.Range(0, customerSprites.Count);
             int randomIdxDialogue = UnityEngine.Random.Range(0, customerDialogues.Length);
-            int randomIdxOrder = UnityEngine.Random.Range(0, orders.Length);
+            //int randomIdxOrder = UnityEngine.Random.Range(0, orders.Length);
+            //kt samain length dialog sm ordernya, jd kt cmn nyari random idx dialogue aja, gk perlu ordernya jg
 
             currentCustomerDialogues = customerDialogues[randomIdxDialogue];
-            currentOrder = orders[randomIdxOrder];
-            
+            currentOrder = orders[randomIdxDialogue];
+            //currentOrder = orders[randomIdxOrder];
+            //revisi, kt samain aja index dialog sm ordernya, soalnya kl dibedain nnt ordernya gk sesuai sm dialognya :)
+
             GameObject customer = Instantiate(customerPrefab, canvas.transform);
             //customer.transform.localScale = Vector3.one;
             //customer.transform.SetParent(canvas.transform, false);
 
             customer.GetComponent<Image>().sprite = customerSprites[randomIdxSprite];
-            if (!PlayerPrefs.HasKey("language") || PlayerPrefs.GetString("language") == "Indonesia")
+            if (PlayerPrefs.GetString("language") == "Indonesia")
             {
                 customer.GetComponent<Customer>().dialogues = currentCustomerDialogues.dialogueIND;
                 customer.GetComponent<Customer>().orderName = currentOrder.orderName_IND;
                 customer.GetComponent<Customer>().ingredients = currentOrder.ingredientsIND;
+                order_note.SetOrder(currentOrder.stepsIND, currentOrder.ingredientsIND, currentOrder.toolsIND);
             }
-            else
+            else if(!PlayerPrefs.HasKey("language") || PlayerPrefs.GetString("language") == "English")
             {
                 customer.GetComponent<Customer>().dialogues = currentCustomerDialogues.dialogueENG;
                 customer.GetComponent<Customer>().orderName = currentOrder.orderName_ENG;
                 customer.GetComponent<Customer>().ingredients = currentOrder.ingredientsENG;
+                order_note.SetOrder(currentOrder.stepsENG, currentOrder.ingredientsENG, currentOrder.toolsENG);
             }
 
             customer.GetComponent<Customer>().price = currentOrder.price;

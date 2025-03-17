@@ -680,6 +680,41 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -700}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &165158199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 165158200}
+  m_Layer: 5
+  m_Name: FoodInventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &165158200
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165158199}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 853198331}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &184693675
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,7 +1403,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &417879882
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1472,6 +1507,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab64c0e9bf4840d4fa41642e686712fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotPosition: {x: 0, y: 0}
+  isParent: 1
+  isClicked: 0
+  released: 0
 --- !u!114 &417879886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1857,7 +1896,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &483702162
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1961,6 +2000,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab64c0e9bf4840d4fa41642e686712fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotPosition: {x: 0, y: 0}
+  isParent: 1
+  isClicked: 0
+  released: 0
 --- !u!114 &483702166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4263,6 +4306,7 @@ RectTransform:
   - {fileID: 1440621880}
   - {fileID: 957706024}
   - {fileID: 1763799527}
+  - {fileID: 165158200}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -10434,7 +10478,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1584822354
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10504,6 +10548,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab64c0e9bf4840d4fa41642e686712fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotPosition: {x: 0, y: 0}
+  isParent: 1
+  isClicked: 0
+  released: 0
 --- !u!61 &1584822358
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11018,16 +11066,18 @@ MonoBehaviour:
     - spinach (1/2 bunches)
     - egg (1 egg)
     - water (300 ml)
-    - boxed milk (1 box)
+    - milk (1 box)
     - banana (1 piece)
     stepsIND:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
+    - potong ayam dan wortel kecil-kecil
+    - cincang bawang putih
+    - 'rebus air, lalu masukkan ayam, wortel, bawang putih, bayam, dan telur
+
+'
+    - tambahkan garam dan merica
+    - aduk hingga matang
+    - potong pisang kecil-kecil
+    - kemas sup, nasi, susu, dan pisang ke dalam bento
     stepsENG:
     - cut chicken and carrot to small dices
     - mince garlic
@@ -11040,21 +11090,81 @@ MonoBehaviour:
     - cut banana into small pieces
     - pack the soup, rice, milk, and banana into the bento box
     toolsENG:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
+    - cutting board
+    - cutting board
+    - 'saucepan  '
+    - 'saucepan  '
+    - 'saucepan  '
+    - cutting board
+    - bento box
     toolsIND:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
+    - talenan
+    - talenan
+    - panci
+    - panci
+    - panci
+    - talenan
+    - tempat bento
+    price: 10
+  - orderName_IND: soup set (mom)
+    orderName_ENG: 'soup set (mom) '
+    ingredientsIND:
+    - nasi (150 gr)
+    - dada ayam (100 gr)
+    - wortel (1 bagian)
+    - bawang putih (2 siung)
+    - bayam (1/2 ikat)
+    - telur (1 butir)
+    - air (300 ml)
+    - susu kotak (1 kotak)
+    - pisang (1 bagian)
+    ingredientsENG:
+    - rice (150 gr)
+    - chicken breast (100 gr)
+    - carrot (1 piece)
+    - garlic (2 pieces)
+    - spinach (1/2 bunches)
+    - egg (1 egg)
+    - water (300 ml)
+    - milk (1 box)
+    - banana (1 piece)
+    stepsIND:
+    - potong ayam dan wortel kecil-kecil
+    - cincang bawang putih
+    - 'rebus air, lalu masukkan ayam, wortel, bawang putih, bayam, dan telur
+
+'
+    - tambahkan garam dan merica
+    - aduk hingga matang
+    - potong pisang kecil-kecil
+    - kemas sup, nasi, susu, dan pisang ke dalam bento
+    stepsENG:
+    - cut chicken and carrot to small dices
+    - mince garlic
+    - 'boil water and add diced chicken, diced carrot, minced garlic, spinach, and
+      egg
+
+'
+    - sprinkle some salt and pepper
+    - stir the soup until cooked
+    - cut banana into small pieces
+    - pack the soup, rice, milk, and banana into the bento box
+    toolsENG:
+    - cutting board
+    - cutting board
+    - 'saucepan  '
+    - 'saucepan  '
+    - 'saucepan  '
+    - cutting board
+    - bento box
+    toolsIND:
+    - talenan
+    - talenan
+    - panci
+    - panci
+    - panci
+    - talenan
+    - tempat bento
     price: 10
   - orderName_IND: soup set (kid)
     orderName_ENG: soup set (kid)
@@ -11076,16 +11186,18 @@ MonoBehaviour:
     - spinach (10 strands)
     - egg (1/4 gr)
     - water (150 ml)
-    - boxed milk (1 box)
+    - milk (1 box)
     - banana (1/2 piece)
     stepsIND:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
+    - potong ayam dan wortel kecil-kecil
+    - cincang bawang putih
+    - 'rebus air, lalu masukkan ayam, wortel, bawang putih, bayam, dan telur
+
+'
+    - tambahkan garam dan merica
+    - aduk hingga matang
+    - potong pisang kecil-kecil
+    - kemas sup, nasi, susu, dan pisang ke dalam bento
     stepsENG:
     - cut chicken and carrot to small dices
     - mince garlic
@@ -11098,21 +11210,81 @@ MonoBehaviour:
     - cut banana into small pieces
     - pack the soup, rice, milk, and banana into the bento box
     toolsENG:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
+    - cutting board
+    - cutting board
+    - 'saucepan  '
+    - 'saucepan  '
+    - 'saucepan  '
+    - cutting board
+    - bento box
     toolsIND:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
+    - talenan
+    - talenan
+    - panci
+    - panci
+    - panci
+    - talenan
+    - tempat bento
+    price: 10
+  - orderName_IND: soup set (kid)
+    orderName_ENG: soup set (kid)
+    ingredientsIND:
+    - nasi (50 gr)
+    - dada ayam (15 gr)
+    - wortel (1/4 bagian)
+    - bawang putih (1/2 bagian)
+    - bayam (10 helai)
+    - telur (1/4 gr)
+    - air (150 ml)
+    - susu kotak (1 kotak)
+    - pisang (1/2 bagian)
+    ingredientsENG:
+    - rice (50 gr)
+    - chicken breast (15 gr)
+    - carrot (1/4 pieces)
+    - garlic (1/2 pieces)
+    - spinach (10 strands)
+    - egg (1/4 gr)
+    - water (150 ml)
+    - milk (1 box)
+    - banana (1/2 piece)
+    stepsIND:
+    - potong ayam dan wortel kecil-kecil
+    - cincang bawang putih
+    - 'rebus air, lalu masukkan ayam, wortel, bawang putih, bayam, dan telur
+
+'
+    - tambahkan garam dan merica
+    - aduk hingga matang
+    - potong pisang kecil-kecil
+    - kemas sup, nasi, susu, dan pisang ke dalam bento
+    stepsENG:
+    - cut chicken and carrot to small dices
+    - mince garlic
+    - 'boil water and add diced chicken, diced carrot, minced garlic, spinach, and
+      egg
+
+'
+    - sprinkle some salt and pepper
+    - stir the soup until cooked
+    - cut banana into small pieces
+    - pack the soup, rice, milk, and banana into the bento box
+    toolsENG:
+    - cutting board
+    - cutting board
+    - 'saucepan  '
+    - 'saucepan  '
+    - 'saucepan  '
+    - cutting board
+    - bento box
+    toolsIND:
+    - talenan
+    - talenan
+    - panci
+    - panci
+    - panci
+    - talenan
+    - tempat bento
     price: 10
   - orderName_IND: stir fry set (mom)
     orderName_ENG: stir fry set (mom)
@@ -11134,16 +11306,16 @@ MonoBehaviour:
     - carrot (1 piece)
     - garlic (2 pieces)
     - cooking oil (15 ml)
-    - boxed milk (1 box)
+    - milk (1 box)
     - orange (1 piece)
     stepsIND:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
+    - potong ayam, tempe, tahu, dan wortel kecil-kecil
+    - cincang bawang putih
+    - panaskan wajan dengan sedikit minyak
+    - tumis ayam, tempe, tahu, wortel, dan bawang putih
+    - tambahkan garam dan merica
+    - aduk hingga matang
+    - kemas tumisan, nasi, susu, dan jeruk ke dalam bento
     stepsENG:
     - cut chicken, tempe, tofu, and carrot to small dices
     - mince garlic
@@ -11156,21 +11328,79 @@ MonoBehaviour:
     - stir-fry until cooked
     - pack the stir-fry, rice, milk, and orange into the bento box
     toolsENG:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
+    - cutting board
+    - cutting board
+    - frying pan
+    - frying pan
+    - frying pan
+    - frying pan
+    - bento box
     toolsIND:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
+    - talenan
+    - talenan
+    - penggorengan
+    - penggorengan
+    - penggorengan
+    - penggorengan
+    - tempat bento
+    price: 10
+  - orderName_IND: stir fry set (mom)
+    orderName_ENG: stir fry set (mom)
+    ingredientsIND:
+    - nasi (150 gr)
+    - dada ayam (100 gr)
+    - tempe (1/2 balok)
+    - tahu (75 gr)
+    - wortel (1 bagian)
+    - bawang putih (2 siung)
+    - minyak (15 ml)
+    - susu kotak (1 kotak)
+    - jeruk (1 bagian)
+    ingredientsENG:
+    - rice (150 gr)
+    - chicken breast (100 gr)
+    - tempeh (1/2 block)
+    - tofu (75 gr)
+    - carrot (1 piece)
+    - garlic (2 pieces)
+    - cooking oil (15 ml)
+    - milk (1 box)
+    - orange (1 piece)
+    stepsIND:
+    - potong ayam, tempe, tahu, dan wortel kecil-kecil
+    - cincang bawang putih
+    - panaskan wajan dengan sedikit minyak
+    - tumis ayam, tempe, tahu, wortel, dan bawang putih
+    - tambahkan garam dan merica
+    - aduk hingga matang
+    - kemas tumisan, nasi, susu, dan jeruk ke dalam bento
+    stepsENG:
+    - cut chicken, tempe, tofu, and carrot to small dices
+    - mince garlic
+    - heat the pan with a little bit of oil
+    - 'add diced chicken, diced tempe, diced tofu, diced carrot, and minced garlic
+      to the hot pan
+
+'
+    - sprinkle some salt and pepper
+    - stir-fry until cooked
+    - pack the stir-fry, rice, milk, and orange into the bento box
+    toolsENG:
+    - cutting board
+    - cutting board
+    - frying pan
+    - frying pan
+    - frying pan
+    - frying pan
+    - bento box
+    toolsIND:
+    - talenan
+    - talenan
+    - penggorengan
+    - penggorengan
+    - penggorengan
+    - penggorengan
+    - tempat bento
     price: 10
   - orderName_IND: stir fry set (kid)
     orderName_ENG: stir fry set (kid)
@@ -11192,16 +11422,16 @@ MonoBehaviour:
     - carrot (1/3 piece)
     - garlic (2 pieces)
     - cooking oil (5 ml)
-    - boxed milk (1 box)
+    - milk (1 box)
     - orange (1/2 piece)
     stepsIND:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
+    - potong ayam, tempe, tahu, dan wortel kecil-kecil
+    - cincang bawang putih
+    - panaskan wajan dengan sedikit minyak
+    - tumis ayam, tempe, tahu, wortel, dan bawang putih
+    - tambahkan garam dan merica
+    - aduk hingga matang
+    - kemas tumisan, nasi, susu, dan jeruk ke dalam bento
     stepsENG:
     - cut chicken, tempe, tofu, and carrot to small dices
     - mince garlic
@@ -11214,21 +11444,21 @@ MonoBehaviour:
     - stir-fry until cooked
     - pack the stir-fry, rice, milk, and orange into the bento box
     toolsENG:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
+    - cutting board
+    - cutting board
+    - 'frying pan    '
+    - 'frying pan    '
+    - 'frying pan    '
+    - 'frying pan    '
+    - bento box
     toolsIND:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
+    - talenan
+    - talenan
+    - penggorengan
+    - penggorengan
+    - penggorengan
+    - penggorengan
+    - tempat bento
     price: 10
   - orderName_IND: stir fry set (kid)
     orderName_ENG: stir fry set (kid)
@@ -11250,16 +11480,16 @@ MonoBehaviour:
     - carrot (1/3 piece)
     - garlic (2 pieces)
     - cooking oil (5 ml)
-    - boxed milk (1 box)
+    - milk (1 box)
     - orange (1/2 piece)
     stepsIND:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
+    - potong ayam, tempe, tahu, dan wortel kecil-kecil
+    - cincang bawang putih
+    - panaskan wajan dengan sedikit minyak
+    - tumis ayam, tempe, tahu, wortel, dan bawang putih
+    - tambahkan garam dan merica
+    - aduk hingga matang
+    - kemas tumisan, nasi, susu, dan jeruk ke dalam bento
     stepsENG:
     - cut chicken, tempe, tofu, and carrot to small dices
     - mince garlic
@@ -11272,195 +11502,21 @@ MonoBehaviour:
     - stir-fry until cooked
     - pack the stir-fry, rice, milk, and orange into the bento box
     toolsENG:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
+    - cutting board
+    - cutting board
+    - 'frying pan    '
+    - 'frying pan    '
+    - 'frying pan    '
+    - 'frying pan    '
+    - bento box
     toolsIND:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    price: 10
-  - orderName_IND: stir fry set (kid)
-    orderName_ENG: stir fry set (kid)
-    ingredientsIND:
-    - nasi (50 gr)
-    - dada ayam (20 gr)
-    - tempe (25 gr)
-    - tahu (40 gr)
-    - wortel (1/3 bagian)
-    - bawang putih (1/2 bagian)
-    - minyak (5 ml)
-    - susu kotak (1 kotak)
-    - jeruk (1/2 bagian)
-    ingredientsENG:
-    - rice (50 gr)
-    - chicken breast (20 gr)
-    - tempeh (25 gr)
-    - tofu (40 gr)
-    - carrot (1/3 piece)
-    - garlic (2 pieces)
-    - cooking oil (5 ml)
-    - boxed milk (1 box)
-    - orange (1/2 piece)
-    stepsIND:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    stepsENG:
-    - cut chicken, tempe, tofu, and carrot to small dices
-    - mince garlic
-    - heat the pan with a little bit of oil
-    - 'add diced chicken, diced tempe, diced tofu, diced carrot, and minced garlic
-      to the hot pan
-
-'
-    - sprinkle some salt and pepper
-    - stir-fry until cooked
-    - pack the stir-fry, rice, milk, and orange into the bento box
-    toolsENG:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    toolsIND:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    price: 10
-  - orderName_IND: stir fry set (kid)
-    orderName_ENG: stir fry set (kid)
-    ingredientsIND:
-    - nasi (50 gr)
-    - dada ayam (20 gr)
-    - tempe (25 gr)
-    - tahu (40 gr)
-    - wortel (1/3 bagian)
-    - bawang putih (1/2 bagian)
-    - minyak (5 ml)
-    - susu kotak (1 kotak)
-    - jeruk (1/2 bagian)
-    ingredientsENG:
-    - rice (50 gr)
-    - chicken breast (20 gr)
-    - tempeh (25 gr)
-    - tofu (40 gr)
-    - carrot (1/3 piece)
-    - garlic (2 pieces)
-    - cooking oil (5 ml)
-    - boxed milk (1 box)
-    - orange (1/2 piece)
-    stepsIND:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    stepsENG:
-    - cut chicken, tempe, tofu, and carrot to small dices
-    - mince garlic
-    - heat the pan with a little bit of oil
-    - 'add diced chicken, diced tempe, diced tofu, diced carrot, and minced garlic
-      to the hot pan
-
-'
-    - sprinkle some salt and pepper
-    - stir-fry until cooked
-    - pack the stir-fry, rice, milk, and orange into the bento box
-    toolsENG:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    toolsIND:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    price: 10
-  - orderName_IND: stir fry set (kid)
-    orderName_ENG: stir fry set (kid)
-    ingredientsIND:
-    - nasi (50 gr)
-    - dada ayam (20 gr)
-    - tempe (25 gr)
-    - tahu (40 gr)
-    - wortel (1/3 bagian)
-    - bawang putih (1/2 bagian)
-    - minyak (5 ml)
-    - susu kotak (1 kotak)
-    - jeruk (1/2 bagian)
-    ingredientsENG:
-    - rice (50 gr)
-    - chicken breast (20 gr)
-    - tempeh (25 gr)
-    - tofu (40 gr)
-    - carrot (1/3 piece)
-    - garlic (2 pieces)
-    - cooking oil (5 ml)
-    - boxed milk (1 box)
-    - orange (1/2 piece)
-    stepsIND:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    stepsENG:
-    - cut chicken, tempe, tofu, and carrot to small dices
-    - mince garlic
-    - heat the pan with a little bit of oil
-    - 'add diced chicken, diced tempe, diced tofu, diced carrot, and minced garlic
-      to the hot pan
-
-'
-    - sprinkle some salt and pepper
-    - stir-fry until cooked
-    - pack the stir-fry, rice, milk, and orange into the bento box
-    toolsENG:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    toolsIND:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
+    - talenan
+    - talenan
+    - penggorengan
+    - penggorengan
+    - penggorengan
+    - penggorengan
+    - tempat bento
     price: 10
   currentOrder:
     orderName_IND: 
@@ -12702,9 +12758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slots: []
-  inventory: []
   isFull: 0
-  idx: 0
 --- !u!1 &1816167444
 GameObject:
   m_ObjectHideFlags: 0

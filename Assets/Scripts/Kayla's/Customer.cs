@@ -34,40 +34,87 @@ public class Customer : MonoBehaviour
         StartDialogue();
     }
 
+    //tambahan
+    Coroutine animate;
+    bool isLeaving = false;
+    //
     private void Update()
     {
         patienceText.text = patience.ToString() + "%";
-        // if(Input.GetMouseButtonDown(0))
-        // {
-        //     if (!isWaitingForOrder)
-        //     {
-        //         NextDialogue();
-        //     }
-        // }
+        //tambahan - customer baru leave kl dialognya dah kelar
+        if (!isLeaving && currentIdx == dialogues.Count - 2 && dialogueText.maxVisibleCharacters == dialogues[currentIdx].Length)
+        {
+            isLeaving = true;
+            CustomerLeaves();
+        }
+        //
     }
 
     public void StartDialogue()
     {
-        currentIdx = 0;
         dialogueBubble.SetActive(true);
+
+        //tambahan
+        dialogueText.maxVisibleCharacters = 0;
+        //
+
         dialogueText.text = dialogues[currentIdx];
+
+        //tambahan
+        animate = StartCoroutine(animationText());
+        //
+
         isWaitingForOrder = true;
         OKButton.interactable = true;
         WHATButton.interactable = true;
         // StartCoroutine(CloseDialogue());
     }
 
+    //tambahan - animasi text dialog
+    IEnumerator animationText()
+    {
+        while (true)
+        {
+            if (dialogueText.maxVisibleCharacters < dialogues[currentIdx].Length)
+            {
+                dialogueText.maxVisibleCharacters++;
+            }
+            else
+            {
+                break;
+            }
+            yield return new WaitForSeconds(0.05f);
+        }
+    }
+    //
+
     public void NextDialogue()
     {
         if (currentIdx < dialogues.Count - 1)
         {
-            currentIdx++;
-            dialogueText.text = dialogues[currentIdx];
+            //tambahan
+            if (dialogueText.maxVisibleCharacters == dialogues[currentIdx].Length)
+            {   
+                currentIdx++;
+                dialogueText.text = dialogues[currentIdx];
 
-            if (currentIdx == dialogues.Count - 2)
-            {
-                CustomerLeaves();
+
+                dialogueText.maxVisibleCharacters = 0;
+                StopCoroutine(animate);
+                animate = StartCoroutine(animationText());
+                //
+
+                if (currentIdx == dialogues.Count - 2)
+                {
+                    //ku comment ini biar customer itu leave pas dialognya kelar dlu
+                    //CustomerLeaves();
+                
+                    //ganti jd ini
+                    OKButton.interactable = false;
+                    WHATButton.interactable = false;
+                }
             }
+
         }
         else
         {

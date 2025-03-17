@@ -6,72 +6,79 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     public List<GameObject> slots = new List<GameObject>();
-    [SerializeField] private List<GameObject> inventory = new List<GameObject>();
     public bool isFull = false;
-    [SerializeField] private int idx = 0;
     private void Start()
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            slots.Add(transform.GetChild(i).gameObject);
-            inventory.Add(null);
+            slots.Add(null);
         }
     }
     public void AddIngredient(GameObject ingredientSprite)
     {
-        Image slotImage = slots[idx].transform.GetChild(0).GetComponent<Image>();
-        slotImage.sprite = ingredientSprite.GetComponent<Image>().sprite;
-        slotImage.enabled = true;
-        inventory[idx] = ingredientSprite;
-        getIndex();
-
-        //biar gk perlu loop, kt pake index aja (gk gt keliatan sih pengaruhnya, cmn ini biar gk gt bnyk loop)
-        //biar gk gt ngeberatin device/memory :3
-/*        foreach (GameObject slot in slots)
+        foreach (GameObject slot in slots)
         {
-            Image slotImage = slot.GetComponentInChildren<Image>();
-            if (slotImage.sprite == null)
+            //tambahan, idx itu buat nentuin posisi mana yg kosong di slot
+            int idx = 0;
+            if (slot == null)
             {
-                slotImage.sprite = ingredientSprite.GetComponent<Image>().sprite;
-                slotImage.enabled = true;
-                break;
+                idx = slots.IndexOf(slot);
+                slots[idx] = ingredientSprite;
+
+                //ini ku comment gegara gk ngaruh, for some reason dia itu sama kek getcomponent biasa T_T
+                //Image slotImage = slot.GetComponentInChildren<Image>();
+
+                Image slotImage = transform.GetChild(idx).GetChild(0).GetComponent<Image>();
+                ingredientSprite.GetComponent<food>().slotPosition = slotImage.rectTransform.position;
+                if (slotImage.sprite == null)
+                {
+                    slotImage.sprite = ingredientSprite.GetComponent<Image>().sprite;
+                    slotImage.enabled = true;
+
+                    //kl uda msk di posisi terakhir, berarti inventorynya full
+                    if (idx == slots.Count - 1)
+                    {
+                        isFull = true;
+                    }
+                    return;
+                }
             }
-        }*/
+        }
     }
 
     public void ClearInventory()
     {
         foreach (GameObject slot in slots)
         {
-            Image slotImage = slot.GetComponentInChildren<Image>();
+            //Image slotImage = slot.GetComponentInChildren<Image>();
+            Image slotImage = transform.GetChild(slots.IndexOf(slot)).GetChild(0).GetComponent<Image>();
             slotImage.sprite = null;
             slotImage.enabled = false;
         }
-        idx = 0;
     }
 
     //tambahan dr Jes, buat trash
     public void RemoveInventory(GameObject food)
     {
-        foreach (GameObject slot in inventory)
+        foreach (GameObject slot in slots)
         {
             if (slot == food)
             {
-                //for some reason ini error pas ku cb T_T, jd ku ganti
+                int idx = slots.IndexOf(slot);
                 //Image slotImage = slot.GetComponentInChildren<Image>();
-                Image slotImage = slots[inventory.IndexOf(food)].transform.GetChild(0).GetComponent<Image>();
-                inventory[inventory.IndexOf(food)] = null;
+                Image slotImage = transform.GetChild(idx).GetChild(0).GetComponent<Image>();
                 slotImage.sprite = null;
                 slotImage.enabled = false;
-                getIndex();
+                idx = slots.IndexOf(slot);
+                slots[idx] = null;
                 return;
             }
         }
-        getIndex();
     }
-    public bool inInventory(GameObject food)
+    //buat ngecek kl foodnya udh ada di inventory ato blm
+    public bool AlreadyInInventory(GameObject food)
     {
-        foreach (GameObject slot in inventory)
+        foreach (GameObject slot in slots)
         {
             if (slot == food)
             {
@@ -79,18 +86,5 @@ public class Inventory : MonoBehaviour
             }
         }
         return false;
-    }
-    void getIndex()
-    {
-        for (int i=0;i<inventory.Count;i++)
-        {
-            if (inventory[i] == null)
-            {
-                idx = i;
-                return;
-            }
-        }
-        isFull = true;
-        idx = slots.Count - 1;
     }
 }

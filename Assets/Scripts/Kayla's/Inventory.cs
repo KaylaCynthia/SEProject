@@ -64,8 +64,8 @@ public class Inventory : MonoBehaviour
         {
             if (slot == food)
             {
+                isFull = false;
                 int idx = slots.IndexOf(slot);
-                //Image slotImage = slot.GetComponentInChildren<Image>();
                 Image slotImage = transform.GetChild(idx).GetChild(0).GetComponent<Image>();
                 slotImage.sprite = null;
                 slotImage.enabled = false;

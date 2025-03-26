@@ -7,6 +7,7 @@ public class Inventory : MonoBehaviour
 {
     public List<GameObject> slots = new List<GameObject>();
     public bool isFull = false;
+    public bool isDeleteMode = false;
     private void Start()
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -18,14 +19,12 @@ public class Inventory : MonoBehaviour
     {
         foreach (GameObject slot in slots)
         {
-            //tambahan, idx itu buat nentuin posisi mana yg kosong di slot
             int idx = 0;
             if (slot == null)
             {
                 idx = slots.IndexOf(slot);
                 slots[idx] = ingredientSprite;
 
-                //ini ku comment gegara gk ngaruh, for some reason dia itu sama kek getcomponent biasa T_T
                 //Image slotImage = slot.GetComponentInChildren<Image>();
 
                 Image slotImage = transform.GetChild(idx).GetChild(0).GetComponent<Image>();
@@ -35,7 +34,6 @@ public class Inventory : MonoBehaviour
                     slotImage.sprite = ingredientSprite.GetComponent<Image>().sprite;
                     slotImage.enabled = true;
 
-                    //kl uda msk di posisi terakhir, berarti inventorynya full
                     if (idx == slots.Count - 1)
                     {
                         isFull = true;
@@ -75,7 +73,7 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-    //buat ngecek kl foodnya udh ada di inventory ato blm
+
     public bool AlreadyInInventory(GameObject food)
     {
         foreach (GameObject slot in slots)
@@ -86,5 +84,10 @@ public class Inventory : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void OnDeleteMode()
+    {
+        isDeleteMode = !isDeleteMode;
     }
 }

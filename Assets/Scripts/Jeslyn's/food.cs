@@ -4,17 +4,21 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
+    [SerializeField] private float foodPrice;
     Inventory inventory;
+    CurrencyManager currencyManager;
     public Vector2 slotPosition = Vector2.zero;
     public bool isParent = false;
     private RectTransform rectTransform;
     public bool isClicked = false;
+    public bool isCollideFridge = false;
     public bool released = false;
     // Start is called before the first frame update
     void Start()
     {
+        currencyManager = FindObjectOfType<CurrencyManager>();
         inventory = FindObjectOfType<Inventory>();
         rectTransform = GetComponent<RectTransform>();
     }
@@ -26,17 +30,27 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         {
             rectTransform.position = Vector2.MoveTowards(rectTransform.position, slotPosition, Time.deltaTime*1000);
         }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.name == "TRASH" && isClicked)
+        if (!isClicked && isCollideFridge)
         {
             inventory.RemoveInventory(gameObject);
             Destroy(gameObject);
+            currencyManager.AddCoins(foodPrice);
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // if (collision.name == "TRASH" && isClicked)
+        // {
+        //     inventory.RemoveInventory(gameObject);
+        //     Destroy(gameObject);
+        // }
         if (collision.name == "Inventory" && !inventory.isFull && !inventory.AlreadyInInventory(gameObject))
         {
             inventory.AddIngredient(gameObject);
+        }
+        if (collision.name == "Fridge" && inventory.AlreadyInInventory(gameObject))
+        {
+            isCollideFridge = true;
         }
         //buat nanti :)
 /*        if (collision.name == "Blend")
@@ -58,6 +72,10 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         {
             inventory.RemoveInventory(gameObject);
             slotPosition = Vector2.zero;
+        }
+        if (collision.name == "Fridge" && inventory.AlreadyInInventory(gameObject))
+        {
+            isCollideFridge = false;
         }
     }
 
@@ -100,6 +118,16 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         {
             clone.GetComponent<food>().isClicked = false;
             clone.GetComponent<food>().released = true;
+            currencyManager.DecreaseCoins(foodPrice);
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if(inventory.isDeleteMode == true && inventory.AlreadyInInventory(gameObject))
+        {
+            inventory.RemoveInventory(gameObject);
+            Destroy(gameObject);
         }
     }
 }

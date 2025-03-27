@@ -5,12 +5,16 @@ using UnityEngine;
 public class switch_room : MonoBehaviour
 {
     private Animator moving;
+    [SerializeField] private GameObject currency;
+    [SerializeField] private GameObject order_notes;
     [SerializeField] private Canvas currCanvas;
     [SerializeField] private Canvas nextCanvas;
     // Start is called before the first frame update
     void Start()
     {
         moving = GetComponent<Animator>();
+        order_notes.SetActive(false);
+        currency.SetActive(true);
     }
 
     // Update is called once per frame
@@ -18,6 +22,7 @@ public class switch_room : MonoBehaviour
     {
         
     }
+
     public void switchRoom(Canvas canvas)
     {
         if(nextCanvas != null) currCanvas = nextCanvas;
@@ -26,7 +31,19 @@ public class switch_room : MonoBehaviour
     }
     public void move()
     {
+        if (nextCanvas.gameObject.name == "Canvas_CUSTOMER_ORDER")
+        {
+            order_notes.SetActive(false);
+            currency.SetActive(true);
+        }
+        else
+        {
+            order_notes.SetActive(true);
+            currency.SetActive(false);
+        }
         currCanvas.sortingOrder = 0;
+        currCanvas.gameObject.SetActive(false);
         nextCanvas.sortingOrder = 1;
+        nextCanvas.gameObject.SetActive(true);
     }
 }

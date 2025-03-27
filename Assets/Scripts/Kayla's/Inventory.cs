@@ -14,6 +14,7 @@ public class Inventory : MonoBehaviour
         {
             slots.Add(null);
         }
+        tutupanDeleteMode.SetActive(false);
     }
     public void AddIngredient(GameObject ingredientSprite)
     {
@@ -86,8 +87,11 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
+    [SerializeField] private GameObject tutupanDeleteMode;
     public void OnDeleteMode()
     {
         isDeleteMode = !isDeleteMode;
+        tutupanDeleteMode.SetActive(isDeleteMode);
+
     }
 }

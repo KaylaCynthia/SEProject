@@ -28,7 +28,8 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         if (!isClicked && !isParent)
         {
-            rectTransform.position = Vector2.MoveTowards(rectTransform.position, slotPosition, Time.deltaTime*1000);
+            //rectTransform.position = Vector2.MoveTowards(rectTransform.position, slotPosition, Time.deltaTime*1000);
+            rectTransform.position = slotPosition;
         }
         if (!isClicked && isCollideFridge)
         {

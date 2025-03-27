@@ -27,18 +27,41 @@ public class Kitchen_Switch : MonoBehaviour
     }
     public void switchRoom(RectTransform room)
     {
-        if (currRoom == null)
+        if (currRoom == null && !isFridge)
         {
+            currency.SetActive(false);
             currRoom = room;
             back = new Vector3(0, 0, 0);
         }
     }
+
+    [SerializeField] private GameObject currency;
     public void backToMain(RectTransform room)
     {
         if (currRoom == null)
         {
+            currency.SetActive(true);
             currRoom = room;
             back = new Vector3(0, -700, 0);
+        }
+    }
+    bool isFridge = false;
+    public void openFridge(RectTransform fridge)
+    {
+        isFridge = !isFridge;
+        currency.SetActive(isFridge);
+        if (currRoom == null)
+        {
+            if (isFridge)
+            {
+                currRoom = fridge;
+                back = new Vector3(1000, 0, 0);
+            }
+            else
+            {
+                currRoom = fridge;
+                back = new Vector3(0, 0, 0);
+            }
         }
     }
 }

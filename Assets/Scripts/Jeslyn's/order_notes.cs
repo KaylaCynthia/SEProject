@@ -9,7 +9,7 @@ public class order_notes : MonoBehaviour
 {
     RectTransform RectTransform;
     [SerializeField] private Vector2 currPos;
-    [SerializeField] private RectTransform arrow;
+    //[SerializeField] private RectTransform arrow;
     [SerializeField] private Vector3 currRot;
     [SerializeField] private Vector3 nextRot;
     [SerializeField] private Slider progressBar;
@@ -42,7 +42,7 @@ public class order_notes : MonoBehaviour
         currPos.y = RectTransform.localPosition.y;
         RectTransform.localPosition = Vector2.MoveTowards(RectTransform.localPosition, currPos, Time.deltaTime*1000);
         currRot = Vector3.MoveTowards(currRot, nextRot, Time.deltaTime*500);
-        arrow.rotation = Quaternion.Euler(currRot);
+        //arrow.rotation = Quaternion.Euler(currRot);
     }
 
     bool isOpen = false;

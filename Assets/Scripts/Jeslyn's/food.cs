@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     [SerializeField] private float foodPrice;
+    public string foodName;
     Inventory inventory;
     CurrencyManager currencyManager;
     public Vector2 slotPosition = Vector2.zero;
@@ -15,6 +16,9 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public bool isClicked = false;
     public bool isCollideFridge = false;
     public bool released = false;
+    public bool isCuttable = false;
+    public bool isRefundable = true;
+    public Sprite dicedSprite;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,7 +53,7 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         {
             inventory.AddIngredient(gameObject);
         }
-        if (collision.name == "Fridge" && inventory.AlreadyInInventory(gameObject))
+        if (collision.name == "Fridge" && inventory.AlreadyInInventory(gameObject) && isRefundable)
         {
             isCollideFridge = true;
         }

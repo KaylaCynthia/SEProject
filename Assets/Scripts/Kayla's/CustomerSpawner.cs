@@ -8,7 +8,7 @@ public class CustomerSpawner : MonoBehaviour
 {
     [SerializeField] private List<Sprite> customerSprites;
     [SerializeField] private GameObject customerPrefab;
-    order_notes order_note;
+    [SerializeField] private order_notes order_note;
     [Serializable] public struct CustomerDialogues
     {
         //indonesia sm b.ing
@@ -38,7 +38,7 @@ public class CustomerSpawner : MonoBehaviour
 
     private void Start()
     {
-        order_note = FindObjectOfType<order_notes>();
+        // order_note = FindObjectOfType<order_notes>();
         StartCoroutine(SpawnCustomer());
     }
 

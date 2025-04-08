@@ -26,12 +26,13 @@ public class Customer : MonoBehaviour
 
     private void Start()
     {
-        // patienceText = GameObject.Find("PatienceText").GetComponent<TextMeshProUGUI>();
+        patienceText = GameObject.Find("notes").transform.GetChild(0).GetChild(6).GetChild(0).GetComponent<TextMeshProUGUI>();
         dialogueBubble = transform.Find("DialogueBubble").gameObject;
         dialogueText = dialogueBubble.transform.Find("DialogueText").GetComponent<TextMeshProUGUI>();
         OKButton = transform.Find("OKButton").GetComponent<Button>();
         WHATButton = transform.Find("WHATButton").GetComponent<Button>();
         StartDialogue();
+        StartCoroutine(patienceDrop());
     }
 
     //tambahan
@@ -40,7 +41,7 @@ public class Customer : MonoBehaviour
     //
     private void Update()
     {
-        // patienceText.text = patience.ToString() + "%";
+        patienceText.text = patience.ToString() + "%";
         //tambahan - customer baru leave kl dialognya dah kelar
         if (!isLeaving && currentIdx == dialogues.Count - 2 && dialogueText.maxVisibleCharacters == dialogues[currentIdx].Length)
         {
@@ -87,6 +88,16 @@ public class Customer : MonoBehaviour
         }
     }
     //
+
+    //tambahan patience customer
+    IEnumerator patienceDrop()
+    {
+        while (patience > 0)
+        {
+            patience--;
+            yield return new WaitForSeconds(1f);
+        }
+    }
 
     public void NextDialogue()
     {

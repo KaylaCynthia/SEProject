@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler
 {
+    public bool cooked = false;
     //[SerializeField] private GameObject img;
+    [SerializeField] private CookingPot pot;
+    [SerializeField] private Slider slider;
     public float stir_value = 0f;
     private RectTransform rectTransform;
     private bool isDragging = false;
@@ -20,7 +24,12 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
 
     void Update()
     {
-        if (isDragging)
+        slider.value = stir_value;
+        if (stir_value >= 100f)
+        {
+            cooked = true;
+        }
+        if (isDragging && !cooked)
         {
             Vector2 currentMousePos = Input.mousePosition;
             Vector2 currentDirection = currentMousePos - centerScreenPos;
@@ -32,18 +41,29 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
                 previousDirection = currentDirection;
             }
         }
+        else if(cooked)
+        {
+            rectTransform.Rotate(0f, 0f, 0f);
+        }
     }
 
+/*    public void resetRotation()
+    {
+        if (!rectTransform)
+        {
+            rectTransform = GetComponent<RectTransform>();
+        }
+    }*/
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isDragging && collision.gameObject.name == "stir_inside")
         {
-            stir_value += 1f;
+            stir_value += 10f;
         }
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (isPointerOver)
+        if (isPointerOver && !cooked)
         {
             isDragging = true;
             centerScreenPos = RectTransformUtility.WorldToScreenPoint(null, rectTransform.position);

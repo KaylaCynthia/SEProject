@@ -28,6 +28,7 @@ public class CuttingBoard : MonoBehaviour
 
         if(food.isCuttable == true && !ingredient.GetComponent<food>().foodName.StartsWith("Diced"))
         {
+            GetComponent<BoxCollider2D>().enabled = false;
             count = 0;
             currentIngredient = ingredient.gameObject.GetComponent<Image>();
             // ingredient.gameObject.SetActive(false);
@@ -41,6 +42,7 @@ public class CuttingBoard : MonoBehaviour
     {
         if(count == 5)
         {
+            GetComponent<BoxCollider2D>().enabled = true;
             currentIngredient.sprite = food.dicedSprite;
             currentIngredient.GetComponent<food>().foodName = "Diced " + currentIngredient.GetComponent<food>().foodName;
             currentIngredient.GetComponent<food>().isRefundable = false;

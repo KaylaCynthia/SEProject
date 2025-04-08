@@ -21,12 +21,23 @@ public class CookingPot : MonoBehaviour
     public GameObject burnedFoodPrefab;
     public Transform spawnPoint;
 
+    [SerializeField] private Slider cookingTimerSlider;
+    [SerializeField] private GameObject timerUI;
+    [Range(0, 1)] public float minPerfectCook = 0.5f;
+    [Range(0, 1)] public float maxPerfectCook = 0.7f;
+
     [SerializeField] private List<string> ingredientsInPot = new List<string>();
     private Inventory inventory;
+    private Coroutine cookingCoroutine;
+    private float currentCookingTime = 0f;
 
     private void Start()
     {
         inventory = FindObjectOfType<Inventory>();
+        if (timerUI != null)
+        {
+            timerUI.SetActive(false);
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D ingredient)
@@ -44,33 +55,75 @@ public class CookingPot : MonoBehaviour
         }
     }
 
+    public void ToggleCooking()
+    {
+        if (ingredientsInPot.Count == 0) return;
+        
+        if (!isCooking)
+        {
+            StartCooking();
+        }
+        else
+        {
+            StopCooking();
+        }
+    }
+
     public void StartCooking()
     {
         if (!isCooking && ingredientsInPot.Count > 0)
         {
-            StartCoroutine(CookFood());
+            isCooking = true;
+            currentCookingTime = 0f;
+            timerUI.SetActive(true);
+            cookingTimerSlider.value = 0f;
+            cookingCoroutine = StartCoroutine(CookFood());
+        }
+    }
+
+    public void StopCooking()
+    {
+        if (isCooking)
+        {
+            StopCoroutine(cookingCoroutine);
+            float progress = currentCookingTime / cookingTime;
+
+            if (progress >= minPerfectCook && progress <= maxPerfectCook)
+            {
+                Recipe dishToSpawn = IngredientsMatch(ingredientsInPot, recipe);
+                if (dishToSpawn.dishPrefab != null)
+                {
+                    inventory.AddIngredient(Instantiate(dishToSpawn.dishPrefab, spawnPoint));
+                }
+                else
+                {
+                    inventory.AddIngredient(Instantiate(burnedFoodPrefab, spawnPoint));
+                }
+            }
+            else
+            {
+                inventory.AddIngredient(Instantiate(burnedFoodPrefab, spawnPoint));
+            }
+
+            ingredientsInPot.Clear();
+            isCooking = false;
+            timerUI.SetActive(false);
         }
     }
 
     private IEnumerator CookFood()
     {
-        isCooking = true;
-        
-        yield return new WaitForSeconds(cookingTime);
-        
-        Recipe dishToSpawn = IngredientsMatch(ingredientsInPot, recipe);
+        while (currentCookingTime < cookingTime)
+        {
+            currentCookingTime += Time.deltaTime;
+            cookingTimerSlider.value = currentCookingTime / cookingTime;
+            yield return null;
+        }
 
-        if(dishToSpawn.dishPrefab == null)
-        {
-            inventory.AddIngredient(Instantiate(burnedFoodPrefab, spawnPoint));
-        }
-        else
-        {
-            inventory.AddIngredient(Instantiate(dishToSpawn.dishPrefab, spawnPoint));
-        }
-        
+        inventory.AddIngredient(Instantiate(burnedFoodPrefab, spawnPoint));
         ingredientsInPot.Clear();
         isCooking = false;
+        timerUI.SetActive(false);
     }
 
     private Recipe IngredientsMatch(List<string> ingredients, List<Recipe> recipe)

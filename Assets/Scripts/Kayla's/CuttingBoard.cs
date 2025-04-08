@@ -21,7 +21,10 @@ public class CuttingBoard : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D ingredient)
     {
+        if (ingredient == null) return;
+        
         food = ingredient.GetComponent<food>();
+        if (food == null) return;
 
         if(food.isCuttable == true && !ingredient.GetComponent<food>().foodName.StartsWith("Diced"))
         {

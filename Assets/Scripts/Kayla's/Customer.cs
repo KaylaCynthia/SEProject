@@ -15,8 +15,8 @@ public class Customer : MonoBehaviour
     public float price;
     public string currentOrder;
     private TextMeshProUGUI dialogueText;
-    private Button OKButton;
-    private Button WHATButton;
+    [SerializeField] private Button OKButton;
+    [SerializeField] private Button WHATButton;
     private GameObject dialogueBubble;
     private int currentIdx;
     private bool isWaitingForOrder = false;
@@ -26,11 +26,12 @@ public class Customer : MonoBehaviour
 
     private void Start()
     {
-        patienceText = GameObject.Find("notes").transform.GetChild(0).GetChild(6).GetChild(0).GetComponent<TextMeshProUGUI>();
+        patienceText = GameObject.Find("notes").transform.GetChild(0).GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>();
         dialogueBubble = transform.Find("DialogueBubble").gameObject;
         dialogueText = dialogueBubble.transform.Find("DialogueText").GetComponent<TextMeshProUGUI>();
-        OKButton = transform.Find("OKButton").GetComponent<Button>();
-        WHATButton = transform.Find("WHATButton").GetComponent<Button>();
+        //modif
+/*        OKButton = transform.Find("OKButton").GetComponent<Button>();
+        WHATButton = transform.Find("WHATButton").GetComponent<Button>();*/
         StartDialogue();
         StartCoroutine(patienceDrop());
     }

@@ -10,6 +10,7 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public string foodName;
     Inventory inventory;
     CurrencyManager currencyManager;
+    public GameObject slot;
     public Vector2 slotPosition = Vector2.zero;
     public bool isParent = false;
     private RectTransform rectTransform;
@@ -18,7 +19,9 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public bool released = false;
     public bool isCuttable = false;
     public bool isRefundable = true;
+    [SerializeField] private Sprite dicedPartSprite;
     public Sprite dicedSprite;
+    public bool isCooking;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +33,11 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     // Update is called once per frame
     void Update()
     {
-        if (!isClicked && !isParent)
+        if (slot != null && !isCooking)
+        {
+            slotPosition = slot.transform.position;
+        }
+        if (!isClicked && !isParent || isCooking)
         {
             //rectTransform.position = Vector2.MoveTowards(rectTransform.position, slotPosition, Time.deltaTime*1000);
             rectTransform.position = slotPosition;
@@ -57,19 +64,6 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         {
             isCollideFridge = true;
         }
-        //buat nanti :)
-/*        if (collision.name == "Blend")
-        {
-
-        }
-        else if (collision.name == "Cut")
-        {
-
-        }
-        else if (collision.name == "Cook")
-        {
-
-        }*/
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -91,6 +85,7 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         if (isParent)
         {
             clone = Instantiate(gameObject,GameObject.Find("FoodInventory").transform);
+            //clone = Instantiate(gameObject, inventory.getSlotPosition(clone));
             clone.GetComponent<food>().isParent = false;
             clone.GetComponent<food>().isClicked = true;
         }
@@ -98,11 +93,11 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (!isParent)
+        if (!isParent && !isCooking)
         {
             transform.position = eventData.position;
         }
-        else
+        else if(isParent)
         {
             clone.transform.position = eventData.position;
         }

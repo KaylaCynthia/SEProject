@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 
 public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler
 {
-    public bool cooked = false;
+    [SerializeField] private bool IsBoil;
+    public bool cooked = true;
     //[SerializeField] private GameObject img;
     [SerializeField] private CookingPot pot;
     [SerializeField] private Slider slider;
@@ -16,20 +17,38 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
     private Vector2 centerScreenPos;
     private Vector2 previousDirection;
     private bool isPointerOver = false;
+    RectTransform inventory;
+    Vector3 temp;
 
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
+        inventory = GameObject.Find("Inventory").GetComponent<RectTransform>();
+        temp = inventory.localPosition;
+
     }
 
     void Update()
     {
+        if(pot.isCooking)
+        {
+            inventory.localPosition = Vector2.MoveTowards(inventory.localPosition, new Vector3(inventory.localPosition.x, 500, inventory.localPosition.z), Time.deltaTime * 1000);
+        }
+        else
+        {
+            inventory.localPosition = Vector2.MoveTowards(inventory.localPosition, temp, Time.deltaTime * 1000);
+        }
+
         slider.value = stir_value;
         if (stir_value >= 100f)
         {
             cooked = true;
         }
-        if (isDragging && !cooked)
+        else if(!isDragging && cooked && !pot.isCooking)
+        {
+            rectTransform.rotation = Quaternion.identity;
+        }
+        else if (isDragging)
         {
             Vector2 currentMousePos = Input.mousePosition;
             Vector2 currentDirection = currentMousePos - centerScreenPos;
@@ -40,10 +59,6 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
                 rectTransform.Rotate(0f, 0f, angleDelta);
                 previousDirection = currentDirection;
             }
-        }
-        else if(cooked)
-        {
-            rectTransform.Rotate(0f, 0f, 0f);
         }
     }
 
@@ -56,14 +71,40 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
     }*/
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isDragging && collision.gameObject.name == "stir_inside")
+        if (isDragging && collision.gameObject.name == "stir_inside" && !pot.isCooking && pot.checkIngredientInPot())
         {
-            stir_value += 10f;
+            pot.StartCooking();
+            if (!IsBoil)
+            {
+                CancelInvoke("stopCooking");
+                Invoke("stopCooking", 1.5f);
+            }
+        }
+        else if (isDragging && collision.gameObject.name == "stir_inside" && pot.isCooking)
+        {
+            if (!IsBoil)
+            {
+                CancelInvoke("stopCooking");
+                Invoke("stopCooking", 1.5f);
+            }
+            else
+            {
+                stir_value += 10f;
+            }
+        }
+    }
+    void stopCooking()
+    {
+        if (pot.isCooking)
+        {
+            //Debug.Log("gk diaduk");
+            pot.StopCooking();
         }
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (isPointerOver && !cooked)
+        pointerUp = false;
+        if (isPointerOver)
         {
             isDragging = true;
             centerScreenPos = RectTransformUtility.WorldToScreenPoint(null, rectTransform.position);
@@ -71,9 +112,22 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
         }
     }
 
+    public bool pointerUp = false;
     public void OnPointerUp(PointerEventData eventData)
     {
         isDragging = false;
+        pointerUp = true;
+        if (!IsBoil && pot.isCooking && pot.isReady)
+        {
+            CancelInvoke("stopCooking");
+            pot.StopCooking();
+        }
+        else if(!IsBoil && pot.isCooking && !pot.isReady)
+        {
+            //Debug.Log("cursor keangkat");
+            CancelInvoke("stopCooking");
+            Invoke("stopCooking", 1f);
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)

@@ -62,11 +62,19 @@ public class CustomerSpawner : MonoBehaviour
             //currentOrder = orders[randomIdxOrder];
             //revisi, kt samain aja index dialog sm ordernya, soalnya kl dibedain nnt ordernya gk sesuai sm dialognya :)
 
-            GameObject customer = Instantiate(customerPrefab, canvas.transform);
+            //modif
+            //GameObject customer = Instantiate(customerPrefab, canvas.transform);
+            GameObject customer = Instantiate(customerPrefab, spawnPoint);
+            customer.GetComponent<RectTransform>().anchorMin = Vector3.zero;
+            customer.GetComponent<RectTransform>().anchorMax = Vector3.one;
+            customer.GetComponent<RectTransform>().anchoredPosition3D = Vector3.zero;
+            customer.GetComponent<RectTransform>().sizeDelta = Vector2.zero;
+
+
             //customer.transform.localScale = Vector3.one;
             //customer.transform.SetParent(canvas.transform, false);
 
-            customer.GetComponent<Image>().sprite = customerSprites[randomIdxSprite];
+            customer.transform.GetChild(0).GetComponent<Image>().sprite = customerSprites[randomIdxSprite];
             if (PlayerPrefs.GetString("language") == "Indonesia")
             {
                 customer.GetComponent<Customer>().dialogues = currentCustomerDialogues.dialogueIND;

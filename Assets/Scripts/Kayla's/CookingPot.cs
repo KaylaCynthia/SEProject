@@ -16,15 +16,15 @@ public class CookingPot : MonoBehaviour
     }
 
     public List<Recipe> recipe;
-    public float cookingTime = 3f;
-    private bool isCooking = false;
+    [SerializeField] private float cookingTime = 7f;
+    public bool isCooking = false;
     public GameObject burnedFoodPrefab;
     public Transform spawnPoint;
 
     [SerializeField] private Slider cookingTimerSlider;
     [SerializeField] private GameObject timerUI;
-    [Range(0, 1)] public float minPerfectCook = 1.5f;
-    [Range(0, 1)] public float maxPerfectCook = 2f;
+    [Range(0, 7)] [SerializeField] private float minPerfectCook = 5f;
+    [Range(0, 7)] [SerializeField] private float maxPerfectCook = 5.5f;
 
     [SerializeField] private List<string> ingredientsInPot = new List<string>();
     private Inventory inventory;
@@ -32,7 +32,10 @@ public class CookingPot : MonoBehaviour
     private float currentCookingTime = 0f;
 
     //tambahan
+    public bool isReady = false;
+    [SerializeField] private bool isSaucepan;
     [SerializeField] private stir stirring;
+    [SerializeField] private Button back;
     //[SerializeField] private GameObject buttonCook;
     //
 
@@ -43,7 +46,18 @@ public class CookingPot : MonoBehaviour
         {
             timerUI.SetActive(false);
         }
-        stirring.transform.parent.gameObject.SetActive(false);
+
+        //modif
+        //stirring.transform.parent.gameObject.SetActive(false);
+    }
+    //tambahan
+    public bool checkIngredientInPot()
+    {
+        if (ingredientsInPot.Count > 0)
+        {
+            return true;
+        }
+        return false;
     }
 
     public void OnTriggerEnter2D(Collider2D ingredient)
@@ -80,8 +94,13 @@ public class CookingPot : MonoBehaviour
         if (!isCooking && ingredientsInPot.Count > 0)
         {
             //tambahan
-            stirring.stir_value = 0f;
-            stirring.transform.parent.gameObject.SetActive(true);
+            back.interactable = false;
+            if (isSaucepan)
+            { 
+                stirring.stir_value = 0f;
+                stirring.cooked = false;
+            }
+            //stirring.transform.parent.gameObject.SetActive(true);
             //buttonCook.SetActive(false);
             //
             isCooking = true;
@@ -96,15 +115,32 @@ public class CookingPot : MonoBehaviour
     {
         if (isCooking)
         {
+            isCooking = false;
+            ingredientsInPot.Clear();
+            timerUI.SetActive(false);
             //tambahan
-            stirring.transform.parent.gameObject.SetActive(false);
+            back.interactable = true;
+            //stirring.transform.parent.gameObject.SetActive(false);
             //buttonCook.SetActive(true);
             //
             StopCoroutine(cookingCoroutine);
-            float progress = currentCookingTime / cookingTime;
 
-            
-            if (progress >= minPerfectCook && progress <= maxPerfectCook && stirring.cooked)
+            //modif
+            //float progress = currentCookingTime / cookingTime;
+            float progress = currentCookingTime;
+            if (isSaucepan)
+            {
+                Recipe dishToSpawn = IngredientsMatch(ingredientsInPot, recipe);
+                if (dishToSpawn.dishPrefab != null)
+                {
+                    inventory.AddIngredient(Instantiate(dishToSpawn.dishPrefab, spawnPoint));
+                }
+                else
+                {
+                    inventory.AddIngredient(Instantiate(burnedFoodPrefab, spawnPoint));
+                }
+            }
+            else if (!isSaucepan && progress >= minPerfectCook && progress <= maxPerfectCook)
             {
                 Recipe dishToSpawn = IngredientsMatch(ingredientsInPot, recipe);
                 if (dishToSpawn.dishPrefab != null)
@@ -120,27 +156,48 @@ public class CookingPot : MonoBehaviour
             {
                 inventory.AddIngredient(Instantiate(burnedFoodPrefab, spawnPoint));
             }
-
-            //tambahan
-            stirring.cooked = false;
-            //
-            ingredientsInPot.Clear();
-            isCooking = false;
-            timerUI.SetActive(false);
         }
     }
 
     private IEnumerator CookFood()
     {
-        while (currentCookingTime < cookingTime)
+        //modif + tambahan
+        while (!isSaucepan && currentCookingTime < cookingTime)
         {
-            currentCookingTime += Time.deltaTime;
-            //modif
-            cookingTimerSlider.value = cookingTime - currentCookingTime;
+            if (currentCookingTime >= minPerfectCook && currentCookingTime <= maxPerfectCook)
+            {
+                isReady = true;
+            }
+            else
+            {
+                isReady = false;
+            }
+            if (!stirring.pointerUp)
+            {
+                currentCookingTime += Time.deltaTime;
+                cookingTimerSlider.value = currentCookingTime;
+            }
             yield return null;
         }
-        //modif + tambahan
-        StopCooking();
+        if (!isSaucepan)
+        {
+            StopCooking();
+            yield return null;
+        }
+        while (isSaucepan && !stirring.cooked)
+        {
+            if (currentCookingTime < cookingTime)
+            {
+                currentCookingTime += Time.deltaTime;
+                cookingTimerSlider.value = currentCookingTime;
+            }
+            yield return null;
+        }
+        if (isSaucepan && stirring.cooked)
+        {
+            StopCooking();
+            yield return null;
+        }
         /*inventory.AddIngredient(Instantiate(burnedFoodPrefab, spawnPoint));
         ingredientsInPot.Clear();
         isCooking = false;

@@ -19,7 +19,7 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public bool released = false;
     public bool isCuttable = false;
     public bool isRefundable = true;
-    [SerializeField] private Sprite dicedPartSprite;
+    public Sprite dicedPartSprite;
     public Sprite dicedSprite;
     public bool isCooking;
     // Start is called before the first frame update

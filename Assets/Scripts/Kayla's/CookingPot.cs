@@ -33,6 +33,7 @@ public class CookingPot : MonoBehaviour
 
     //tambahan
     public bool isReady = false;
+    [SerializeField] private List<GameObject> foodPosInPot;
     [SerializeField] private bool isSaucepan;
     [SerializeField] private stir stirring;
     [SerializeField] private Button back;
@@ -48,6 +49,11 @@ public class CookingPot : MonoBehaviour
         }
 
         //modif
+        for (int i = 0; i < transform.GetChild(1).childCount; i++)
+        {
+            foodPosInPot.Add(transform.GetChild(1).GetChild(i).gameObject);
+            transform.GetChild(1).GetChild(i).gameObject.SetActive(false);
+        }
         //stirring.transform.parent.gameObject.SetActive(false);
     }
     //tambahan
@@ -62,13 +68,25 @@ public class CookingPot : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D ingredient)
     {
-        if (ingredient != null && !isCooking)
+        if (ingredient != null && !isCooking && /*tambahan buat limit jumlah ingredients*/ ingredientsInPot.Count < foodPosInPot.Count)
         {
             food foodItem = ingredient.GetComponent<food>();
             if (foodItem != null)
             {
                 ingredientsInPot.Add(foodItem.foodName);
                 inventory.RemoveInventory(ingredient.gameObject);
+
+                //tambahan, biar ingredientsnya keliatan di dlm pot
+                foreach (GameObject food in foodPosInPot)
+                {
+                    if (food.GetComponent<Image>().sprite == null || !food.activeSelf)
+                    {
+                        food.GetComponent<Image>().sprite = ingredient.GetComponent<Image>().sprite;
+                        food.GetComponent<Image>().color = ingredient.GetComponent<Image>().color;
+                        food.SetActive(true);
+                        break;
+                    }
+                }
                 Destroy(ingredient.gameObject);
                 // StartCooking();
             }
@@ -91,15 +109,12 @@ public class CookingPot : MonoBehaviour
 
     public void StartCooking()
     {
-        if (!isCooking && ingredientsInPot.Count > 0)
+        if (!isCooking && ingredientsInPot.Count > 0 /*tambahan biar limit jumlah ingredients sesuai jumlah foodPosInPot*/ && ingredientsInPot.Count <= foodPosInPot.Count)
         {
             //tambahan
             back.interactable = false;
-            if (isSaucepan)
-            { 
-                stirring.stir_value = 0f;
-                stirring.cooked = false;
-            }
+            stirring.stir_value = 0f;
+            stirring.cooked = false;
             //stirring.transform.parent.gameObject.SetActive(true);
             //buttonCook.SetActive(false);
             //
@@ -116,14 +131,19 @@ public class CookingPot : MonoBehaviour
         if (isCooking)
         {
             isCooking = false;
-            ingredientsInPot.Clear();
-            timerUI.SetActive(false);
+
             //tambahan
+            foreach (GameObject food in foodPosInPot)
+            {
+                food.SetActive(false);
+                food.GetComponent<Image>().sprite = null;
+            }
             back.interactable = true;
+            stirring.stir_value = 0f;
             //stirring.transform.parent.gameObject.SetActive(false);
             //buttonCook.SetActive(true);
             //
-            StopCoroutine(cookingCoroutine);
+            if(cookingCoroutine != null) StopCoroutine(cookingCoroutine);
 
             //modif
             //float progress = currentCookingTime / cookingTime;
@@ -156,6 +176,8 @@ public class CookingPot : MonoBehaviour
             {
                 inventory.AddIngredient(Instantiate(burnedFoodPrefab, spawnPoint));
             }
+            ingredientsInPot.Clear();
+            timerUI.SetActive(false);
         }
     }
 
@@ -184,7 +206,7 @@ public class CookingPot : MonoBehaviour
             StopCooking();
             yield return null;
         }
-        while (isSaucepan && !stirring.cooked)
+        while (isSaucepan && currentCookingTime < cookingTime || isSaucepan && stirring.stir_value < 100)
         {
             if (currentCookingTime < cookingTime)
             {
@@ -193,7 +215,7 @@ public class CookingPot : MonoBehaviour
             }
             yield return null;
         }
-        if (isSaucepan && stirring.cooked)
+        if (isSaucepan && stirring.stir_value >= 100)
         {
             StopCooking();
             yield return null;

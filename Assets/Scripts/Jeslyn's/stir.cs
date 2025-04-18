@@ -73,7 +73,7 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
     {
         if (isDragging && collision.gameObject.name == "stir_inside" && !pot.isCooking && pot.checkIngredientInPot())
         {
-            pot.StartCooking();
+            if(!pot.isCooking) pot.StartCooking();
             if (!IsBoil)
             {
                 CancelInvoke("stopCooking");
@@ -89,7 +89,7 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
             }
             else
             {
-                stir_value += 10f;
+                stir_value += 5f;
             }
         }
     }
@@ -103,7 +103,7 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        pointerUp = false;
+        if(!IsBoil) pointerUp = false;
         if (isPointerOver)
         {
             isDragging = true;
@@ -116,9 +116,9 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
     public void OnPointerUp(PointerEventData eventData)
     {
         isDragging = false;
-        pointerUp = true;
         if (!IsBoil && pot.isCooking && pot.isReady)
         {
+            pointerUp = true;
             CancelInvoke("stopCooking");
             pot.StopCooking();
         }

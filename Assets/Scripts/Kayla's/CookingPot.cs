@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -23,8 +24,8 @@ public class CookingPot : MonoBehaviour
 
     [SerializeField] private Slider cookingTimerSlider;
     [SerializeField] private GameObject timerUI;
-    [Range(0, 7)] [SerializeField] private float minPerfectCook = 5f;
-    [Range(0, 7)] [SerializeField] private float maxPerfectCook = 5.5f;
+    [Range(0, 7)] public float minPerfectCook = 5f;
+    [Range(0, 7)] public float maxPerfectCook = 5.5f;
 
     [SerializeField] private List<string> ingredientsInPot = new List<string>();
     private Inventory inventory;
@@ -112,7 +113,8 @@ public class CookingPot : MonoBehaviour
         if (!isCooking && ingredientsInPot.Count > 0 /*tambahan biar limit jumlah ingredients sesuai jumlah foodPosInPot*/ && ingredientsInPot.Count <= foodPosInPot.Count)
         {
             //tambahan
-            back.interactable = false;
+            //back.interactable = false;
+            back.gameObject.SetActive(false);
             stirring.stir_value = 0f;
             stirring.cooked = false;
             //stirring.transform.parent.gameObject.SetActive(true);
@@ -126,6 +128,12 @@ public class CookingPot : MonoBehaviour
         }
     }
 
+    //tambahan buat Invoke
+    void goBack()
+    {
+        FindObjectOfType<Kitchen_Switch>().backToMain(transform.parent.GetComponent<RectTransform>());
+        back.gameObject.SetActive(true);
+    }
     public void StopCooking()
     {
         if (isCooking)
@@ -133,12 +141,14 @@ public class CookingPot : MonoBehaviour
             isCooking = false;
 
             //tambahan
+            stirring.inventory.GetComponent<Animator>().SetBool("up", false);
+            Invoke("goBack", 1f);
             foreach (GameObject food in foodPosInPot)
             {
                 food.SetActive(false);
                 food.GetComponent<Image>().sprite = null;
             }
-            back.interactable = true;
+            //back.interactable = true;
             stirring.stir_value = 0f;
             //stirring.transform.parent.gameObject.SetActive(false);
             //buttonCook.SetActive(true);
@@ -153,11 +163,21 @@ public class CookingPot : MonoBehaviour
                 Recipe dishToSpawn = IngredientsMatch(ingredientsInPot, recipe);
                 if (dishToSpawn.dishPrefab != null)
                 {
-                    inventory.AddIngredient(Instantiate(dishToSpawn.dishPrefab, spawnPoint));
+                    GameObject dish = Instantiate(dishToSpawn.dishPrefab, spawnPoint);
+                    Vector2 size = GameObject.Find("Slot1").transform.GetChild(0).GetComponent<RectTransform>().rect.size;
+                    dish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x);
+                    dish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
+                    dish.GetComponent<RectTransform>().localScale = Vector3.one;
+                    inventory.AddIngredient(dish);
                 }
                 else
                 {
-                    inventory.AddIngredient(Instantiate(burnedFoodPrefab, spawnPoint));
+                    GameObject dish = Instantiate(burnedFoodPrefab, spawnPoint);
+                    Vector2 size = GameObject.Find("Slot1").transform.GetChild(0).GetComponent<RectTransform>().rect.size;
+                    dish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x);
+                    dish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
+                    dish.GetComponent<RectTransform>().localScale = Vector3.one;
+                    inventory.AddIngredient(dish);
                 }
             }
             else if (!isSaucepan && progress >= minPerfectCook && progress <= maxPerfectCook)
@@ -165,11 +185,21 @@ public class CookingPot : MonoBehaviour
                 Recipe dishToSpawn = IngredientsMatch(ingredientsInPot, recipe);
                 if (dishToSpawn.dishPrefab != null)
                 {
-                    inventory.AddIngredient(Instantiate(dishToSpawn.dishPrefab, spawnPoint));
+                    GameObject dish = Instantiate(dishToSpawn.dishPrefab, spawnPoint);
+                    Vector2 size = GameObject.Find("Slot1").transform.GetChild(0).GetComponent<RectTransform>().rect.size;
+                    dish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x);
+                    dish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
+                    dish.GetComponent<RectTransform>().localScale = Vector3.one;
+                    inventory.AddIngredient(dish);
                 }
                 else
                 {
-                    inventory.AddIngredient(Instantiate(burnedFoodPrefab, spawnPoint));
+                    GameObject dish = Instantiate(burnedFoodPrefab, spawnPoint);
+                    Vector2 size = GameObject.Find("Slot1").transform.GetChild(0).GetComponent<RectTransform>().rect.size;
+                    dish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x);
+                    dish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
+                    dish.GetComponent<RectTransform>().localScale = Vector3.one;
+                    inventory.AddIngredient(dish);
                 }
             }
             else

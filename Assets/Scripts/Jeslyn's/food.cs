@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -85,6 +86,11 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         if (isParent)
         {
             clone = Instantiate(gameObject,GameObject.Find("FoodInventory").transform);
+            //clone.GetComponent<RectTransform>().localScale = Vector3.one * 0.4f;
+            Vector2 size = GameObject.Find("Slot1").transform.GetChild(0).GetComponent<RectTransform>().rect.size;
+            clone.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x);
+            clone.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
+            clone.GetComponent<RectTransform>().localScale = Vector3.one;
             //clone = Instantiate(gameObject, inventory.getSlotPosition(clone));
             clone.GetComponent<food>().isParent = false;
             clone.GetComponent<food>().isClicked = true;

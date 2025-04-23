@@ -17,7 +17,7 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
     private Vector2 centerScreenPos;
     private Vector2 previousDirection;
     private bool isPointerOver = false;
-    RectTransform inventory;
+    public RectTransform inventory;
     Vector3 temp;
 
     void Start()
@@ -30,9 +30,9 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
 
     void Update()
     {
-        if(pot.isCooking)
+        if (pot.isCooking)
         {
-            inventory.localPosition = Vector2.MoveTowards(inventory.localPosition, new Vector3(inventory.localPosition.x, 500, inventory.localPosition.z), Time.deltaTime * 1000);
+            inventory.localPosition = Vector2.MoveTowards(inventory.localPosition, new Vector3(inventory.localPosition.x, 1000, inventory.localPosition.z), Time.deltaTime * 1000);
         }
         else
         {
@@ -73,8 +73,12 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
     {
         if (isDragging && collision.gameObject.name == "stir_inside" && !pot.isCooking && pot.checkIngredientInPot())
         {
-            if(!pot.isCooking) pot.StartCooking();
-            if (!IsBoil)
+            if (!pot.isCooking)
+            {
+                pot.StartCooking();
+                inventory.GetComponent<Animator>().SetBool("up", true);
+            }
+                if (!IsBoil)
             {
                 CancelInvoke("stopCooking");
                 Invoke("stopCooking", 1.5f);

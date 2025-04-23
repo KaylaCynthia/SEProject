@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Kitchen_Switch : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> cook;
+    //[SerializeField] private List<GameObject> cook;
     Vector3 back;
     RectTransform currRoom;
     bool isBento = false;
@@ -13,10 +13,10 @@ public class Kitchen_Switch : MonoBehaviour
     {
         currRoom = new RectTransform();
         back = new Vector3(0,-500,0);
-        foreach (GameObject stir in cook)
+/*        foreach (GameObject stir in cook)
         {
             stir.SetActive(false);
-        }
+        }*/
     }
 
     // Update is called once per frame
@@ -29,13 +29,13 @@ public class Kitchen_Switch : MonoBehaviour
         if (currRoom != null && Vector2.Distance(currRoom.localPosition, back) < 0.001f)
         {
             currRoom = null;
-            foreach (GameObject stir in cook)
+/*            foreach (GameObject stir in cook)
             { 
                 if(back == new Vector3(0, -700, 0))
                 {
                     stir.SetActive(false);
                 }
-            }
+            }*/
         }
     }
     public void switchRoom(RectTransform room)
@@ -45,14 +45,14 @@ public class Kitchen_Switch : MonoBehaviour
             currency.SetActive(false);
             currRoom = room;
             back = new Vector3(0, 0, 0);
-            foreach (GameObject stir in cook)
+/*            foreach (GameObject stir in cook)
             {
                 if (stir.transform.parent.gameObject == currRoom.gameObject)
                 {
                     stir.SetActive(true);
                     break;
                 }
-            }
+            }*/
         }
     }
 
@@ -61,7 +61,7 @@ public class Kitchen_Switch : MonoBehaviour
     {
         if (currRoom == null)
         {
-            currency.SetActive(true);
+            //currency.SetActive(true);
             currRoom = room;
             back = new Vector3(0, -700, 0);
         }

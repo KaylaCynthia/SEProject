@@ -38,7 +38,7 @@ public class CuttingBoard : MonoBehaviour
             //modif
             food.GetComponent<Image>().raycastTarget = false;
             food.isCooking = true;
-            food.transform.localScale = Vector3.one*2.5f;
+            food.transform.localScale = Vector3.one*5f;
             //
             back.interactable = false;
             GetComponent<BoxCollider2D>().enabled = false;
@@ -65,7 +65,7 @@ public class CuttingBoard : MonoBehaviour
             }
             parts.Clear();
             currentIngredient.fillAmount = 1f;
-            food.transform.localScale = Vector3.one*0.5f;
+            food.transform.localScale = Vector3.one;
             isCutting = false;
             transform.GetChild(0).gameObject.SetActive(false);
             food.isCooking = false;
@@ -87,7 +87,8 @@ public class CuttingBoard : MonoBehaviour
         else
         {
             GameObject dice = new GameObject("dicePart");
-            dice.AddComponent<dicedPart>().target = new Vector2(food.transform.localPosition.x + food.GetComponent<RectTransform>().rect.width - 20f  - count*10, food.transform.localPosition.y+20f);
+            dice.AddComponent<dicedPart>().target = new Vector2(food.transform.localPosition.x + food.GetComponent<RectTransform>().rect.width  - count*10, transform.localPosition.y);
+            dice.AddComponent<RectTransform>().localScale = Vector3.one * 0.7f;
             dice.AddComponent<Image>().sprite = food.dicedPartSprite;
             dice.GetComponent<Image>().raycastTarget = false;
             parts.Add(Instantiate(dice, food.transform));

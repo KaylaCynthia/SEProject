@@ -8,7 +8,6 @@ public class Customer : MonoBehaviour
 {
     private TextMeshProUGUI patienceText;
     public float patience = 100f;
-    //disini dialognya 1 aja gpp, nnt ganti bahasanya itu cmn bs di main menu soalnya
     public List<string> dialogues;
     public string orderName;
     public List<string> ingredients;
@@ -29,50 +28,36 @@ public class Customer : MonoBehaviour
         patienceText = GameObject.Find("notes").transform.GetChild(0).GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>();
         dialogueBubble = transform.Find("DialogueBubble").gameObject;
         dialogueText = dialogueBubble.transform.Find("DialogueText").GetComponent<TextMeshProUGUI>();
-        //modif
-/*        OKButton = transform.Find("OKButton").GetComponent<Button>();
-        WHATButton = transform.Find("WHATButton").GetComponent<Button>();*/
         StartDialogue();
         StartCoroutine(patienceDrop());
     }
 
-    //tambahan
+    
     Coroutine animate;
     bool isLeaving = false;
-    //
+    
     private void Update()
     {
         patienceText.text = patience.ToString() + "%";
-        //tambahan - customer baru leave kl dialognya dah kelar
         if (!isLeaving && currentIdx == dialogues.Count - 2 && dialogueText.maxVisibleCharacters == dialogues[currentIdx].Length)
         {
             isLeaving = true;
             CustomerLeaves();
         }
-        //
     }
 
     public void StartDialogue()
     {
         dialogueBubble.SetActive(true);
-
-        //tambahan
         dialogueText.maxVisibleCharacters = 0;
-        //
-
         dialogueText.text = dialogues[currentIdx];
-
-        //tambahan
         animate = StartCoroutine(animationText());
-        //
-
         isWaitingForOrder = true;
         OKButton.interactable = true;
         WHATButton.interactable = true;
         // StartCoroutine(CloseDialogue());
     }
 
-    //tambahan - animasi text dialog
     IEnumerator animationText()
     {
         while (true)
@@ -88,9 +73,7 @@ public class Customer : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
     }
-    //
 
-    //tambahan patience customer
     IEnumerator patienceDrop()
     {
         while (patience > 0)
@@ -104,7 +87,6 @@ public class Customer : MonoBehaviour
     {
         if (currentIdx < dialogues.Count - 1)
         {
-            //tambahan
             if (dialogueText.maxVisibleCharacters == dialogues[currentIdx].Length)
             {   
                 currentIdx++;
@@ -114,14 +96,9 @@ public class Customer : MonoBehaviour
                 dialogueText.maxVisibleCharacters = 0;
                 StopCoroutine(animate);
                 animate = StartCoroutine(animationText());
-                //
 
                 if (currentIdx == dialogues.Count - 2)
                 {
-                    //ku comment ini biar customer itu leave pas dialognya kelar dlu
-                    //CustomerLeaves();
-                
-                    //ganti jd ini
                     OKButton.interactable = false;
                     WHATButton.interactable = false;
                 }
@@ -134,14 +111,19 @@ public class Customer : MonoBehaviour
         }
     }
 
-    public void SubmitOrder()
+    public void SubmitOrder(string bento)
     {
         if (isWaitingForOrder)
         {
-            OKButton.interactable = false;
-            WHATButton.interactable = false;
             dialogueBubble.SetActive(true);
-            dialogueText.text = dialogues[dialogues.Count - 1].ToString();
+            if(orderName == bento)
+            {
+                dialogueText.text = dialogues[dialogues.Count - 1].ToString();
+            }
+            else
+            {
+                dialogueText.text = dialogues[dialogues.Count - 2].ToString();
+            }
             currentIdx = dialogues.Count - 1;
             isWaitingForOrder = false;
             StartCoroutine(CompleteOrderAfterDelay(2f));
@@ -169,5 +151,13 @@ public class Customer : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         dialogueBubble.SetActive(false);
+    }
+
+    public void ToKitchen()
+    {
+        OKButton.gameObject.SetActive(false);
+        WHATButton.gameObject.SetActive(false);
+        switch_room switch_Room = FindObjectOfType<switch_room>();
+        switch_Room.switchRoom(GameObject.Find("Canvas_KITCHEN").GetComponent<Canvas>());
     }
 }

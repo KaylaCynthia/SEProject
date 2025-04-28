@@ -105,11 +105,11 @@ public class CustomerSpawner : MonoBehaviour
         currentCustomer = null;
     }
 
-    public void SubmitOrderNow()
-    {
-        if (currentCustomer != null)
-        {
-            currentCustomer.GetComponent<Customer>().SubmitOrder();
-        }
-    }
+    // public void SubmitOrderNow()
+    // {
+    //     if (currentCustomer != null)
+    //     {
+    //         currentCustomer.GetComponent<Customer>().SubmitOrder();
+    //     }
+    // }
 }

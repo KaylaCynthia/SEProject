@@ -59,7 +59,12 @@ public class CuttingBoard : MonoBehaviour
         if(count == 4)
         {
             //tambahan
-            foreach (GameObject part in parts)
+            // foreach (GameObject part in parts)
+            // {
+            //     Destroy(part);
+            // }
+            GameObject[] unwantedParts = GameObject.FindGameObjectsWithTag("Dice");
+            foreach (GameObject part in unwantedParts)
             {
                 Destroy(part);
             }
@@ -87,6 +92,7 @@ public class CuttingBoard : MonoBehaviour
         else
         {
             GameObject dice = new GameObject("dicePart");
+            dice.tag = "Dice";
             dice.AddComponent<dicedPart>().target = new Vector2(food.transform.localPosition.x + food.GetComponent<RectTransform>().rect.width  - count*10, transform.localPosition.y);
             dice.AddComponent<RectTransform>().localScale = Vector3.one * 0.7f;
             dice.AddComponent<Image>().sprite = food.dicedPartSprite;

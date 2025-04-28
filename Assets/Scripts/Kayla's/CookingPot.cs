@@ -27,7 +27,7 @@ public class CookingPot : MonoBehaviour
     [Range(0, 7)] public float minPerfectCook = 5f;
     [Range(0, 7)] public float maxPerfectCook = 5.5f;
 
-    [SerializeField] private List<string> ingredientsInPot = new List<string>();
+    private List<string> ingredientsInPot = new List<string>();
     private Inventory inventory;
     private Coroutine cookingCoroutine;
     private float currentCookingTime = 0f;
@@ -39,7 +39,6 @@ public class CookingPot : MonoBehaviour
     [SerializeField] private stir stirring;
     [SerializeField] private Button back;
     //[SerializeField] private GameObject buttonCook;
-    //
 
     private void Start()
     {
@@ -49,7 +48,6 @@ public class CookingPot : MonoBehaviour
             timerUI.SetActive(false);
         }
 
-        //modif
         for (int i = 0; i < transform.GetChild(1).childCount; i++)
         {
             foodPosInPot.Add(transform.GetChild(1).GetChild(i).gameObject);
@@ -57,7 +55,7 @@ public class CookingPot : MonoBehaviour
         }
         //stirring.transform.parent.gameObject.SetActive(false);
     }
-    //tambahan
+    
     public bool checkIngredientInPot()
     {
         if (ingredientsInPot.Count > 0)
@@ -69,7 +67,7 @@ public class CookingPot : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D ingredient)
     {
-        if (ingredient != null && !isCooking && /*tambahan buat limit jumlah ingredients*/ ingredientsInPot.Count < foodPosInPot.Count)
+        if (ingredient != null && !isCooking && ingredientsInPot.Count < foodPosInPot.Count && ingredient.gameObject.name != "SoupSet(Clone)" && ingredient.gameObject.name != "StirFrySet(Clone)")
         {
             food foodItem = ingredient.GetComponent<food>();
             if (foodItem != null)

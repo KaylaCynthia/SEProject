@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviour
 
                 Image slotImage = transform.GetChild(idx).GetChild(0).GetComponent<Image>();
                 //tambahan
-                //ingredientSprite.transform.parent = slotImage.transform;
+                // ingredientSprite.transform.parent = slotImage.transform;
                 ingredientSprite.GetComponent<food>().slot = slotImage.gameObject;
                 ingredientSprite.GetComponent<food>().slotPosition = slotImage.rectTransform.position;
 
@@ -42,13 +42,6 @@ public class Inventory : MonoBehaviour
                     slotImage.sprite = ingredientSprite.GetComponent<Image>().sprite;
                     slotImage.enabled = true;
 
-                    //modif -> logicnya salah ternyata
-                    /*if (idx == slots.Count - 1)
-                    {
-                        isFull = true;
-                    }
-                    return;
-                    */
                     for (int i = 0; i < slots.Count; i++)
                     {
                         if (slots[i] == null)

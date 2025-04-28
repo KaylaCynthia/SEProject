@@ -19,12 +19,6 @@ public class switch_room : MonoBehaviour
         currency.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void switchRoom(Canvas canvas)
     {
         if(nextCanvas != null) currCanvas = nextCanvas;

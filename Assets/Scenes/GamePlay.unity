@@ -6748,7 +6748,7 @@ GameObject:
   - component: {fileID: 808093662}
   - component: {fileID: 808093661}
   m_Layer: 5
-  m_Name: Milk
+  m_Name: MomMilk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6858,7 +6858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodPrice: 1.5
-  foodName: Milk
+  foodName: MomMilk
   slot: {fileID: 0}
   slotPosition: {x: 0, y: 0}
   isParent: 1
@@ -7373,7 +7373,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19
+  m_fontSize: 17.25
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10031,7 +10031,7 @@ GameObject:
   - component: {fileID: 1030358980}
   - component: {fileID: 1030358979}
   m_Layer: 5
-  m_Name: Carrot
+  m_Name: ChildMilk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10141,7 +10141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodPrice: 2
-  foodName: Carrot
+  foodName: ChildMilk
   slot: {fileID: 0}
   slotPosition: {x: 0, y: 0}
   isParent: 1
@@ -10166,7 +10166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.4050197, b: 0, a: 1}
+  m_Color: {r: 0.48867923, g: 0.97612447, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10537,7 +10537,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 13.65
+  m_fontSize: 12.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -21872,7 +21872,8 @@ MonoBehaviour:
     isOccupied: 0
   - slotImage: {fileID: 1564480772}
     allowedFood:
-    - Milk
+    - ChildMilk
+    - MomMilk
     allowedFoodImage:
     - {fileID: -61615323, guid: 6224ea8ae4a4e9d4a8bd6159718db1a6, type: 3}
     isOccupied: 0
@@ -21884,6 +21885,7 @@ MonoBehaviour:
     isOccupied: 0
   bentoToServePrefab: {fileID: 8478309217928769946, guid: 200ba51f82a448f4ea2e14b05c8fde47, type: 3}
   servePosition: {fileID: 1454441884}
+  bento: {fileID: 1949277018}
 --- !u!1 &1859377240
 GameObject:
   m_ObjectHideFlags: 0
@@ -24709,7 +24711,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.1
+  m_fontSize: 14.55
   m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -23,11 +23,14 @@ public class Bento : MonoBehaviour
     public GameObject bentoToServePrefab;
     public Transform servePosition;
     private int targetSlotImage;
+    private Kitchen_Switch kitchen_Switch;
+    [SerializeField] private RectTransform bento;
 
     private void Start()
     {
         switch_Room = FindObjectOfType<switch_room>();
         inventory = FindObjectOfType<Inventory>();
+        kitchen_Switch = FindObjectOfType<Kitchen_Switch>();
         // bentoSlots = new List<BentoSlot>(4);
         
         for (int i = 0; i < bentoSlots.Count; i++)
@@ -74,16 +77,25 @@ public class Bento : MonoBehaviour
 
         if(CheckIfFull())
         {
-            if(ingredientsInBento.Contains("StirFrySet"))
+            if(ingredientsInBento.Contains("StirFrySet") && ingredientsInBento.Contains("ChildMilk"))
             {
-                bentoName = "StirFryBento";
+                bentoName = "ChildStirFryBento";
+            }
+            else if(ingredientsInBento.Contains("StirFrySet") && ingredientsInBento.Contains("MomMilk"))
+            {
+                bentoName = "MomStirFryBento";
+            }
+            else if(ingredientsInBento.Contains("SoupSet") && ingredientsInBento.Contains("ChildMilk"))
+            {
+                bentoName = "ChildSoupBento";
             }
             else
             {
-                bentoName = "SoupBento";
+                bentoName = "MomSoupBento";
             }
 
             ServeCompletedBento(bentoName);
+            kitchen_Switch.openBento(bento);
             switch_Room.switchRoom(customerCanvas);
             ClearBento();
         }

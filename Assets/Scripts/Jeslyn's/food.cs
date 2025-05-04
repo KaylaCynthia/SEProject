@@ -20,12 +20,15 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public bool released = false;
     public bool isCuttable = false;
     public bool isRefundable = true;
+    public Sprite normalSprite;
+    public Sprite dicingSprite;
     public Sprite dicedPartSprite;
     public Sprite dicedSprite;
     public bool isCooking;
     // Start is called before the first frame update
     void Start()
     {
+        normalSprite = GetComponent<Image>().sprite;
         currencyManager = FindObjectOfType<CurrencyManager>();
         inventory = FindObjectOfType<Inventory>();
         rectTransform = GetComponent<RectTransform>();
@@ -38,10 +41,15 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         {
             slotPosition = slot.transform.position;
         }
-        if (!isClicked && !isParent || isCooking)
+        if (!isCooking && !isClicked && !isParent)
         {
             //rectTransform.position = Vector2.MoveTowards(rectTransform.position, slotPosition, Time.deltaTime*1000);
             rectTransform.position = slotPosition;
+        }
+        else if (isCooking)
+        {
+            GameObject cut = GameObject.Find("cut");
+            rectTransform.position = new Vector3(cut.transform.position.x, cut.transform.position.y - 50f, cut.transform.position.z);
         }
         if (!isClicked && isCollideFridge)
         {
@@ -57,7 +65,7 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         //     inventory.RemoveInventory(gameObject);
         //     Destroy(gameObject);
         // }
-        if (collision.name == "Inventory" && !inventory.isFull && !inventory.AlreadyInInventory(gameObject))
+        if (!isCooking && collision.name == "Inventory" && !inventory.isFull && !inventory.AlreadyInInventory(gameObject))
         {
             inventory.AddIngredient(gameObject);
         }
@@ -94,6 +102,11 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             clone.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
             clone.GetComponent<RectTransform>().localScale = Vector3.one;
             // clone = Instantiate(gameObject, inventory.getSlotPosition(clone));
+        }
+        if (!isParent && inventory.isDeleteMode == true && inventory.AlreadyInInventory(gameObject))
+        {
+            inventory.RemoveInventory(gameObject);
+            Destroy(gameObject);
         }
     }
 

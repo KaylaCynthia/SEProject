@@ -128,7 +128,7 @@ public class CookingPot : MonoBehaviour
 
     //tambahan buat Invoke
     void goBack()
-    {
+    { 
         FindObjectOfType<Kitchen_Switch>().backToMain(transform.parent.GetComponent<RectTransform>());
         back.gameObject.SetActive(true);
     }
@@ -177,6 +177,8 @@ public class CookingPot : MonoBehaviour
                     dish.GetComponent<RectTransform>().localScale = Vector3.one;
                     inventory.AddIngredient(dish);
                 }
+                boilingAnimation anim = GameObject.FindObjectOfType<boilingAnimation>();
+                anim.doneCooking();
             }
             else if (!isSaucepan && progress >= minPerfectCook && progress <= maxPerfectCook)
             {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Kitchen_Switch : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Kitchen_Switch : MonoBehaviour
     Vector3 back;
     RectTransform currRoom;
     bool isBento = false;
+    [SerializeField] private Button bentoButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -97,5 +99,9 @@ public class Kitchen_Switch : MonoBehaviour
             isBento = false;
             backToMain(bento);
         }
+    }
+    public void hideBento(bool active)
+    {
+        bentoButton.interactable = !active;
     }
 }

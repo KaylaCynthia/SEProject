@@ -34,10 +34,14 @@ public class CuttingBoard : MonoBehaviour
 
         if(!isCutting && food.isCuttable == true && !ingredient.GetComponent<food>().foodName.StartsWith("Diced"))
         {
-            isCutting = true;
             //modif
-            food.GetComponent<Image>().raycastTarget = false;
+            isCutting = true;
             food.isCooking = true;
+            inventory.RemoveInventory(ingredient.gameObject);
+            food.slotPosition = new Vector3(transform.position.x, transform.position.y-50f,transform.position.z);
+            food.GetComponent<RectTransform>().position = new Vector3(transform.position.x, transform.position.y - 50f, transform.position.z);
+            food.GetComponent<Image>().sprite = food.dicingSprite;
+            food.GetComponent<Image>().raycastTarget = false;
             food.transform.localScale = Vector3.one*5f;
             //
             back.interactable = false;
@@ -45,8 +49,6 @@ public class CuttingBoard : MonoBehaviour
             count = 0;
             currentIngredient = ingredient.gameObject.GetComponent<Image>();
             // ingredient.gameObject.SetActive(false);
-            ingredient.GetComponent<food>().slotPosition = new Vector3(transform.position.x, transform.position.y-50f,transform.position.z);
-            inventory.RemoveInventory(ingredient.gameObject);
             //tambahan
             //StartDicing();
             transform.GetChild(0).gameObject.SetActive(true);
@@ -73,19 +75,21 @@ public class CuttingBoard : MonoBehaviour
             food.transform.localScale = Vector3.one;
             isCutting = false;
             transform.GetChild(0).gameObject.SetActive(false);
-            food.isCooking = false;
-            food.slotPosition = food.slot.transform.position;
-            food.GetComponent<Image>().raycastTarget = true;
-            //
-
             back.interactable = true;
+
             GetComponent<BoxCollider2D>().enabled = true;
             currentIngredient.sprite = food.dicedSprite;
-            food.GetComponent<RectTransform>().position = food.slotPosition;
-            food.foodName = "Diced " + currentIngredient.GetComponent<food>().foodName;
+            food.foodName = "Diced " + food.foodName;
             food.isRefundable = false;
-            // currentIngredient.gameObject.SetActive(true);
+
             inventory.AddIngredient(currentIngredient.gameObject);
+            food.isCooking = false;
+            food.GetComponent<Image>().raycastTarget = true;
+            //food.slotPosition = food.slot.transform.position;
+            //food.GetComponent<RectTransform>().position = food.slotPosition;
+            //
+
+            // currentIngredient.gameObject.SetActive(true);
         }
 
         //tambahan
@@ -93,7 +97,7 @@ public class CuttingBoard : MonoBehaviour
         {
             GameObject dice = new GameObject("dicePart");
             dice.tag = "Dice";
-            dice.AddComponent<dicedPart>().target = new Vector2(food.transform.localPosition.x + food.GetComponent<RectTransform>().rect.width  - count*10, transform.localPosition.y);
+            dice.AddComponent<dicedPart>().target = new Vector2(food.transform.localPosition.x + food.GetComponent<RectTransform>().rect.width  - count*5, transform.localPosition.y);
             dice.AddComponent<RectTransform>().localScale = Vector3.one * 0.7f;
             dice.AddComponent<Image>().sprite = food.dicedPartSprite;
             dice.GetComponent<Image>().raycastTarget = false;

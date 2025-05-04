@@ -65,8 +65,8 @@ public class Inventory : MonoBehaviour
         {
             //Image slotImage = slot.GetComponentInChildren<Image>();
             Image slotImage = transform.GetChild(slots.IndexOf(slot)).GetChild(0).GetComponent<Image>();
-            slotImage.sprite = null;
             slotImage.enabled = false;
+            slotImage.sprite = null;
         }
         //tambahan krn trash msk inventory
         slots[0] = transform.GetChild(0).gameObject;
@@ -80,11 +80,11 @@ public class Inventory : MonoBehaviour
             if (slot == food)
             {
                 isFull = false;
+                food.GetComponent<food>().slot = null;
                 int idx = slots.IndexOf(slot);
                 Image slotImage = transform.GetChild(idx).GetChild(0).GetComponent<Image>();
-                slotImage.sprite = null;
                 slotImage.enabled = false;
-                idx = slots.IndexOf(slot);
+                slotImage.sprite = null;
                 slots[idx] = null;
                 return;
             }

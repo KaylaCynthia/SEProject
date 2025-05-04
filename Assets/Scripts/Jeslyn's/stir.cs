@@ -13,7 +13,7 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
     [SerializeField] private Slider slider;
     public float stir_value = 0f;
     private RectTransform rectTransform;
-    private bool isDragging = false;
+    public bool isDragging = false;
     private Vector2 centerScreenPos;
     private Vector2 previousDirection;
     private bool isPointerOver = false;

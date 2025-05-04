@@ -65,7 +65,6 @@ public class Bento : MonoBehaviour
 
         BentoSlot slot = bentoSlots[targetSlot];
         ingredientsInBento.Add(foodItem.foodName);
-        
         slot.slotImage.sprite = slot.allowedFoodImage[targetSlotImage];
         slot.slotImage.enabled = true;
         slot.isOccupied = true;
@@ -95,11 +94,24 @@ public class Bento : MonoBehaviour
             }
 
             ServeCompletedBento(bentoName);
-            kitchen_Switch.openBento(bento);
-            switch_Room.switchRoom(customerCanvas);
-            ClearBento();
+            //modif
+            //kitchen_Switch.openBento(bento);
+            GetComponent<Animator>().Play("closed");
+            kitchen_Switch.hideBento(true);
+            //
+            //switch_Room.switchRoom(customerCanvas);
         }
     }
+
+    //tambahan buat UI/UX
+    public void backToCustomer()
+    {
+        switch_Room.switchRoom(customerCanvas);
+        kitchen_Switch.hideBento(false);
+        kitchen_Switch.openBento(bento);
+        ClearBento();
+    }
+    //
 
     private void ServeCompletedBento(string bentoName)
     {

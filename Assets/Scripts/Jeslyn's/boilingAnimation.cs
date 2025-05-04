@@ -33,15 +33,27 @@ public class boilingAnimation : MonoBehaviour
                         previousDirection = currentDirection;
                     }
                 }*/
-        animation[2].GetComponent<RectTransform>().rotation = aduk.GetComponent<RectTransform>().rotation;
+        animation[3].GetComponent<RectTransform>().rotation = aduk.GetComponent<RectTransform>().rotation;
         if (aduk.stir_value > 0 && aduk.stir_value < 100)
         {
-            Color color1 = new Color(1,1,1,1-aduk.stir_value/100);
-            Color color2 = new Color(1,1,1,aduk.stir_value/100);
-            animation[0].color = color1;
-            animation[1].color = color2;
-            animation[2].color = color2;
-            animation[3].color = Color.clear;
+            //aduk stir = 50 buat color0 jadi 1
+            //aduk stir = 100 buat color1 jadi 1
+            Color color0 = new Color(1,1,1,aduk.stir_value/50);
+            Color color1 = new Color(1,1,1,1f-aduk.stir_value/50);
+            Color color2 = new Color(1,1,1,1f-aduk.stir_value/200);
+            Color color3 = new Color(1,1,1,aduk.stir_value/50f - 1f);
+            if (aduk.stir_value >= 50)
+            {
+                animation[1].color = color2;
+                animation[2].color = color3;
+                animation[3].color = color3;
+            }
+            else
+            {
+                animation[0].color = color1;
+                animation[1].color = color0;
+            }
+            animation[4].color = Color.clear;
         }
     }
     public void doneCooking()
@@ -49,7 +61,8 @@ public class boilingAnimation : MonoBehaviour
         animation[0].color = Color.clear;
         animation[1].color = Color.clear;
         animation[2].color = Color.clear;
-        animation[3].color = Color.white;
+        animation[3].color = Color.clear;
+        animation[4].color = Color.white;
         Invoke("resetColor", 1.2f);
     }
     void resetColor()
@@ -58,5 +71,6 @@ public class boilingAnimation : MonoBehaviour
         animation[1].color = Color.clear;
         animation[2].color = Color.clear;
         animation[3].color = Color.clear;
+        animation[4].color = Color.clear;
     }
 }

@@ -11,6 +11,7 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public string foodName;
     Inventory inventory;
     CurrencyManager currencyManager;
+    DayReceipt dayReceipt;
     public GameObject slot;
     public Vector2 slotPosition = Vector2.zero;
     public bool isParent = false;
@@ -31,6 +32,7 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         normalSprite = GetComponent<Image>().sprite;
         currencyManager = FindObjectOfType<CurrencyManager>();
         inventory = FindObjectOfType<Inventory>();
+        dayReceipt = FindObjectOfType<DayReceipt>();
         rectTransform = GetComponent<RectTransform>();
     }
 
@@ -138,6 +140,7 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             clone.GetComponent<food>().isClicked = false;
             clone.GetComponent<food>().released = true;
             currencyManager.DecreaseCoins(foodPrice);
+            dayReceipt.iExpenses += foodPrice;
         }
     }
 

@@ -12,6 +12,7 @@ public class Customer : MonoBehaviour
     public string orderName;
     public List<string> ingredients;
     public float price;
+    private float tips;
     public string currentOrder;
     private TextMeshProUGUI dialogueText;
     [SerializeField] private Button OKButton;
@@ -22,17 +23,21 @@ public class Customer : MonoBehaviour
 
     public delegate void OrderCompleted();
     public event OrderCompleted OnOrderCompleted;
+    private CurrencyManager currencyManager;
+    private DayReceipt dayReceipt;
 
     private void Start()
     {
         patienceText = GameObject.Find("notes").transform.GetChild(0).GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>();
+        currencyManager = FindObjectOfType<CurrencyManager>();
+        dayReceipt = FindObjectOfType<DayReceipt>();
         dialogueBubble = transform.Find("DialogueBubble").gameObject;
         dialogueText = dialogueBubble.transform.Find("DialogueText").GetComponent<TextMeshProUGUI>();
         StartDialogue();
         StartCoroutine(patienceDrop());
+        SetCurrentOrder();
     }
 
-    
     Coroutine animate;
     bool isLeaving = false;
     
@@ -97,7 +102,7 @@ public class Customer : MonoBehaviour
                 StopCoroutine(animate);
                 animate = StartCoroutine(animationText());
 
-                if (currentIdx == dialogues.Count - 2)
+                if (currentIdx == dialogues.Count - 3)
                 {
                     OKButton.interactable = false;
                     WHATButton.interactable = false;
@@ -115,18 +120,49 @@ public class Customer : MonoBehaviour
     {
         if (isWaitingForOrder)
         {
+            tips = 5 / 100 * price;
             dialogueBubble.SetActive(true);
-            if(orderName == bento)
+            if(currentOrder == bento)
             {
                 dialogueText.text = dialogues[dialogues.Count - 1].ToString();
+                currencyManager.AddCoins(tips);
+                dayReceipt.totalEarnings += tips;
+                dayReceipt.customerServed += 1;
+                dayReceipt.UpdateSatisfactionRate(patience);
+                dayReceipt.UpdateReceiptData();
             }
             else
             {
                 dialogueText.text = dialogues[dialogues.Count - 2].ToString();
+                currencyManager.DecreaseCoins(price);
+                dayReceipt.totalEarnings -= price;
+                dayReceipt.customerServed += 1;
+                dayReceipt.UpdateSatisfactionRate(patience);
+                dayReceipt.UpdateReceiptData();
             }
             currentIdx = dialogues.Count - 1;
             isWaitingForOrder = false;
             StartCoroutine(CompleteOrderAfterDelay(2f));
+        }
+    }
+
+    public void SetCurrentOrder()
+    {
+        if(orderName == "Soup Set (Mom)")
+        {
+            currentOrder = "MomSoupBento";
+        }
+        else if(orderName == "Soup Set (Kid)")
+        {
+            currentOrder = "ChildSoupBento";
+        }
+        else if(orderName == "Stir Fry Set (Mom)")
+        {
+            currentOrder = "MomStirFryBento";
+        }
+        else
+        {
+            currentOrder = "ChildStirFryBento";
         }
     }
 
@@ -157,6 +193,8 @@ public class Customer : MonoBehaviour
     {
         OKButton.gameObject.SetActive(false);
         WHATButton.gameObject.SetActive(false);
+        currencyManager.AddCoins(price);
+        dayReceipt.totalEarnings += price;
         switch_room switch_Room = FindObjectOfType<switch_room>();
         switch_Room.switchRoom(GameObject.Find("Canvas_KITCHEN").GetComponent<Canvas>());
     }

@@ -7,7 +7,6 @@ using static System.Net.Mime.MediaTypeNames;
 
 public class GameManager : MonoBehaviour
 {
-    //audio settings
     [SerializeField] private Slider bgm;
     [SerializeField] private Slider sfx;
     [SerializeField] private AudioMixer mixer;
@@ -17,11 +16,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI TimerText;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject receiptPanel;
+    [SerializeField] private GameObject customerSpawner;
+    [SerializeField] private Transform customerParent;
 
     private int currentDay = 1;
     private float currentTime = 540f; // 09:00 in minutes (9 * 60)
     private float endTime = 1260f; // 21:00 in minutes (21 * 60)
     private float timeScale = 5f;
+    private bool isShopClosed = false;
 
     private void Awake()
     {
@@ -37,7 +40,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //audio settings
         if (!PlayerPrefs.HasKey("bgm") || !PlayerPrefs.HasKey("sfx"))
         {
             PlayerPrefs.SetFloat("bgm", 1);
@@ -74,21 +76,55 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        //audio settings
         PlayerPrefs.SetFloat("bgm", bgm.value);
         PlayerPrefs.SetFloat("sfx", sfx.value);
         mixer.SetFloat("bgm", Mathf.Log10(PlayerPrefs.GetFloat("bgm")) * 20);
         mixer.SetFloat("sfx", Mathf.Log10(PlayerPrefs.GetFloat("sfx")) * 20);
 
-        currentTime += Time.deltaTime / timeScale * 15;
-
-        if (currentTime >= endTime)
+        if (!isShopClosed)
         {
-            currentTime = 540f;
-            currentDay++;
-            UpdateDayText();
+            currentTime += Time.deltaTime / timeScale * 15;
+
+            if (currentTime >= endTime)
+            {
+                CloseShop();
+            }
+        }
+        else
+        {
+            if (customerParent.childCount == 0)
+            {
+                ShowReceipt();
+            }
         }
 
+        UpdateTimer();
+    }
+
+    private void CloseShop()
+    {
+        isShopClosed = true;
+        customerSpawner.SetActive(false);
+    }
+
+    private void ShowReceipt()
+    {
+        Time.timeScale = 0f;
+        receiptPanel.SetActive(true);
+    }
+
+    public void StartNextDay()
+    {
+        currentDay++;
+        currentTime = 540f;
+        isShopClosed = false;
+        
+        receiptPanel.SetActive(false);
+        Time.timeScale = 1f;
+        
+        customerSpawner.SetActive(true);
+        
+        UpdateDayText();
         UpdateTimer();
     }
 

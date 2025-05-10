@@ -76,21 +76,25 @@ public class Bento : MonoBehaviour
 
         if(CheckIfFull())
         {
-            if(ingredientsInBento.Contains("StirFrySet") && ingredientsInBento.Contains("ChildMilk"))
+            if(ingredientsInBento.Contains("StirFrySet") && ingredientsInBento.Contains("ChildMilk") && ingredientsInBento.Contains("Orange"))
             {
                 bentoName = "ChildStirFryBento";
             }
-            else if(ingredientsInBento.Contains("StirFrySet") && ingredientsInBento.Contains("MomMilk"))
+            else if(ingredientsInBento.Contains("StirFrySet") && ingredientsInBento.Contains("MomMilk") && ingredientsInBento.Contains("Orange"))
             {
                 bentoName = "MomStirFryBento";
             }
-            else if(ingredientsInBento.Contains("SoupSet") && ingredientsInBento.Contains("ChildMilk"))
+            else if(ingredientsInBento.Contains("SoupSet") && ingredientsInBento.Contains("ChildMilk") && ingredientsInBento.Contains("Banana"))
             {
                 bentoName = "ChildSoupBento";
             }
-            else
+            else if(ingredientsInBento.Contains("SoupSet") && ingredientsInBento.Contains("MomMilk") && ingredientsInBento.Contains("Banana"))
             {
                 bentoName = "MomSoupBento";
+            }
+            else
+            {
+                bentoName = "FAILED";
             }
 
             ServeCompletedBento(bentoName);

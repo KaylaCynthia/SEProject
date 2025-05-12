@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class CuttingBoard : MonoBehaviour
 {
     //tambahan
+    [SerializeField] private GameObject pisau;
     List<GameObject> parts = new List<GameObject>();
     [SerializeField] private Button back;
     bool isCutting = false;
@@ -25,7 +26,21 @@ public class CuttingBoard : MonoBehaviour
     {
         inventory = FindObjectOfType<Inventory>();
     }
+    //tambahan
+    private void Update()
+    {
+        if(isCutting)
+        {
 
+            pisau.GetComponent<Image>().color = Color.Lerp(pisau.GetComponent<Image>().color, Color.white, Time.deltaTime*10f);
+        }
+        else
+        {
+            pisau.GetComponent<Image>().color = Color.Lerp(pisau.GetComponent<Image>().color, Color.clear, Time.deltaTime*5f);
+        }
+    }
+
+    //
     private void OnTriggerEnter2D(Collider2D ingredient)
     {
         if (ingredient == null) return;
@@ -42,12 +57,13 @@ public class CuttingBoard : MonoBehaviour
             food.GetComponent<RectTransform>().position = new Vector3(transform.position.x, transform.position.y - 50f, transform.position.z);
             food.GetComponent<Image>().sprite = food.dicingSprite;
             food.GetComponent<Image>().raycastTarget = false;
-            food.transform.localScale = Vector3.one*5f;
+            food.transform.localScale = food.transform.localScale * 5f;
             //
             back.interactable = false;
             GetComponent<BoxCollider2D>().enabled = false;
             count = 0;
             currentIngredient = ingredient.gameObject.GetComponent<Image>();
+            pisau.transform.localPosition = new Vector2(food.transform.localPosition.x + food.GetComponent<RectTransform>().rect.width*2.5f, transform.localPosition.y);
             // ingredient.gameObject.SetActive(false);
             //tambahan
             //StartDicing();
@@ -61,18 +77,19 @@ public class CuttingBoard : MonoBehaviour
         if(count == 4)
         {
             //tambahan
-            // foreach (GameObject part in parts)
-            // {
-            //     Destroy(part);
-            // }
-            GameObject[] unwantedParts = GameObject.FindGameObjectsWithTag("Dice");
-            foreach (GameObject part in unwantedParts)
+/*            pisau.transform.parent = GameObject.Find("Canvas_ALL").transform;
+            pisau.transform.SetSiblingIndex(7);*/
+            pisau.GetComponent<Animator>().Play("cut");
+            //GameObject[] unwantedParts = GameObject.FindGameObjectsWithTag("Dice");
+            foreach (GameObject part in parts)
             {
-                Destroy(part);
+                part.transform.parent = GameObject.Find("FoodInventory").transform;
+                //Destroy(part);
+                part.GetComponent<dicedPart>().destroying = true;
             }
             parts.Clear();
             currentIngredient.fillAmount = 1f;
-            food.transform.localScale = Vector3.one;
+            food.transform.localScale = food.transform.localScale / 5f;
             isCutting = false;
             transform.GetChild(0).gameObject.SetActive(false);
             back.interactable = true;
@@ -95,15 +112,22 @@ public class CuttingBoard : MonoBehaviour
         //tambahan
         else
         {
+            pisau.GetComponent<Animator>().StopPlayback();
+            pisau.GetComponent<Animator>().Play("cut");
             GameObject dice = new GameObject("dicePart");
             dice.tag = "Dice";
-            dice.AddComponent<dicedPart>().target = new Vector2(food.transform.localPosition.x + food.GetComponent<RectTransform>().rect.width  - count*5, transform.localPosition.y);
-            dice.AddComponent<RectTransform>().localScale = Vector3.one * 0.7f;
-            dice.AddComponent<Image>().sprite = food.dicedPartSprite;
+            parts.Add(dice);
+            dice.transform.parent = food.transform;
+            dice.transform.position = pisau.transform.position;
+            dice.AddComponent<dicedPart>().target = new Vector2(food.transform.localPosition.x + (food.GetComponent<RectTransform>().rect.width - 31) - count*10f, transform.localPosition.y);
+            dice.AddComponent<RectTransform>().localScale = Vector3.one * 0.3f;
+            dice.AddComponent<Image>().color = Color.clear;
+            dice.GetComponent<Image>().sprite = food.dicedPartSprite;
             dice.GetComponent<Image>().raycastTarget = false;
-            parts.Add(Instantiate(dice, food.transform));
+            //parts.Add(Instantiate(dice, food.transform));
             currentIngredient.fillAmount -= 0.2f;
         }
         count++;
+        pisau.transform.localPosition = new Vector2((food.transform.localPosition.x + food.GetComponent<RectTransform>().rect.width*2.5f) - count * 60f, transform.localPosition.y);
     }
 }

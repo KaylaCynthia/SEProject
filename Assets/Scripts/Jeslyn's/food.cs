@@ -96,6 +96,7 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         if (isParent)
         {
             clone = Instantiate(gameObject,GameObject.Find("FoodInventory").transform);
+            clone.transform.localScale = Vector3.one * 0.5f;
             clone.GetComponent<food>().isParent = false;
             clone.GetComponent<food>().isClicked = true;
             // clone.GetComponent<RectTransform>().localScale = Vector3.one * 0.4f;

@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class CustomerSpawner : MonoBehaviour
 {
+    //modif
     [SerializeField] private List<Sprite> customerSprites;
+    //
     [SerializeField] private GameObject customerPrefab;
     [SerializeField] private order_notes order_note;
     [Serializable] public struct CustomerDialogues
@@ -46,11 +48,13 @@ public class CustomerSpawner : MonoBehaviour
     {
         while (true)
         {
+            //modif
             if (customerSprites.Count == 0)
             {
                 Debug.LogError("No customer prefabs assigned!");
                 yield break;
             }
+            //
 
             int randomIdxSprite = UnityEngine.Random.Range(0, customerSprites.Count);
             int randomIdxDialogue = UnityEngine.Random.Range(0, customerDialogues.Length);
@@ -75,6 +79,7 @@ public class CustomerSpawner : MonoBehaviour
             //customer.transform.SetParent(canvas.transform, false);
 
             customer.transform.GetChild(0).GetComponent<Image>().sprite = customerSprites[randomIdxSprite];
+
             if (PlayerPrefs.GetString("language") == "Indonesia")
             {
                 customer.GetComponent<Customer>().dialogues = currentCustomerDialogues.dialogueIND;
@@ -89,7 +94,7 @@ public class CustomerSpawner : MonoBehaviour
                 customer.GetComponent<Customer>().ingredients = currentOrder.ingredientsENG;
                 order_note.SetOrder(currentOrder.stepsENG, currentOrder.ingredientsENG, currentOrder.toolsENG);
             }
-
+            //
             customer.GetComponent<Customer>().price = currentOrder.price;
             customer.GetComponent<Customer>().OnOrderCompleted += HandleOrderCompleted;
             currentCustomer = customer;

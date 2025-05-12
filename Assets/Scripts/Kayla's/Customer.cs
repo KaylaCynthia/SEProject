@@ -6,6 +6,17 @@ using System.Collections;
 
 public class Customer : MonoBehaviour
 {
+    //tambahan
+    [SerializeField] private List<Color> clothe;
+    [SerializeField] private List<Color> hair;
+    [SerializeField] private List<Image> hair_sprite;
+    [SerializeField] private List<Image> clothe_sprite;
+    [SerializeField] private List<GameObject> eyes;
+    [SerializeField] private List<GameObject> clothes;
+    [SerializeField] private List<GameObject> hair_front;
+    [SerializeField] private List<GameObject> hair_back;
+    [SerializeField] private Animator anim;
+    //
     private TextMeshProUGUI patienceText;
     public float patience = 100f;
     public List<string> dialogues;
@@ -17,6 +28,7 @@ public class Customer : MonoBehaviour
     private TextMeshProUGUI dialogueText;
     [SerializeField] private Button OKButton;
     [SerializeField] private Button WHATButton;
+    [SerializeField] private Button WHATButton1;
     private GameObject dialogueBubble;
     private int currentIdx;
     private bool isWaitingForOrder = false;
@@ -25,8 +37,69 @@ public class Customer : MonoBehaviour
     public event OrderCompleted OnOrderCompleted;
     private CurrencyManager currencyManager;
     private DayReceipt dayReceipt;
+    
+    //tambahan
+    private void Awake()
+    {
+        int rand_hair_color = Random.Range(0, hair.Count);
+        int rand_clothe_color = Random.Range(0, clothe.Count);
+        foreach (Image obj in hair_sprite)
+        {
+            obj.color = hair[rand_hair_color];
+        }
+        foreach (Image obj in clothe_sprite)
+        {
+            obj.color = clothe[rand_clothe_color];
+        }
 
-    private void Start()
+        int rand_eyes = Random.Range(0, eyes.Count);
+        int rand_clothe = Random.Range(0, clothes.Count);
+        int rand_hairB= Random.Range(0, hair_back.Count);
+        int rand_hairF = Random.Range(0, hair_front.Count);
+        for(int i=0;i<eyes.Count;i++)
+        {
+            if (i != rand_eyes)
+            {
+                eyes[i].SetActive(false);
+            }
+        }
+        for (int i = 0; i < clothes.Count; i++)
+        {
+            if (i != rand_clothe)
+            {
+                clothes[i].SetActive(false);
+            }
+        }
+        for (int i = 0; i < hair_back.Count; i++)
+        {
+            if (i != rand_hairB)
+            {
+                hair_back[i].SetActive(false);
+            }
+        }
+        for (int i = 0; i < hair_front.Count; i++)
+        {
+            if (i != rand_hairF)
+            {
+                hair_front[i].SetActive(false);
+            }
+        }
+    }
+    //
+
+    //modif
+/*    private void Start()
+    {
+        StartDialogue();
+        patienceText = GameObject.Find("notes").transform.GetChild(0).GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>();
+        currencyManager = FindObjectOfType<CurrencyManager>();
+        dayReceipt = FindObjectOfType<DayReceipt>();
+        dialogueBubble = transform.Find("DialogueBubble").gameObject;
+        dialogueText = dialogueBubble.transform.Find("DialogueText").GetComponent<TextMeshProUGUI>();
+        StartCoroutine(patienceDrop());
+        SetCurrentOrder();
+    }*/
+    public void startOrdering()
     {
         patienceText = GameObject.Find("notes").transform.GetChild(0).GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>();
         currencyManager = FindObjectOfType<CurrencyManager>();
@@ -37,13 +110,14 @@ public class Customer : MonoBehaviour
         StartCoroutine(patienceDrop());
         SetCurrentOrder();
     }
+    //
 
     Coroutine animate;
     bool isLeaving = false;
     
     private void Update()
     {
-        patienceText.text = patience.ToString() + "%";
+        if(patienceText != null) patienceText.text = patience.ToString() + "%";
         if (!isLeaving && currentIdx == dialogues.Count - 2 && dialogueText.maxVisibleCharacters == dialogues[currentIdx].Length)
         {
             isLeaving = true;
@@ -70,12 +144,14 @@ public class Customer : MonoBehaviour
             if (dialogueText.maxVisibleCharacters < dialogues[currentIdx].Length)
             {
                 dialogueText.maxVisibleCharacters++;
+                anim.SetBool("talk", true);
             }
             else
             {
+                anim.SetBool("talk", false);
                 break;
             }
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.03f);
         }
     }
 
@@ -101,14 +177,22 @@ public class Customer : MonoBehaviour
                 dialogueText.maxVisibleCharacters = 0;
                 StopCoroutine(animate);
                 animate = StartCoroutine(animationText());
-
-                if (currentIdx == dialogues.Count - 3)
+                //modif
+                if (currentIdx == 2)
                 {
+                    WHATButton.gameObject.SetActive(false);
+                    WHATButton1.gameObject.SetActive(true);
+                }
+                else if (currentIdx >= 3)
+                {
+                    CustomerLeaves();
+                    anim.Play("mad");
                     OKButton.interactable = false;
                     WHATButton.interactable = false;
+                    WHATButton1.interactable = false;
                 }
+                //
             }
-
         }
         else
         {
@@ -133,6 +217,7 @@ public class Customer : MonoBehaviour
             }
             else
             {
+                anim.Play("mad");
                 dialogueText.text = dialogues[dialogues.Count - 2].ToString();
                 currencyManager.DecreaseCoins(price);
                 dayReceipt.totalEarnings -= price;
@@ -180,8 +265,19 @@ public class Customer : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         OnOrderCompleted?.Invoke();
+        //modif
+        dialogueBubble.SetActive(false);
+        anim.SetTrigger("exit");
+        Invoke("leaves", 1.5f);
+        //Destroy(gameObject);
+        //
+    }
+    //tambahan
+    void leaves()
+    {
         Destroy(gameObject);
     }
+    //
 
     private IEnumerator CloseDialogue()
     {
@@ -193,6 +289,7 @@ public class Customer : MonoBehaviour
     {
         OKButton.gameObject.SetActive(false);
         WHATButton.gameObject.SetActive(false);
+        WHATButton1.gameObject.SetActive(false);
         currencyManager.AddCoins(price);
         dayReceipt.totalEarnings += price;
         switch_room switch_Room = FindObjectOfType<switch_room>();

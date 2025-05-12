@@ -63,10 +63,6 @@ public class order_notes : MonoBehaviour
 
     public void SetOrder(List<string> step, List<string> ingredient, List<string> tool)
     {
-/*        for (int i = 0; i < checklist.transform.childCount; i++)
-        {
-
-        }*/
         progress = 0;
         int idx1 = 0;
         int idx2 = 0;
@@ -79,10 +75,14 @@ public class order_notes : MonoBehaviour
                 m.text += ingredient[idx1];
                 idx1++;
             }
+            else
+            {
+                break;
+            }
         }
         foreach (TextMeshProUGUI m in steps)
         {
-            if (idx2 < steps.Count)
+            if (idx2 < step.Count)
             {
                 m.text = step[idx2];
                 idx2++;

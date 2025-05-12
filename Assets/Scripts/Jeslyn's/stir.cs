@@ -16,6 +16,7 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
     public bool isDragging = false;
     private Vector2 centerScreenPos;
     private Vector2 previousDirection;
+    public Vector2 currentDirection;
     private bool isPointerOver = false;
     public RectTransform inventory;
     Vector3 temp;
@@ -51,7 +52,7 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
         else if (isDragging)
         {
             Vector2 currentMousePos = Input.mousePosition;
-            Vector2 currentDirection = currentMousePos - centerScreenPos;
+            currentDirection = currentMousePos - centerScreenPos;
 
             if (currentDirection.magnitude > 0.01f) // Prevents NaN or weird values
             {

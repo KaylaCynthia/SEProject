@@ -5,7 +5,7 @@ using UnityEngine;
 public class switch_room : MonoBehaviour
 {
     private Animator moving;
-    [SerializeField] private GameObject currency;
+    //[SerializeField] private GameObject currency;
     [SerializeField] private GameObject order_notes;
     [SerializeField] private GameObject bento;
     [SerializeField] private Canvas currCanvas;
@@ -16,7 +16,7 @@ public class switch_room : MonoBehaviour
         moving = GetComponent<Animator>();
         order_notes.SetActive(false);
         bento.SetActive(false);
-        currency.SetActive(true);
+        //currency.SetActive(true);
     }
 
     public void switchRoom(Canvas canvas)
@@ -31,13 +31,13 @@ public class switch_room : MonoBehaviour
         {
             order_notes.SetActive(false);
             bento.SetActive(false);
-            currency.SetActive(true);
+            //currency.SetActive(true);
         }
         else
         {
             order_notes.SetActive(true);
             bento.SetActive(true);
-            currency.SetActive(false);
+            //currency.SetActive(false);
         }
         currCanvas.sortingOrder = 0;
         //currCanvas.gameObject.SetActive(false);

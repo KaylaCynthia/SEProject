@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ba57d8f0eabf03f4790c92ac0f57a1cd
+guid: e1e47743e6b14aa41b49d5b263a2c3fb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 300
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -149,148 +149,61 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: shelf(1)_0
+      name: laddle_0
       rect:
         serializedVersion: 2
-        x: 331
-        y: 608
-        width: 222
-        height: 251
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 58a4b9c8425456a44b4e410891717c53
-      internalID: -2057567608
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shelf(1)_1
-      rect:
-        serializedVersion: 2
-        x: 651
-        y: 602
-        width: 244
-        height: 213
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 982889e7bd8b0bb4896a7daed698f70f
-      internalID: -679778149
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shelf(1)_2
-      rect:
-        serializedVersion: 2
-        x: 976
-        y: 594
-        width: 206
-        height: 216
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 66a466c54d1df3244aad0dfb526555de
-      internalID: -893296069
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shelf(1)_3
-      rect:
-        serializedVersion: 2
-        x: 191
-        y: 136
-        width: 236
-        height: 246
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9112bade2877128409b530384412b5d4
-      internalID: 499695051
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shelf(1)_4
-      rect:
-        serializedVersion: 2
-        x: 555
-        y: 152
-        width: 92
-        height: 248
+        x: 97
+        y: 94
+        width: 640
+        height: 1091
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      outline:
+      - - {x: 31, y: 161.5}
+        - {x: -9, y: 186.5}
+        - {x: -46, y: 190.5}
+        - {x: -80, y: 172.5}
+        - {x: -106, y: 138.5}
+        - {x: -320, y: 178.5}
+        - {x: -320, y: 545.5}
+        - {x: 320, y: 545.5}
+        - {x: 320, y: 217.5}
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6863e68136555b14b9975a2f6923f478
-      internalID: -1738658756
+      spriteID: 6fe75e7d00027f84583dcc8211185817
+      internalID: -1018100714
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shelf(1)_5
+      name: laddle_1
       rect:
         serializedVersion: 2
-        x: 722
-        y: 127
-        width: 272
-        height: 289
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 25c7022f9bbe11c41b8d884cf565e91b
-      internalID: -1269375535
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shelf(1)_6
-      rect:
-        serializedVersion: 2
-        x: 1055
-        y: 146
-        width: 297
-        height: 330
+        x: 97
+        y: 94
+        width: 640
+        height: 1091
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      outline:
+      - - {x: -320, y: -545.5}
+        - {x: -320, y: 133.5}
+        - {x: -108, y: 153.5}
+        - {x: -81, y: 179.5}
+        - {x: -48, y: 191.5}
+        - {x: -12, y: 185.5}
+        - {x: 22, y: 169.5}
+        - {x: 320, y: 197.5}
+        - {x: 320, y: -545.5}
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc1fa8aa8b2a8b34db26d3170916f8de
-      internalID: 1465297098
+      spriteID: 96dc821d058a6f64f96d568e0335350d
+      internalID: 651881590
       vertices: []
       indices: 
       edges: []
@@ -306,13 +219,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      shelf(1)_0: -2057567608
-      shelf(1)_1: -679778149
-      shelf(1)_2: -893296069
-      shelf(1)_3: 499695051
-      shelf(1)_4: -1738658756
-      shelf(1)_5: -1269375535
-      shelf(1)_6: 1465297098
+      laddle_0: -1018100714
+      laddle_1: -1056896954
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ba57d8f0eabf03f4790c92ac0f57a1cd
+guid: 02c2d1aed4a274546be4fe619dd4c6dc
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -149,97 +149,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: shelf(1)_0
+      name: chicken_0
       rect:
         serializedVersion: 2
-        x: 331
-        y: 608
-        width: 222
-        height: 251
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 58a4b9c8425456a44b4e410891717c53
-      internalID: -2057567608
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shelf(1)_1
-      rect:
-        serializedVersion: 2
-        x: 651
-        y: 602
-        width: 244
-        height: 213
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 982889e7bd8b0bb4896a7daed698f70f
-      internalID: -679778149
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shelf(1)_2
-      rect:
-        serializedVersion: 2
-        x: 976
-        y: 594
-        width: 206
-        height: 216
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 66a466c54d1df3244aad0dfb526555de
-      internalID: -893296069
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shelf(1)_3
-      rect:
-        serializedVersion: 2
-        x: 191
-        y: 136
-        width: 236
-        height: 246
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9112bade2877128409b530384412b5d4
-      internalID: 499695051
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shelf(1)_4
-      rect:
-        serializedVersion: 2
-        x: 555
-        y: 152
-        width: 92
-        height: 248
+        x: 137
+        y: 117
+        width: 1365
+        height: 947
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,41 +163,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6863e68136555b14b9975a2f6923f478
-      internalID: -1738658756
+      spriteID: 8e4f57d13093b8943b242abb873a9da2
+      internalID: 1825140020
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shelf(1)_5
+      name: chicken_1
       rect:
         serializedVersion: 2
-        x: 722
-        y: 127
-        width: 272
-        height: 289
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 25c7022f9bbe11c41b8d884cf565e91b
-      internalID: -1269375535
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shelf(1)_6
-      rect:
-        serializedVersion: 2
-        x: 1055
-        y: 146
-        width: 297
-        height: 330
+        x: 1623
+        y: 226
+        width: 600
+        height: 537
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,8 +184,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc1fa8aa8b2a8b34db26d3170916f8de
-      internalID: 1465297098
+      spriteID: 6722a53f9986618449bb57bf4eef052b
+      internalID: 2091006471
       vertices: []
       indices: 
       edges: []
@@ -306,13 +201,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      shelf(1)_0: -2057567608
-      shelf(1)_1: -679778149
-      shelf(1)_2: -893296069
-      shelf(1)_3: 499695051
-      shelf(1)_4: -1738658756
-      shelf(1)_5: -1269375535
-      shelf(1)_6: 1465297098
+      chicken_0: 1825140020
+      chicken_1: 2091006471
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

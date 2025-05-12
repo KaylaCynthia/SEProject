@@ -7,6 +7,10 @@ using static System.Net.Mime.MediaTypeNames;
 
 public class GameManager : MonoBehaviour
 {
+    //tambahan
+    [SerializeField] private UnityEngine.UI.Image sky_bg;
+    //
+
     [SerializeField] private Slider bgm;
     [SerializeField] private Slider sfx;
     [SerializeField] private AudioMixer mixer;
@@ -21,7 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform customerParent;
 
     private int currentDay = 1;
-    private float currentTime = 540f; // 09:00 in minutes (9 * 60)
+    [SerializeField] private float currentTime = 540f; // 09:00 in minutes (9 * 60)
     private float endTime = 1260f; // 21:00 in minutes (21 * 60)
     private float timeScale = 5f;
     private bool isShopClosed = false;
@@ -148,6 +152,8 @@ public class GameManager : MonoBehaviour
             int hours = Mathf.FloorToInt(roundedTime / 60);
             int minutes = Mathf.FloorToInt(roundedTime % 60);
             TimerText.text = string.Format("{0:00}:{1:00}", hours, minutes);
+            if(currentTime <= 900f) sky_bg.color = Color.Lerp(sky_bg.color,new Color(1, 0.5f, 0.3f,1), (currentTime-roundedTime)*0.03f);
+            else sky_bg.color = Color.Lerp(sky_bg.color,Color.blue, (currentTime-roundedTime)*0.03f);
         }
     }
 }

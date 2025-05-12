@@ -44,7 +44,7 @@ public class Kitchen_Switch : MonoBehaviour
     {
         if (currRoom == null && !isFridge)
         {
-            currency.SetActive(false);
+            //currency.SetActive(false);
             currRoom = room;
             back = new Vector3(0, 0, 0);
 /*            foreach (GameObject stir in cook)
@@ -58,7 +58,7 @@ public class Kitchen_Switch : MonoBehaviour
         }
     }
 
-    [SerializeField] private GameObject currency;
+    //[SerializeField] private GameObject currency;
     public void backToMain(RectTransform room)
     {
         if (currRoom == null)
@@ -72,7 +72,7 @@ public class Kitchen_Switch : MonoBehaviour
     public void openFridge(RectTransform fridge)
     {
         isFridge = !isFridge;
-        currency.SetActive(isFridge);
+        //currency.SetActive(isFridge);
         if (currRoom == null)
         {
             if (isFridge)

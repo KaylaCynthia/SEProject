@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class CurrencyManager : MonoBehaviour
 {
-    public float coins = 100; // Starting coins
+    public float coins = 50000; // Starting coins
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private TextMeshProUGUI coinText1;
 

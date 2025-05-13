@@ -215,6 +215,145 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &9440663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9440664}
+  - component: {fileID: 9440668}
+  - component: {fileID: 9440667}
+  - component: {fileID: 9440666}
+  - component: {fileID: 9440665}
+  m_Layer: 5
+  m_Name: ingredient (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &9440664
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9440663}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 210517549}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 7, y: -47}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!58 &9440665
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9440663}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 50
+--- !u!50 &9440666
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9440663}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0.2
+  m_AngularDrag: 0
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
+--- !u!114 &9440667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9440663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &9440668
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9440663}
+  m_CullTransparentMesh: 1
 --- !u!1 &31028111
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,7 +812,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.25
+  m_fontSize: 19.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2355,6 +2494,7 @@ RectTransform:
   - {fileID: 1736992844}
   - {fileID: 106824238}
   - {fileID: 128879299}
+  - {fileID: 9440664}
   m_Father: {fileID: 1372172195}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4237,7 +4377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab64c0e9bf4840d4fa41642e686712fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodPrice: 2
+  foodPrice: 600
   foodName: Carrot
   slot: {fileID: 0}
   slotPosition: {x: 0, y: 0}
@@ -5078,7 +5218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab64c0e9bf4840d4fa41642e686712fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodPrice: 1.5
+  foodPrice: 400
   foodName: Garlic
   slot: {fileID: 0}
   slotPosition: {x: 0, y: 0}
@@ -8629,7 +8769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab64c0e9bf4840d4fa41642e686712fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodPrice: 1.5
+  foodPrice: 2500
   foodName: MomMilk
   slot: {fileID: 0}
   slotPosition: {x: 0, y: 0}
@@ -9222,7 +9362,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19
+  m_fontSize: 17.25
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11040,7 +11180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab64c0e9bf4840d4fa41642e686712fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodPrice: 1.5
+  foodPrice: 1000
   foodName: Egg
   slot: {fileID: 0}
   slotPosition: {x: 0, y: 0}
@@ -11577,7 +11717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b004c4e6a4dc041905714292c46121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coins: 100
+  coins: 50000
   coinText: {fileID: 1046965185}
   coinText1: {fileID: 66519875}
 --- !u!4 &1023289542
@@ -11853,7 +11993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab64c0e9bf4840d4fa41642e686712fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodPrice: 2
+  foodPrice: 2500
   foodName: ChildMilk
   slot: {fileID: 0}
   slotPosition: {x: 0, y: 0}
@@ -19316,7 +19456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab64c0e9bf4840d4fa41642e686712fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodPrice: 1.5
+  foodPrice: 700
   foodName: Orange
   slot: {fileID: 0}
   slotPosition: {x: 0, y: 0}
@@ -20668,7 +20808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab64c0e9bf4840d4fa41642e686712fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodPrice: 1.5
+  foodPrice: 800
   foodName: Tempeh
   slot: {fileID: 0}
   slotPosition: {x: 0, y: 0}
@@ -20811,7 +20951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab64c0e9bf4840d4fa41642e686712fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodPrice: 1
+  foodPrice: 1500
   foodName: Chicken
   slot: {fileID: 0}
   slotPosition: {x: 0, y: 0}
@@ -21681,7 +21821,7 @@ MonoBehaviour:
     - panci
     - talenan
     - tempat bento
-    price: 10
+    price: 25000
   - orderName_IND: Soup Set (Mom)
     orderName_ENG: 'Soup Set (Mom) '
     ingredientsIND:
@@ -21737,7 +21877,7 @@ MonoBehaviour:
     - panci
     - talenan
     - tempat bento
-    price: 10
+    price: 25000
   - orderName_IND: Soup Set (Kid)
     orderName_ENG: Soup Set (Kid)
     ingredientsIND:
@@ -21793,7 +21933,7 @@ MonoBehaviour:
     - panci
     - talenan
     - tempat bento
-    price: 10
+    price: 15000
   - orderName_IND: Soup Set (Kid)
     orderName_ENG: Soup Set (Kid)
     ingredientsIND:
@@ -21849,7 +21989,7 @@ MonoBehaviour:
     - panci
     - talenan
     - tempat bento
-    price: 10
+    price: 15000
   - orderName_IND: Stir Fry Set (Mom)
     orderName_ENG: Stir Fry Set (Mom)
     ingredientsIND:
@@ -21905,7 +22045,7 @@ MonoBehaviour:
     - penggorengan
     - penggorengan
     - tempat bento
-    price: 10
+    price: 28000
   - orderName_IND: Stir Fry Set (Mom)
     orderName_ENG: Stir Fry Set (Mom)
     ingredientsIND:
@@ -21961,7 +22101,7 @@ MonoBehaviour:
     - penggorengan
     - penggorengan
     - tempat bento
-    price: 10
+    price: 28000
   - orderName_IND: Stir Fry Set (Kid)
     orderName_ENG: Stir Fry Set (Kid)
     ingredientsIND:
@@ -22017,7 +22157,7 @@ MonoBehaviour:
     - penggorengan
     - penggorengan
     - tempat bento
-    price: 10
+    price: 18000
   - orderName_IND: Stir Fry Set (Kid)
     orderName_ENG: Stir Fry Set (Kid)
     ingredientsIND:
@@ -22073,7 +22213,7 @@ MonoBehaviour:
     - penggorengan
     - penggorengan
     - tempat bento
-    price: 10
+    price: 18000
   currentOrder:
     orderName_IND: 
     orderName_ENG: 
@@ -22449,7 +22589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab64c0e9bf4840d4fa41642e686712fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodPrice: 1.5
+  foodPrice: 700
   foodName: Spinach
   slot: {fileID: 0}
   slotPosition: {x: 0, y: 0}
@@ -23837,7 +23977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab64c0e9bf4840d4fa41642e686712fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodPrice: 1.5
+  foodPrice: 800
   foodName: Tofu
   slot: {fileID: 0}
   slotPosition: {x: 0, y: 0}
@@ -24817,8 +24957,8 @@ MonoBehaviour:
     - ChildMilk
     - MomMilk
     allowedFoodImage:
-    - {fileID: -61615323, guid: 6224ea8ae4a4e9d4a8bd6159718db1a6, type: 3}
-    - {fileID: -61615323, guid: 6224ea8ae4a4e9d4a8bd6159718db1a6, type: 3}
+    - {fileID: -1276726917, guid: bc2fcb5243db1c84cbb2a0609e5465bc, type: 3}
+    - {fileID: 827872634, guid: bc2fcb5243db1c84cbb2a0609e5465bc, type: 3}
     isOccupied: 0
   - slotImage: {fileID: 576606397}
     allowedFood:
@@ -24901,11 +25041,11 @@ MonoBehaviour:
   customerServed: 0
   satisfactionRate: []
   displayText:
-  - {fileID: 1032996902}
-  - {fileID: 1371917685}
-  - {fileID: 1041210827}
-  - {fileID: 1088512062}
-  - {fileID: 1366666615}
+  - {fileID: 2142337986}
+  - {fileID: 443451070}
+  - {fileID: 1114478334}
+  - {fileID: 1896524286}
+  - {fileID: 2135926829}
 --- !u!4 &1855933361
 Transform:
   m_ObjectHideFlags: 0
@@ -25126,7 +25266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab64c0e9bf4840d4fa41642e686712fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodPrice: 1.5
+  foodPrice: 500
   foodName: Rice
   slot: {fileID: 0}
   slotPosition: {x: 0, y: 0}
@@ -26371,7 +26511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab64c0e9bf4840d4fa41642e686712fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodPrice: 1
+  foodPrice: 700
   foodName: Banana
   slot: {fileID: 0}
   slotPosition: {x: 0, y: 0}
@@ -28323,7 +28463,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.1
+  m_fontSize: 14.55
   m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 1

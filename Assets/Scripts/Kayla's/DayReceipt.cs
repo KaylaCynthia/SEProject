@@ -16,6 +16,7 @@ public class DayReceipt : MonoBehaviour
 
     public void UpdateReceiptData()
     {
+        netEarnings = CalculateNetEarnings();
         if (displayText.Count >= 5)
         {
             displayText[0].text = totalEarnings.ToString();
@@ -33,6 +34,11 @@ public class DayReceipt : MonoBehaviour
                 displayText[4].text = "N/A";
             }
         }
+    }
+
+    private float CalculateNetEarnings()
+    {
+        return totalEarnings - iExpenses;
     }
 
     private float CalculateAverageSatisfaction()

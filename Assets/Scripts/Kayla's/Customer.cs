@@ -204,11 +204,30 @@ public class Customer : MonoBehaviour
     {
         if (isWaitingForOrder)
         {
-            tips = 5 / 100 * price;
+            if(patience >= 75)
+            {
+                tips = 15 / 100 * price;
+            }
+            else if(patience >= 50)
+            {
+                tips = 10 / 100 * price;
+            }
+            else if(patience >= 25)
+            {
+                tips = 5 / 100 * price;
+            }
+            else
+            {
+                tips = 0;
+            }
+
             dialogueBubble.SetActive(true);
             if(currentOrder == bento)
             {
-                dialogueText.text = dialogues[dialogues.Count - 1].ToString();
+                dialogueText.text = dialogues[dialogues.Count - 1];
+                dialogueText.maxVisibleCharacters = 0;
+                StopCoroutine(animate);
+                animate = StartCoroutine(animationText());
                 currencyManager.AddCoins(tips);
                 dayReceipt.totalEarnings += tips;
                 dayReceipt.customerServed += 1;
@@ -218,7 +237,10 @@ public class Customer : MonoBehaviour
             else
             {
                 anim.Play("mad");
-                dialogueText.text = dialogues[dialogues.Count - 2].ToString();
+                dialogueText.text = dialogues[dialogues.Count - 2];
+                dialogueText.maxVisibleCharacters = 0;
+                StopCoroutine(animate);
+                animate = StartCoroutine(animationText());
                 currencyManager.DecreaseCoins(price);
                 dayReceipt.totalEarnings -= price;
                 dayReceipt.customerServed += 1;
@@ -227,7 +249,7 @@ public class Customer : MonoBehaviour
             }
             currentIdx = dialogues.Count - 1;
             isWaitingForOrder = false;
-            StartCoroutine(CompleteOrderAfterDelay(2f));
+            StartCoroutine(CompleteOrderAfterDelay(3f));
         }
     }
 

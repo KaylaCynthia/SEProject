@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using System.Globalization;
 
 public class Customer : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class Customer : MonoBehaviour
     [SerializeField] private List<GameObject> hair_front;
     [SerializeField] private List<GameObject> hair_back;
     [SerializeField] private Animator anim;
+    [SerializeField] private Animator mainAnim;
+    order_notes notes;
     //
     private TextMeshProUGUI patienceText;
     public float patience = 100f;
@@ -41,6 +44,8 @@ public class Customer : MonoBehaviour
     //tambahan
     private void Awake()
     {
+        mainAnim = GetComponent<Animator>();
+        notes = FindObjectOfType<order_notes>();
         int rand_hair_color = Random.Range(0, hair.Count);
         int rand_clothe_color = Random.Range(0, clothe.Count);
         foreach (Image obj in hair_sprite)
@@ -101,6 +106,7 @@ public class Customer : MonoBehaviour
     }*/
     public void startOrdering()
     {
+        mainAnim.Play("in");
         patienceText = GameObject.Find("notes").transform.GetChild(0).GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>();
         currencyManager = FindObjectOfType<CurrencyManager>();
         dayReceipt = FindObjectOfType<DayReceipt>();
@@ -127,7 +133,7 @@ public class Customer : MonoBehaviour
 
     public void StartDialogue()
     {
-        dialogueBubble.SetActive(true);
+        //dialogueBubble.SetActive(true);
         dialogueText.maxVisibleCharacters = 0;
         dialogueText.text = dialogues[currentIdx];
         animate = StartCoroutine(animationText());
@@ -160,7 +166,7 @@ public class Customer : MonoBehaviour
         while (patience > 0)
         {
             patience--;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
         }
     }
 
@@ -194,9 +200,11 @@ public class Customer : MonoBehaviour
                 //
             }
         }
+        //mod
         else
         {
-            dialogueBubble.SetActive(false);
+            mainAnim.SetTrigger("next");
+            //dialogueBubble.SetActive(false);
         }
     }
 
@@ -204,24 +212,29 @@ public class Customer : MonoBehaviour
     {
         if (isWaitingForOrder)
         {
+            notes.resetChecklist();
             if(patience >= 75)
             {
-                tips = 15 / 100 * price;
+                tips = 15f / 100f * price;
             }
-            else if(patience >= 50)
+            else if(patience < 75 && patience >= 50)
             {
-                tips = 10 / 100 * price;
+                tips = 10f / 100f * price;
             }
-            else if(patience >= 25)
+            else if(patience < 50 && patience >= 25)
             {
-                tips = 5 / 100 * price;
+                tips = 5f / 100f * price;
             }
-            else
+            else if(patience < 25)
             {
-                tips = 0;
+                tips = 0f;
             }
+            Animator tipping = GameObject.Find("Tip").transform.GetChild(0).GetComponent<Animator>();
+            CultureInfo culture = new CultureInfo("id-ID");
+            tipping.GetComponent<TextMeshProUGUI>().text = tips.ToString("C", culture);
+            tipping.Play("in");
 
-            dialogueBubble.SetActive(true);
+            //dialogueBubble.SetActive(true);
             if(currentOrder == bento)
             {
                 dialogueText.text = dialogues[dialogues.Count - 1];
@@ -267,7 +280,7 @@ public class Customer : MonoBehaviour
         {
             currentOrder = "MomStirFryBento";
         }
-        else
+        else if(orderName == "Stir Fry Set (Kid)")
         {
             currentOrder = "ChildStirFryBento";
         }
@@ -288,7 +301,8 @@ public class Customer : MonoBehaviour
         yield return new WaitForSeconds(delay);
         OnOrderCompleted?.Invoke();
         //modif
-        dialogueBubble.SetActive(false);
+        //dialogueBubble.SetActive(false);
+        mainAnim.SetTrigger("next");
         anim.SetTrigger("exit");
         Invoke("leaves", 1.5f);
         //Destroy(gameObject);

@@ -21,6 +21,7 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public bool released = false;
     public bool isCuttable = false;
     public bool isRefundable = true;
+    public Sprite eggSprite;
     public Sprite normalSprite;
     public Sprite dicingSprite;
     public Sprite dicedPartSprite;

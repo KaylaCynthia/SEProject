@@ -89,12 +89,12 @@ public class Kitchen_Switch : MonoBehaviour
     }
     public void openBento(RectTransform bento)
     {
-        if (!isBento)
+        if (!isBento && !isFridge)
         {
             isBento = true;
             switchRoom(bento);
         }
-        else
+        else if(isBento && !isFridge)
         {
             isBento = false;
             backToMain(bento);

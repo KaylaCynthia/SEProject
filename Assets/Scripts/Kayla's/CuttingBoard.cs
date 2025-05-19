@@ -14,6 +14,7 @@ public class CuttingBoard : MonoBehaviour
     [SerializeField] private GameObject pisau;
     List<GameObject> parts = new List<GameObject>();
     [SerializeField] private Button back;
+    order_notes notes;
     bool isCutting = false;
     //
 
@@ -24,6 +25,7 @@ public class CuttingBoard : MonoBehaviour
 
     private void Start()
     {
+        notes = FindObjectOfType<order_notes>();
         inventory = FindObjectOfType<Inventory>();
     }
     //tambahan
@@ -41,6 +43,13 @@ public class CuttingBoard : MonoBehaviour
     }
 
     //
+    //tambahan variabel
+    bool cutChicken = false;
+    bool cutTempe = false;
+    bool cutTofu = false;
+    bool cutCarrot = false;
+    bool minceGarlic = false;
+    //
     private void OnTriggerEnter2D(Collider2D ingredient)
     {
         if (ingredient == null) return;
@@ -50,6 +59,54 @@ public class CuttingBoard : MonoBehaviour
         if(!isCutting && food.isCuttable == true && !ingredient.GetComponent<food>().foodName.StartsWith("Diced"))
         {
             //modif
+            if (food.foodName.Contains("Chicken"))
+            {
+                cutChicken = true;
+            }
+            else if (food.foodName.Contains("Tempeh"))
+            {
+                cutTempe = true;
+            }
+            else if (food.foodName.Contains("Carrot"))
+            {
+                cutCarrot = true;
+            }
+            else if (food.foodName.Contains("Tofu"))
+            {
+                cutTofu = true;
+            }
+            else if (food.foodName.Contains("Garlic"))
+            {
+                minceGarlic = true;
+            }
+            CustomerSpawner cust = FindObjectOfType<CustomerSpawner>();
+            if (cust.currentOrder.orderName_ENG.Contains("Soup Set"))
+            {
+                if (cutChicken && cutCarrot)
+                {
+                    order_notes notes = FindObjectOfType<order_notes>();
+                    notes.check(0);
+                }
+                if (minceGarlic)
+                {
+                    order_notes notes = FindObjectOfType<order_notes>();
+                    notes.check(1);
+                }
+            }
+            else if (cust.currentOrder.orderName_ENG.Contains("Stir Fry Set"))
+            {
+                if (cutChicken && cutTempe && cutTofu && cutCarrot)
+                {
+                    order_notes notes = FindObjectOfType<order_notes>();
+                    notes.check(0);
+                }
+                if (minceGarlic)
+                {
+                    order_notes notes = FindObjectOfType<order_notes>();
+                    notes.check(1);
+                }
+            }
+
             isCutting = true;
             food.isCooking = true;
             inventory.RemoveInventory(ingredient.gameObject);
@@ -63,7 +120,7 @@ public class CuttingBoard : MonoBehaviour
             GetComponent<BoxCollider2D>().enabled = false;
             count = 0;
             currentIngredient = ingredient.gameObject.GetComponent<Image>();
-            pisau.transform.localPosition = new Vector2(food.transform.localPosition.x + food.GetComponent<RectTransform>().rect.width*2.5f, transform.localPosition.y);
+            pisau.transform.localPosition = new Vector2(food.transform.localPosition.x + food.GetComponent<RectTransform>().rect.xMax *2.5f, transform.localPosition.y);
             // ingredient.gameObject.SetActive(false);
             //tambahan
             //StartDicing();
@@ -119,7 +176,7 @@ public class CuttingBoard : MonoBehaviour
             parts.Add(dice);
             dice.transform.parent = food.transform;
             dice.transform.position = pisau.transform.position;
-            dice.AddComponent<dicedPart>().target = new Vector2(food.transform.localPosition.x + (food.GetComponent<RectTransform>().rect.width - 31) - count*10f, transform.localPosition.y);
+            dice.AddComponent<dicedPart>().target = new Vector2(food.transform.localPosition.x + (food.GetComponent<RectTransform>().rect.xMax - 31) - count*10f, transform.localPosition.y);
             dice.AddComponent<RectTransform>().localScale = Vector3.one * 0.3f;
             dice.AddComponent<Image>().color = Color.clear;
             dice.GetComponent<Image>().sprite = food.dicedPartSprite;
@@ -128,6 +185,14 @@ public class CuttingBoard : MonoBehaviour
             currentIngredient.fillAmount -= 0.2f;
         }
         count++;
-        pisau.transform.localPosition = new Vector2((food.transform.localPosition.x + food.GetComponent<RectTransform>().rect.width*2.5f) - count * 60f, transform.localPosition.y);
+        pisau.transform.localPosition = new Vector2((food.transform.localPosition.x + food.GetComponent<RectTransform>().rect.xMax*2.5f) - count * 60f, transform.localPosition.y);
+    }
+    public void resetVar()
+    {
+        cutTofu = false;
+        cutCarrot = false;
+        cutChicken = false;
+        cutTempe = false;
+        minceGarlic = false;
     }
 }

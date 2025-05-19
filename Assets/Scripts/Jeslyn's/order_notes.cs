@@ -14,10 +14,10 @@ public class order_notes : MonoBehaviour
     [SerializeField] private Vector3 nextRot;
     [SerializeField] private Slider progressBar;
     [SerializeField] private float progress = 0;
-    [SerializeField] private GameObject checklist;
     [SerializeField] private List<TextMeshProUGUI> ingredients;
     [SerializeField] private List<TextMeshProUGUI> steps;
     [SerializeField] private List<TextMeshProUGUI> tools;
+    [SerializeField] private List<GameObject> checklists;
     // Start is called before the first frame update
     void Start()
     {
@@ -92,11 +92,27 @@ public class order_notes : MonoBehaviour
                 return;
             }
         }
+
         //will be used later 
 /*        foreach (TextMeshProUGUI m in tools)
         {
             m.text = tool[idx3];
             idx3++;
         }*/
+    }
+    public void check(int idx)
+    {
+        checklists[idx].SetActive(true);
+    }
+    public void uncheck(int idx)
+    {
+        checklists[idx].SetActive(true);
+    }
+    public void resetChecklist()
+    {
+        foreach (GameObject check in checklists)
+        {
+            check.SetActive(false);
+        }
     }
 }

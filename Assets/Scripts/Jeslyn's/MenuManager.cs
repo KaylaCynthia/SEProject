@@ -6,23 +6,32 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static Unity.VisualScripting.Icons;
 
 public class MenuManager : MonoBehaviour
 {
+    [SerializeField] private Sprite indo;
+    [SerializeField] private Sprite eng;
+    [SerializeField] private Image language_button;
     [SerializeField] private Slider bgm;
     [SerializeField] private Slider sfx;
     [SerializeField] private AudioMixer mixer;
     [SerializeField] private GameObject settingPanel;
     [SerializeField] private GameObject languagePanel;
+    [SerializeField] private GameObject newGameButton;
     bool languageAktif = true;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //audio settings
         if (!PlayerPrefs.HasKey("bgm") || !PlayerPrefs.HasKey("sfx"))
         {
             PlayerPrefs.SetFloat("bgm", 1);
             PlayerPrefs.SetFloat("sfx", 1);
+        }
+        if (!PlayerPrefs.HasKey("coins") || !PlayerPrefs.HasKey("day"))
+        {
+            newGameButton.SetActive(false);
         }
         bgm.value = PlayerPrefs.GetFloat("bgm");
         sfx.value = PlayerPrefs.GetFloat("sfx");
@@ -34,6 +43,14 @@ public class MenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PlayerPrefs.GetString("language") == "Indonesia")
+        {
+            language_button.sprite = indo;
+        }
+        else
+        {
+            language_button.sprite = eng;
+        }
         PlayerPrefs.SetFloat("bgm", bgm.value);
         PlayerPrefs.SetFloat("sfx", sfx.value);
         mixer.SetFloat("bgm", Mathf.Log10(PlayerPrefs.GetFloat("bgm")) * 20);
@@ -48,6 +65,8 @@ public class MenuManager : MonoBehaviour
         if (sure.name == "yes")
         {
             //reset data
+            PlayerPrefs.SetFloat("coins", 50000);
+            PlayerPrefs.SetInt("day", 1);
             Debug.Log("reset data");
             startGame();
             //GameObject.Find("AreYouSure").SetActive(false);

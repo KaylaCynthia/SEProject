@@ -110,6 +110,8 @@ public class Bento : MonoBehaviour
     //tambahan buat UI/UX
     public void backToCustomer()
     {
+        CuttingBoard cut = FindObjectOfType<CuttingBoard>();
+        cut.resetVar();
         switch_Room.switchRoom(customerCanvas);
         kitchen_Switch.hideBento(false);
         kitchen_Switch.openBento(bento);

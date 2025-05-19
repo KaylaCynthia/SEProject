@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject customerSpawner;
     [SerializeField] private Transform customerParent;
 
-    private int currentDay = 1;
+    private int currentDay;
     [SerializeField] private float currentTime = 540f; // 09:00 in minutes (9 * 60)
     private float endTime = 1260f; // 21:00 in minutes (21 * 60)
     private float timeScale = 5f;
@@ -32,6 +32,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        //tambahan save day
+        if (PlayerPrefs.HasKey("day"))
+        {
+            currentDay = 1;
+        }
+        //
         if(instance == null)
         {
             instance = this;
@@ -80,6 +86,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        PlayerPrefs.SetInt("day",currentDay);
         PlayerPrefs.SetFloat("bgm", bgm.value);
         PlayerPrefs.SetFloat("sfx", sfx.value);
         mixer.SetFloat("bgm", Mathf.Log10(PlayerPrefs.GetFloat("bgm")) * 20);
@@ -119,6 +126,7 @@ public class GameManager : MonoBehaviour
 
     public void StartNextDay()
     {
+        sky_bg.color = Color.white;
         currentDay++;
         currentTime = 540f;
         isShopClosed = false;
@@ -153,7 +161,7 @@ public class GameManager : MonoBehaviour
             int minutes = Mathf.FloorToInt(roundedTime % 60);
             TimerText.text = string.Format("{0:00}:{1:00}", hours, minutes);
             if(currentTime <= 900f) sky_bg.color = Color.Lerp(sky_bg.color,new Color(1, 0.5f, 0.3f,1), (currentTime-roundedTime)*0.03f);
-            else sky_bg.color = Color.Lerp(sky_bg.color,Color.blue, (currentTime-roundedTime)*0.03f);
+            else sky_bg.color = Color.Lerp(sky_bg.color,new Color(0.5f, 0.02f, 1,1), (currentTime-roundedTime)*0.03f);
         }
     }
 }

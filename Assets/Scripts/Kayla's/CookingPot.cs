@@ -35,6 +35,7 @@ public class CookingPot : MonoBehaviour
     //tambahan
     public bool isReady = false;
     [SerializeField] private List<GameObject> foodPosInPot;
+    order_notes notes;
     [SerializeField] private bool isSaucepan;
     [SerializeField] private stir stirring;
     [SerializeField] private Button back;
@@ -42,6 +43,7 @@ public class CookingPot : MonoBehaviour
 
     private void Start()
     {
+        notes = FindObjectOfType<order_notes>();
         inventory = FindObjectOfType<Inventory>();
         if (timerUI != null)
         {
@@ -76,11 +78,16 @@ public class CookingPot : MonoBehaviour
                 inventory.RemoveInventory(ingredient.gameObject);
 
                 //tambahan, biar ingredientsnya keliatan di dlm pot
+                if (!isSaucepan && FindObjectOfType<Customer>().orderName.Contains("Stir Fry"))
+                {
+                    notes.check(2);
+                }
                 foreach (GameObject food in foodPosInPot)
                 {
                     if (food.GetComponent<Image>().sprite == null || !food.activeSelf)
                     {
-                        food.GetComponent<Image>().sprite = ingredient.GetComponent<Image>().sprite;
+                        if(foodItem.foodName != "Egg") food.GetComponent<Image>().sprite = ingredient.GetComponent<Image>().sprite;
+                        else food.GetComponent<Image>().sprite = foodItem.eggSprite;
                         food.GetComponent<Image>().color = ingredient.GetComponent<Image>().color;
                         food.SetActive(true);
                         break;
@@ -182,6 +189,16 @@ public class CookingPot : MonoBehaviour
             }
             else if (!isSaucepan && progress >= minPerfectCook && progress <= maxPerfectCook)
             {
+                if (FindObjectOfType<Customer>().orderName.Contains("Stir Fry"))
+                {
+                    notes.check(3);
+                    notes.check(4);
+                }
+                else if (FindObjectOfType<Customer>().orderName.Contains("Soup Set"))
+                {
+                    notes.check(2);
+                    notes.check(3);
+                }
                 Recipe dishToSpawn = IngredientsMatch(ingredientsInPot, recipe);
                 if (dishToSpawn.dishPrefab != null)
                 {
@@ -204,7 +221,13 @@ public class CookingPot : MonoBehaviour
             }
             else
             {
-                inventory.AddIngredient(Instantiate(burnedFoodPrefab, spawnPoint));
+                //inventory.AddIngredient(Instantiate(burnedFoodPrefab, spawnPoint));
+                GameObject dish = Instantiate(burnedFoodPrefab, spawnPoint);
+                Vector2 size = GameObject.Find("Slot1").transform.GetChild(0).GetComponent<RectTransform>().rect.size;
+                dish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x);
+                dish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
+                dish.GetComponent<RectTransform>().localScale = Vector3.one;
+                inventory.AddIngredient(dish);
             }
             ingredientsInPot.Clear();
             timerUI.SetActive(false);

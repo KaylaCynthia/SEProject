@@ -35,7 +35,7 @@ public class CustomerSpawner : MonoBehaviour
         public float price;
     }
     [SerializeField] private Orders[] orders;
-    [SerializeField] private Orders currentOrder;
+    public Orders currentOrder;
     [SerializeField] private GameObject currentCustomer;
 
     private void Start()

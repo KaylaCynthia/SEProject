@@ -213,22 +213,6 @@ public class Customer : MonoBehaviour
         if (isWaitingForOrder)
         {
             notes.resetChecklist();
-            if(patience >= 75)
-            {
-                tips = 15f / 100f * price;
-            }
-            else if(patience < 75 && patience >= 50)
-            {
-                tips = 10f / 100f * price;
-            }
-            else if(patience < 50 && patience >= 25)
-            {
-                tips = 5f / 100f * price;
-            }
-            else if(patience < 25)
-            {
-                tips = 0f;
-            }
             Animator tipping = GameObject.Find("Tip").transform.GetChild(0).GetComponent<Animator>();
             CultureInfo culture = new CultureInfo("id-ID");
             tipping.GetComponent<TextMeshProUGUI>().text = tips.ToString("C", culture);
@@ -237,6 +221,22 @@ public class Customer : MonoBehaviour
             //dialogueBubble.SetActive(true);
             if(currentOrder == bento)
             {
+                if(patience >= 75)
+                {
+                    tips = 15f / 100f * price;
+                }
+                else if(patience < 75 && patience >= 50)
+                {
+                    tips = 10f / 100f * price;
+                }
+                else if(patience < 50 && patience >= 25)
+                {
+                    tips = 5f / 100f * price;
+                }
+                else if(patience < 25)
+                {
+                    tips = 0f;
+                }
                 dialogueText.text = dialogues[dialogues.Count - 1];
                 dialogueText.maxVisibleCharacters = 0;
                 StopCoroutine(animate);

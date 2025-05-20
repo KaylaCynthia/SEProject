@@ -37,16 +37,18 @@ public class CustomerSpawner : MonoBehaviour
     [SerializeField] private Orders[] orders;
     public Orders currentOrder;
     [SerializeField] private GameObject currentCustomer;
+    private GameManager gameManager;
 
     private void Start()
     {
         // order_note = FindObjectOfType<order_notes>();
+        gameManager = FindObjectOfType<GameManager>();
         StartCoroutine(SpawnCustomer());
     }
 
-    private IEnumerator SpawnCustomer()
+    public IEnumerator SpawnCustomer()
     {
-        while (true)
+        while (!gameManager.isShopClosed)
         {
             //modif
             if (customerSprites.Count == 0)

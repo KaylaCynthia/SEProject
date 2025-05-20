@@ -21,14 +21,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject receiptPanel;
-    [SerializeField] private GameObject customerSpawner;
     [SerializeField] private Transform customerParent;
 
     private int currentDay;
     [SerializeField] private float currentTime = 540f; // 09:00 in minutes (9 * 60)
     private float endTime = 1260f; // 21:00 in minutes (21 * 60)
     private float timeScale = 5f;
-    private bool isShopClosed = false;
+    public bool isShopClosed = false;
+    private CustomerSpawner customerSpawner;
 
     private void Awake()
     {
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
             currentDay = 1;
         }
         //
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        customerSpawner = FindObjectOfType<CustomerSpawner>();
     }
 
     private void Start()
@@ -115,7 +116,6 @@ public class GameManager : MonoBehaviour
     private void CloseShop()
     {
         isShopClosed = true;
-        customerSpawner.SetActive(false);
     }
 
     private void ShowReceipt()
@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour
         receiptPanel.SetActive(false);
         Time.timeScale = 1f;
         
-        customerSpawner.SetActive(true);
+        StartCoroutine(customerSpawner.SpawnCustomer());
         
         UpdateDayText();
         UpdateTimer();

@@ -40,7 +40,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 2.1666667
+        time: 2.25
         value: 1000
         inSlope: 0
         outSlope: 0
@@ -171,15 +171,6 @@ AnimationClip:
       - serializedVersion: 3
         time: 2
         value: 27
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 2.1666667
-        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -853,7 +844,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 2.1666667
+        time: 2.25
         value: 1000
         inSlope: 0
         outSlope: 0
@@ -984,15 +975,6 @@ AnimationClip:
       - serializedVersion: 3
         time: 2
         value: 27
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 2.1666667
-        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1563,7 +1545,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 1.8333334
+  - time: 2.1666667
     functionName: leave
     data: 
     objectReferenceParameter: {fileID: 0}

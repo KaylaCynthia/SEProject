@@ -173,10 +173,10 @@ TextureImporter:
       name: tempe_2
       rect:
         serializedVersion: 2
-        x: 1610
-        y: 131
-        width: 376
-        height: 576
+        x: 1528
+        y: 80
+        width: 515
+        height: 691
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

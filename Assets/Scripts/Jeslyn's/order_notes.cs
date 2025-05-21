@@ -18,9 +18,11 @@ public class order_notes : MonoBehaviour
     [SerializeField] private List<TextMeshProUGUI> steps;
     [SerializeField] private List<TextMeshProUGUI> tools;
     [SerializeField] private List<GameObject> checklists;
+    TutorialManager tutor;
     // Start is called before the first frame update
     void Start()
     {
+        tutor = FindObjectOfType<TutorialManager>();
         RectTransform = GetComponent<RectTransform>();
         currPos = RectTransform.localPosition;
         //currPos.x = -currPos.x;
@@ -48,6 +50,10 @@ public class order_notes : MonoBehaviour
     bool isOpen = false;
     public void open_note()
     {
+        if (tutor.isTutoring && tutor.idx == 6)
+        {
+            tutor.nextTut();
+        }
         isOpen = !isOpen;
         if (isOpen)
         {

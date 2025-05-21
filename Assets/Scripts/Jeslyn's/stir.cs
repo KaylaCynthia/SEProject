@@ -20,9 +20,11 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
     private bool isPointerOver = false;
     public RectTransform inventory;
     Vector3 temp;
+    TutorialManager tutor;
 
     void Start()
     {
+        tutor = FindObjectOfType<TutorialManager>();
         rectTransform = GetComponent<RectTransform>();
         inventory = GameObject.Find("Inventory").GetComponent<RectTransform>();
         temp = inventory.localPosition;
@@ -79,8 +81,12 @@ public class stir : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
                 pot.StartCooking();
                 inventory.GetComponent<Animator>().SetBool("up", true);
             }
-                if (!IsBoil)
+            if (!IsBoil)
             {
+                if (tutor.isTutoring && tutor.idx == 16)
+                {
+                    tutor.nextTut();
+                }
                 CancelInvoke("stopCooking");
                 Invoke("stopCooking", 1.5f);
             }

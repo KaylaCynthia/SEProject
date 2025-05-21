@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
+    TutorialManager tutor;
     [SerializeField] private float foodPrice;
     public string foodName;
     Inventory inventory;
@@ -30,6 +31,7 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     // Start is called before the first frame update
     void Start()
     {
+        tutor = FindObjectOfType<TutorialManager>();
         normalSprite = GetComponent<Image>().sprite;
         currencyManager = FindObjectOfType<CurrencyManager>();
         inventory = FindObjectOfType<Inventory>();
@@ -139,6 +141,10 @@ public class food : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         }
         else if(isParent && clone.GetComponent<food>().slotPosition != Vector2.zero)
         {
+            if (tutor.isTutoring && tutor.idx == 8)
+            {
+                tutor.nextTut();
+            }
             clone.GetComponent<food>().isClicked = false;
             clone.GetComponent<food>().released = true;
             currencyManager.DecreaseCoins(foodPrice);

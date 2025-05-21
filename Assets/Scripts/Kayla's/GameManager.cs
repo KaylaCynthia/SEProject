@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     //tambahan
     [SerializeField] private UnityEngine.UI.Image sky_bg;
+    public bool timerStart = true;
     //
 
     [SerializeField] private Slider bgm;
@@ -33,9 +34,11 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         //tambahan save day
-        if (PlayerPrefs.HasKey("day"))
+        if (!PlayerPrefs.HasKey("day") || PlayerPrefs.GetInt("day") <= 1)
         {
+            PlayerPrefs.SetInt("day", 1);
             currentDay = 1;
+            timerStart = false;
         }
         //
         if (instance == null)
@@ -84,7 +87,6 @@ public class GameManager : MonoBehaviour
         settingsPanel.SetActive(isSettings);
     }
 
-
     private void Update()
     {
         PlayerPrefs.SetInt("day",currentDay);
@@ -95,7 +97,10 @@ public class GameManager : MonoBehaviour
 
         if (!isShopClosed)
         {
-            currentTime += Time.deltaTime / timeScale * 15;
+            if (timerStart)
+            {
+                currentTime += Time.deltaTime / timeScale * 15;
+            }
 
             if (currentTime >= endTime)
             {
@@ -126,6 +131,8 @@ public class GameManager : MonoBehaviour
 
     public void StartNextDay()
     {
+        CurrencyManager coin = FindObjectOfType<CurrencyManager>();
+        coin.save();
         sky_bg.color = Color.white;
         currentDay++;
         currentTime = 540f;

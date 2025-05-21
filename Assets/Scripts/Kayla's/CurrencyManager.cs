@@ -24,12 +24,14 @@ public class CurrencyManager : MonoBehaviour
     private void Update()
     {
         //coinText.text = coins.ToString();
-        PlayerPrefs.SetFloat("coins",coins);
         CultureInfo culture = new CultureInfo("id-ID");
         coinText.text = coins.ToString("C", culture);
         coinText1.text = coins.ToString("C", culture);
     }
-
+    public void save()
+    {
+        PlayerPrefs.SetFloat("coins",coins);
+    }
     public void DecreaseCoins(float amount)
     {
         coins -= amount;

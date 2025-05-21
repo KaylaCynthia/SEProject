@@ -16,6 +16,7 @@ public class CuttingBoard : MonoBehaviour
     [SerializeField] private Button back;
     order_notes notes;
     bool isCutting = false;
+    TutorialManager tutor;
     //
 
     private food food;
@@ -25,6 +26,7 @@ public class CuttingBoard : MonoBehaviour
 
     private void Start()
     {
+        tutor = FindObjectOfType<TutorialManager>();
         notes = FindObjectOfType<order_notes>();
         inventory = FindObjectOfType<Inventory>();
     }
@@ -134,8 +136,12 @@ public class CuttingBoard : MonoBehaviour
         if(count == 4)
         {
             //tambahan
-/*            pisau.transform.parent = GameObject.Find("Canvas_ALL").transform;
-            pisau.transform.SetSiblingIndex(7);*/
+            if (tutor.isTutoring && tutor.idx == 11)
+            {
+                tutor.nextTut();
+            }
+            /*            pisau.transform.parent = GameObject.Find("Canvas_ALL").transform;
+                        pisau.transform.SetSiblingIndex(7);*/
             pisau.GetComponent<Animator>().Play("cut");
             //GameObject[] unwantedParts = GameObject.FindGameObjectsWithTag("Dice");
             foreach (GameObject part in parts)

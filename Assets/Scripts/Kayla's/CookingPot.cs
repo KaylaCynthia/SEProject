@@ -33,6 +33,7 @@ public class CookingPot : MonoBehaviour
     private float currentCookingTime = 0f;
 
     //tambahan
+    TutorialManager tutor;
     public bool isReady = false;
     [SerializeField] private List<GameObject> foodPosInPot;
     order_notes notes;
@@ -43,6 +44,7 @@ public class CookingPot : MonoBehaviour
 
     private void Start()
     {
+        tutor = FindObjectOfType<TutorialManager>();
         notes = FindObjectOfType<order_notes>();
         inventory = FindObjectOfType<Inventory>();
         if (timerUI != null)
@@ -191,6 +193,10 @@ public class CookingPot : MonoBehaviour
             {
                 if (FindObjectOfType<Customer>().orderName.Contains("Stir Fry"))
                 {
+                    if (tutor.isTutoring && tutor.idx == 17)
+                    {
+                        tutor.nextTut();
+                    }
                     notes.check(3);
                     notes.check(4);
                 }

@@ -157,7 +157,7 @@ TextureImporter:
         width: 1385
         height: 762
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,12 +173,12 @@ TextureImporter:
       name: tahu_1
       rect:
         serializedVersion: 2
-        x: 1582
-        y: 198
-        width: 417
-        height: 667
+        x: 1526
+        y: 133
+        width: 526
+        height: 816
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

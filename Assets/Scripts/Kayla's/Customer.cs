@@ -19,6 +19,7 @@ public class Customer : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private Animator mainAnim;
     order_notes notes;
+    TutorialManager tutor;
     //
     private TextMeshProUGUI patienceText;
     public float patience = 100f;
@@ -44,6 +45,7 @@ public class Customer : MonoBehaviour
     //tambahan
     private void Awake()
     {
+        tutor = FindObjectOfType<TutorialManager>();
         mainAnim = GetComponent<Animator>();
         notes = FindObjectOfType<order_notes>();
         int rand_hair_color = Random.Range(0, hair.Count);
@@ -188,6 +190,10 @@ public class Customer : MonoBehaviour
                 {
                     WHATButton.gameObject.SetActive(false);
                     WHATButton1.gameObject.SetActive(true);
+                    if (tutor.isTutoring)
+                    {
+                        WHATButton1.interactable = false;
+                    }
                 }
                 else if (currentIdx >= 3)
                 {
@@ -221,7 +227,11 @@ public class Customer : MonoBehaviour
             //dialogueBubble.SetActive(true);
             if(currentOrder == bento)
             {
-                if(patience >= 75)
+                if (tutor.isTutoring && tutor.idx == 19)
+                {
+                    tutor.nextTut();
+                }
+                if (patience >= 75)
                 {
                     tips = 15f / 100f * price;
                 }
@@ -323,6 +333,10 @@ public class Customer : MonoBehaviour
 
     public void ToKitchen()
     {
+        if (tutor.isTutoring && tutor.idx == 4)
+        {
+            tutor.nextTut();
+        }
         OKButton.gameObject.SetActive(false);
         WHATButton.gameObject.SetActive(false);
         WHATButton1.gameObject.SetActive(false);

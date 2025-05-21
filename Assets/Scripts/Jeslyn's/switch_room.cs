@@ -10,9 +10,11 @@ public class switch_room : MonoBehaviour
     [SerializeField] private GameObject bento;
     [SerializeField] private Canvas currCanvas;
     [SerializeField] private Canvas nextCanvas;
+    TutorialManager tutor;
     // Start is called before the first frame update
     void Start()
     {
+        tutor = FindObjectOfType<TutorialManager>();
         moving = GetComponent<Animator>();
         order_notes.SetActive(false);
         bento.SetActive(false);

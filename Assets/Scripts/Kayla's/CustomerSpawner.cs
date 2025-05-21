@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class CustomerSpawner : MonoBehaviour
 {
     //modif
+    TutorialManager tutor;
     [SerializeField] private List<Sprite> customerSprites;
     //
     [SerializeField] private GameObject customerPrefab;
@@ -41,9 +42,10 @@ public class CustomerSpawner : MonoBehaviour
 
     private void Start()
     {
+        tutor = FindObjectOfType<TutorialManager>();
         // order_note = FindObjectOfType<order_notes>();
         gameManager = FindObjectOfType<GameManager>();
-        StartCoroutine(SpawnCustomer());
+        //StartCoroutine(SpawnCustomer());
     }
 
     public IEnumerator SpawnCustomer()
@@ -65,6 +67,11 @@ public class CustomerSpawner : MonoBehaviour
 
             currentCustomerDialogues = customerDialogues[randomIdxDialogue];
             currentOrder = orders[randomIdxDialogue];
+            if (tutor.idx == 2 || tutor.idx == 3 || tutor.idx == 4)
+            {
+                currentCustomerDialogues = customerDialogues[4];
+                currentOrder = orders[4];
+            }
             //currentOrder = orders[randomIdxOrder];
             //revisi, kt samain aja index dialog sm ordernya, soalnya kl dibedain nnt ordernya gk sesuai sm dialognya :)
 

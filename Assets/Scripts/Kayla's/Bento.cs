@@ -25,9 +25,10 @@ public class Bento : MonoBehaviour
     private int targetSlotImage;
     private Kitchen_Switch kitchen_Switch;
     [SerializeField] private RectTransform bento;
-
+    TutorialManager tutor;
     private void Start()
     {
+        tutor = FindObjectOfType<TutorialManager>();
         switch_Room = FindObjectOfType<switch_room>();
         inventory = FindObjectOfType<Inventory>();
         kitchen_Switch = FindObjectOfType<Kitchen_Switch>();
@@ -110,6 +111,10 @@ public class Bento : MonoBehaviour
     //tambahan buat UI/UX
     public void backToCustomer()
     {
+        if (tutor.isTutoring && tutor.idx == 18)
+        {
+            tutor.nextTut();
+        }
         CuttingBoard cut = FindObjectOfType<CuttingBoard>();
         cut.resetVar();
         switch_Room.switchRoom(customerCanvas);

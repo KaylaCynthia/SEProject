@@ -5859,7 +5859,7 @@ MonoBehaviour:
   mixer: {fileID: 24100000, guid: e46fa6acc83692c48a8cfcd3cdc042f4, type: 2}
   settingPanel: {fileID: 966318371}
   languagePanel: {fileID: 181107989}
-  newGameButton: {fileID: 1912572883}
+  ContinueButton: {fileID: 1903146907}
 --- !u!4 &1886324163
 Transform:
   m_ObjectHideFlags: 0

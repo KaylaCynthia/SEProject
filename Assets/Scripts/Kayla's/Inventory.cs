@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    [SerializeField] private AudioSource pickup;
     public List<GameObject> slots = new List<GameObject>();
     public bool isFull = false;
     public bool isDeleteMode = false;
@@ -33,6 +34,7 @@ public class Inventory : MonoBehaviour
 
                 Image slotImage = transform.GetChild(idx).GetChild(0).GetComponent<Image>();
                 //tambahan
+                pickup.Play();
                 // ingredientSprite.transform.parent = slotImage.transform;
                 ingredientSprite.GetComponent<food>().slot = slotImage.gameObject;
                 ingredientSprite.GetComponent<food>().slotPosition = slotImage.rectTransform.position;

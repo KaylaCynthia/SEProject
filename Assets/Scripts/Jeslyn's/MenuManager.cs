@@ -18,7 +18,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private AudioMixer mixer;
     [SerializeField] private GameObject settingPanel;
     [SerializeField] private GameObject languagePanel;
-    [SerializeField] private GameObject ContinueButton;
+    //[SerializeField] private GameObject ContinueButton;
     bool languageAktif = true;
     // Start is called before the first frame update
     void Awake()
@@ -29,10 +29,10 @@ public class MenuManager : MonoBehaviour
             PlayerPrefs.SetFloat("bgm", 1);
             PlayerPrefs.SetFloat("sfx", 1);
         }
-        if (!PlayerPrefs.HasKey("coins") || !PlayerPrefs.HasKey("day"))
+/*        if (!PlayerPrefs.HasKey("coins") || !PlayerPrefs.HasKey("day"))
         {
             ContinueButton.SetActive(false);
-        }
+        }*/
         bgm.value = PlayerPrefs.GetFloat("bgm");
         sfx.value = PlayerPrefs.GetFloat("sfx");
 

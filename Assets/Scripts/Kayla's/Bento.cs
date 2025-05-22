@@ -26,6 +26,7 @@ public class Bento : MonoBehaviour
     private Kitchen_Switch kitchen_Switch;
     [SerializeField] private RectTransform bento;
     TutorialManager tutor;
+    [SerializeField] private AudioSource sfx;
     private void Start()
     {
         tutor = FindObjectOfType<TutorialManager>();
@@ -109,6 +110,10 @@ public class Bento : MonoBehaviour
     }
 
     //tambahan buat UI/UX
+    public void sound()
+    {
+        sfx.Play();
+    }
     public void backToCustomer()
     {
         if (tutor.isTutoring && tutor.idx == 18)

@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class CuttingBoard : MonoBehaviour
 {
     //tambahan
+    [SerializeField] private AudioSource cutting;
     [SerializeField] private GameObject pisau;
     List<GameObject> parts = new List<GameObject>();
     [SerializeField] private Button back;
@@ -136,6 +137,7 @@ public class CuttingBoard : MonoBehaviour
         if(count == 4)
         {
             //tambahan
+            cutting.Play();
             if (tutor.isTutoring && tutor.idx == 11)
             {
                 tutor.nextTut();
@@ -175,6 +177,7 @@ public class CuttingBoard : MonoBehaviour
         //tambahan
         else
         {
+            cutting.Play();
             pisau.GetComponent<Animator>().StopPlayback();
             pisau.GetComponent<Animator>().Play("cut");
             GameObject dice = new GameObject("dicePart");
@@ -182,7 +185,7 @@ public class CuttingBoard : MonoBehaviour
             parts.Add(dice);
             dice.transform.parent = food.transform;
             dice.transform.position = pisau.transform.position;
-            dice.AddComponent<dicedPart>().target = new Vector2(food.transform.localPosition.x + (food.GetComponent<RectTransform>().rect.xMax - 31) - count*10f, transform.localPosition.y);
+            dice.AddComponent<dicedPart>().target = new Vector2(food.transform.localPosition.x + (food.GetComponent<RectTransform>().rect.xMax-10) - count*10f, transform.localPosition.y);
             dice.AddComponent<RectTransform>().localScale = Vector3.one * 0.3f;
             dice.AddComponent<Image>().color = Color.clear;
             dice.GetComponent<Image>().sprite = food.dicedPartSprite;
@@ -191,7 +194,7 @@ public class CuttingBoard : MonoBehaviour
             currentIngredient.fillAmount -= 0.2f;
         }
         count++;
-        pisau.transform.localPosition = new Vector2((food.transform.localPosition.x + food.GetComponent<RectTransform>().rect.xMax*2.5f) - count * 60f, transform.localPosition.y);
+        pisau.transform.localPosition = new Vector2((food.transform.localPosition.x + food.GetComponent<RectTransform>().rect.xMax*3f) - count * 50f, transform.localPosition.y);
     }
     public void resetVar()
     {

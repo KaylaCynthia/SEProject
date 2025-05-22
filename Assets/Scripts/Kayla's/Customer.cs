@@ -8,6 +8,11 @@ using System.Globalization;
 public class Customer : MonoBehaviour
 {
     //tambahan
+    [SerializeField] private AudioSource coins;
+    [SerializeField] private AudioSource talking;
+    [SerializeField] private AudioSource mad;
+    [SerializeField] private AudioSource happy;
+
     [SerializeField] private List<Color> clothe;
     [SerializeField] private List<Color> hair;
     [SerializeField] private List<Image> hair_sprite;
@@ -109,6 +114,7 @@ public class Customer : MonoBehaviour
     public void startOrdering()
     {
         mainAnim.Play("in");
+        talking.Play();
         patienceText = GameObject.Find("notes").transform.GetChild(0).GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>();
         currencyManager = FindObjectOfType<CurrencyManager>();
         dayReceipt = FindObjectOfType<DayReceipt>();
@@ -156,6 +162,7 @@ public class Customer : MonoBehaviour
             }
             else
             {
+                talking.Stop();
                 anim.SetBool("talk", false);
                 break;
             }
@@ -177,7 +184,8 @@ public class Customer : MonoBehaviour
         if (currentIdx < dialogues.Count - 1)
         {
             if (dialogueText.maxVisibleCharacters == dialogues[currentIdx].Length)
-            {   
+            {
+                talking.Play();
                 currentIdx++;
                 dialogueText.text = dialogues[currentIdx];
 
@@ -227,20 +235,27 @@ public class Customer : MonoBehaviour
             //dialogueBubble.SetActive(true);
             if(currentOrder == bento)
             {
+                happy.Play();
                 if (tutor.isTutoring && tutor.idx == 19)
                 {
                     tutor.nextTut();
                 }
                 if (patience >= 75)
                 {
+                    coins.Play();
+                    coins.time = 0.1f;
                     tips = 15f / 100f * price;
                 }
                 else if(patience < 75 && patience >= 50)
                 {
+                    coins.Play();
+                    coins.time = 0.1f;
                     tips = 10f / 100f * price;
                 }
                 else if(patience < 50 && patience >= 25)
                 {
+                    coins.Play();
+                    coins.time = 0.1f;
                     tips = 5f / 100f * price;
                 }
                 else if(patience < 25)
@@ -259,6 +274,7 @@ public class Customer : MonoBehaviour
             }
             else
             {
+                mad.Play();
                 anim.Play("mad");
                 dialogueText.text = dialogues[dialogues.Count - 2];
                 dialogueText.maxVisibleCharacters = 0;
@@ -337,6 +353,8 @@ public class Customer : MonoBehaviour
         {
             tutor.nextTut();
         }
+        coins.Play();
+        coins.time = 0.1f;
         OKButton.gameObject.SetActive(false);
         WHATButton.gameObject.SetActive(false);
         WHATButton1.gameObject.SetActive(false);

@@ -33,6 +33,7 @@ public class CookingPot : MonoBehaviour
     private float currentCookingTime = 0f;
 
     //tambahan
+    [SerializeField] private AudioSource cookingSfx;
     TutorialManager tutor;
     public bool isReady = false;
     [SerializeField] private List<GameObject> foodPosInPot;
@@ -120,6 +121,7 @@ public class CookingPot : MonoBehaviour
         if (!isCooking && ingredientsInPot.Count > 0 /*tambahan biar limit jumlah ingredients sesuai jumlah foodPosInPot*/ && ingredientsInPot.Count <= foodPosInPot.Count)
         {
             //tambahan
+            cookingSfx.Play();
             //back.interactable = false;
             back.gameObject.SetActive(false);
             stirring.stir_value = 0f;
@@ -148,6 +150,7 @@ public class CookingPot : MonoBehaviour
             isCooking = false;
 
             //tambahan
+            cookingSfx.Stop();
             stirring.inventory.GetComponent<Animator>().SetBool("up", false);
             Invoke("goBack", 1f);
             foreach (GameObject food in foodPosInPot)

@@ -8,6 +8,7 @@ using static System.Net.Mime.MediaTypeNames;
 public class GameManager : MonoBehaviour
 {
     //tambahan
+    [SerializeField] private AudioSource endDay;
     [SerializeField] private UnityEngine.UI.Image sky_bg;
     public bool timerStart = true;
     //
@@ -125,6 +126,7 @@ public class GameManager : MonoBehaviour
 
     private void ShowReceipt()
     {
+        endDay.Play();
         Time.timeScale = 0f;
         receiptPanel.SetActive(true);
     }

@@ -812,7 +812,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.1
+  m_fontSize: 28.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6947,8 +6947,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1853981154}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.455, y: 0.57533294}
-  m_AnchorMax: {x: 0.90300006, y: 0.82100004}
+  m_AnchorMin: {x: 0.45601934, y: 0.573151}
+  m_AnchorMax: {x: 0.90300006, y: 0.86502504}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6972,7 +6972,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -146950336, guid: 1033d5c9de97cb042baf1b8e2b3cdf20, type: 3}
+  m_Sprite: {fileID: -1691183782, guid: 01b41f63fcef3a544b0d7f8bd958071c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8288,6 +8288,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 690148726}
+  m_CullTransparentMesh: 1
+--- !u!1 &697022624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 697022625}
+  - component: {fileID: 697022627}
+  - component: {fileID: 697022626}
+  m_Layer: 5
+  m_Name: stirfry
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &697022625
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697022624}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.2, y: 2.75, z: 2.75}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1526676487}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -36.7937, y: -3.2475586}
+  m_SizeDelta: {x: -710.39435, y: -377.60742}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &697022626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697022624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -1390756840, guid: 204a802e508badf41a7b48215616abd4, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &697022627
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697022624}
   m_CullTransparentMesh: 1
 --- !u!1 &701486247
 GameObject:
@@ -9986,7 +10061,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19.75
+  m_fontSize: 21.3
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10542,6 +10617,7 @@ MonoBehaviour:
   - {fileID: 275891395}
   - {fileID: 1246649502}
   - {fileID: 1434395288}
+  isOpen: 0
 --- !u!1 &871738541
 GameObject:
   m_ObjectHideFlags: 0
@@ -12703,6 +12779,7 @@ GameObject:
   - component: {fileID: 1027342852}
   - component: {fileID: 1027342854}
   - component: {fileID: 1027342853}
+  - component: {fileID: 1027342855}
   m_Layer: 5
   m_Name: bubble
   m_TagString: Untagged
@@ -12768,6 +12845,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027342851}
   m_CullTransparentMesh: 1
+--- !u!95 &1027342855
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027342851}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3dafcc452e2943e47b94da89fd00d5b4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1030358977
 GameObject:
   m_ObjectHideFlags: 0
@@ -15564,7 +15662,8 @@ MonoBehaviour:
     dishPrefab: {fileID: 3719313072970455709, guid: e63cb29680c4ce64db240497da4893a8, type: 3}
   cookingTime: 3
   isCooking: 0
-  burnedFoodPrefab: {fileID: 2913592896387112675, guid: b5ee20b6f45201f4c8c8c57af8b81f96, type: 3}
+  burnedFoodPrefab_soup: {fileID: 2913592896387112675, guid: b5ee20b6f45201f4c8c8c57af8b81f96, type: 3}
+  burnedFoodPrefab_stirfry: {fileID: 2913592896387112675, guid: 0daae0601785dc54f8b38d3f8b368461, type: 3}
   spawnPoint: {fileID: 165158200}
   cookingTimerSlider: {fileID: 332554507}
   timerUI: {fileID: 486987579}
@@ -15576,6 +15675,7 @@ MonoBehaviour:
   isSaucepan: 1
   stirring: {fileID: 1517037150}
   back: {fileID: 192314975}
+  stirfry: {fileID: 0}
 --- !u!1 &1186652109
 GameObject:
   m_ObjectHideFlags: 0
@@ -18749,7 +18849,8 @@ MonoBehaviour:
     dishPrefab: {fileID: 749518038320526491, guid: 041e3c545e048fa4bb7b1b357d1831c2, type: 3}
   cookingTime: 7
   isCooking: 0
-  burnedFoodPrefab: {fileID: 2913592896387112675, guid: b5ee20b6f45201f4c8c8c57af8b81f96, type: 3}
+  burnedFoodPrefab_soup: {fileID: 2913592896387112675, guid: b5ee20b6f45201f4c8c8c57af8b81f96, type: 3}
+  burnedFoodPrefab_stirfry: {fileID: 2913592896387112675, guid: 0daae0601785dc54f8b38d3f8b368461, type: 3}
   spawnPoint: {fileID: 165158200}
   cookingTimerSlider: {fileID: 279142156}
   timerUI: {fileID: 1058178846}
@@ -18761,6 +18862,7 @@ MonoBehaviour:
   isSaucepan: 0
   stirring: {fileID: 313491777}
   back: {fileID: 1594427581}
+  stirfry: {fileID: 697022626}
 --- !u!1 &1389776139
 GameObject:
   m_ObjectHideFlags: 0
@@ -21080,6 +21182,7 @@ RectTransform:
   m_Children:
   - {fileID: 1188511682}
   - {fileID: 1372172195}
+  - {fileID: 697022625}
   - {fileID: 999953128}
   - {fileID: 1058178847}
   - {fileID: 124780187}
@@ -26222,14 +26325,14 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1027342852}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1822690590
 MonoBehaviour:
@@ -26753,7 +26856,7 @@ MonoBehaviour:
     - StirFrySet
     allowedFoodImage:
     - {fileID: -146950336, guid: 1033d5c9de97cb042baf1b8e2b3cdf20, type: 3}
-    - {fileID: 1421991251, guid: 6224ea8ae4a4e9d4a8bd6159718db1a6, type: 3}
+    - {fileID: -1691183782, guid: 01b41f63fcef3a544b0d7f8bd958071c, type: 3}
     isOccupied: 0
   - slotImage: {fileID: 1564480772}
     allowedFood:
@@ -30863,7 +30966,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.7
+  m_fontSize: 20.85
   m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 1

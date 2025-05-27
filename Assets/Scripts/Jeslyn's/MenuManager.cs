@@ -12,13 +12,15 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private Sprite indo;
     [SerializeField] private Sprite eng;
+    [SerializeField] private Sprite start_ind;
+    [SerializeField] private Sprite start_eng;
     [SerializeField] private Image language_button;
     [SerializeField] private Slider bgm;
     [SerializeField] private Slider sfx;
     [SerializeField] private AudioMixer mixer;
     [SerializeField] private GameObject settingPanel;
     [SerializeField] private GameObject languagePanel;
-    //[SerializeField] private GameObject ContinueButton;
+    [SerializeField] private Image start_button;
     bool languageAktif = true;
     // Start is called before the first frame update
     void Awake()
@@ -46,10 +48,12 @@ public class MenuManager : MonoBehaviour
         if (PlayerPrefs.GetString("language") == "Indonesia")
         {
             language_button.sprite = indo;
+            start_button.sprite = start_ind;
         }
         else
         {
             language_button.sprite = eng;
+            start_button.sprite = start_eng;
         }
         PlayerPrefs.SetFloat("bgm", bgm.value);
         PlayerPrefs.SetFloat("sfx", sfx.value);

@@ -135,7 +135,7 @@ public class TutorialManager : MonoBehaviour
             else if(idx == 10)
             {
                 order_notes note = FindObjectOfType<order_notes>();
-                note.open_note();
+                if(note.isOpen) note.open_note();
             }
             //index next = 2 - 4, 6 - 20
             if (idx == 2 || idx == 3 || idx == 4 || idx == 5 || idx == 6 || idx == 7 || idx == 8 || idx == 9 || idx == 10 ||

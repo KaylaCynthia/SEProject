@@ -47,7 +47,7 @@ public class order_notes : MonoBehaviour
         //arrow.rotation = Quaternion.Euler(currRot);
     }
 
-    bool isOpen = false;
+    public bool isOpen = false;
     public void open_note()
     {
         if (tutor.isTutoring && tutor.idx == 6)

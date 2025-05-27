@@ -19,7 +19,8 @@ public class CookingPot : MonoBehaviour
     public List<Recipe> recipe;
     [SerializeField] private float cookingTime = 7f;
     public bool isCooking = false;
-    public GameObject burnedFoodPrefab;
+    public GameObject burnedFoodPrefab_soup;
+    public GameObject burnedFoodPrefab_stirfry;
     public Transform spawnPoint;
 
     [SerializeField] private Slider cookingTimerSlider;
@@ -41,6 +42,7 @@ public class CookingPot : MonoBehaviour
     [SerializeField] private bool isSaucepan;
     [SerializeField] private stir stirring;
     [SerializeField] private Button back;
+    [SerializeField] private Image stirfry;
     //[SerializeField] private GameObject buttonCook;
 
     private void Start()
@@ -139,7 +141,11 @@ public class CookingPot : MonoBehaviour
 
     //tambahan buat Invoke
     void goBack()
-    { 
+    {
+        if (!isSaucepan)
+        {
+            stirfry.color = Color.clear;
+        }
         FindObjectOfType<Kitchen_Switch>().backToMain(transform.parent.GetComponent<RectTransform>());
         back.gameObject.SetActive(true);
     }
@@ -179,10 +185,15 @@ public class CookingPot : MonoBehaviour
                     dish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
                     dish.GetComponent<RectTransform>().localScale = Vector3.one;
                     inventory.AddIngredient(dish);
+                    if (FindObjectOfType<Customer>().orderName.Contains("Soup Set"))
+                    {
+                        notes.check(2);
+                        notes.check(3);
+                    }
                 }
                 else
                 {
-                    GameObject dish = Instantiate(burnedFoodPrefab, spawnPoint);
+                    GameObject dish = Instantiate(burnedFoodPrefab_soup, spawnPoint);
                     Vector2 size = GameObject.Find("Slot1").transform.GetChild(0).GetComponent<RectTransform>().rect.size;
                     dish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x);
                     dish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
@@ -203,11 +214,6 @@ public class CookingPot : MonoBehaviour
                     notes.check(3);
                     notes.check(4);
                 }
-                else if (FindObjectOfType<Customer>().orderName.Contains("Soup Set"))
-                {
-                    notes.check(2);
-                    notes.check(3);
-                }
                 Recipe dishToSpawn = IngredientsMatch(ingredientsInPot, recipe);
                 if (dishToSpawn.dishPrefab != null)
                 {
@@ -220,7 +226,7 @@ public class CookingPot : MonoBehaviour
                 }
                 else
                 {
-                    GameObject dish = Instantiate(burnedFoodPrefab, spawnPoint);
+                    GameObject dish = Instantiate(burnedFoodPrefab_stirfry, spawnPoint);
                     Vector2 size = GameObject.Find("Slot1").transform.GetChild(0).GetComponent<RectTransform>().rect.size;
                     dish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x);
                     dish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
@@ -231,7 +237,7 @@ public class CookingPot : MonoBehaviour
             else
             {
                 //inventory.AddIngredient(Instantiate(burnedFoodPrefab, spawnPoint));
-                GameObject dish = Instantiate(burnedFoodPrefab, spawnPoint);
+                GameObject dish = Instantiate(burnedFoodPrefab_stirfry, spawnPoint);
                 Vector2 size = GameObject.Find("Slot1").transform.GetChild(0).GetComponent<RectTransform>().rect.size;
                 dish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x);
                 dish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
@@ -258,6 +264,7 @@ public class CookingPot : MonoBehaviour
             }
             if (!stirring.pointerUp)
             {
+                stirfry.color = Color.Lerp(stirfry.color, Color.white,(currentCookingTime/minPerfectCook)/110);
                 currentCookingTime += Time.deltaTime;
                 cookingTimerSlider.value = currentCookingTime;
             }

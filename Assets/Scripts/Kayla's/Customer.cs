@@ -229,8 +229,6 @@ public class Customer : MonoBehaviour
             notes.resetChecklist();
             Animator tipping = GameObject.Find("Tip").transform.GetChild(0).GetComponent<Animator>();
             CultureInfo culture = new CultureInfo("id-ID");
-            tipping.GetComponent<TextMeshProUGUI>().text = tips.ToString("C", culture);
-            tipping.Play("in");
 
             //dialogueBubble.SetActive(true);
             if(currentOrder == bento)
@@ -262,6 +260,8 @@ public class Customer : MonoBehaviour
                 {
                     tips = 0f;
                 }
+                tipping.GetComponent<TextMeshProUGUI>().text = tips.ToString("C", culture);
+                tipping.Play("in");
                 dialogueText.text = dialogues[dialogues.Count - 1];
                 dialogueText.maxVisibleCharacters = 0;
                 StopCoroutine(animate);

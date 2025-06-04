@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.Audio;
 using static System.Net.Mime.MediaTypeNames;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -87,10 +88,16 @@ public class GameManager : MonoBehaviour
         pausePanel.SetActive(!isSettings);
         settingsPanel.SetActive(isSettings);
     }
+    
+    public void OnReturnToMainMenuClicked()
+    {
+        SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 1f;
+    }
 
     private void Update()
     {
-        PlayerPrefs.SetInt("day",currentDay);
+        PlayerPrefs.SetInt("day", currentDay);
         PlayerPrefs.SetFloat("bgm", bgm.value);
         PlayerPrefs.SetFloat("sfx", sfx.value);
         mixer.SetFloat("bgm", Mathf.Log10(PlayerPrefs.GetFloat("bgm")) * 20);

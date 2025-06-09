@@ -158,11 +158,11 @@ public class GameManager : MonoBehaviour
 
     private void UpdateDayText()
     {
-        if (!PlayerPrefs.HasKey("language") || PlayerPrefs.GetString("language") == "Indonesia")
+        if (PlayerPrefs.GetString("language") == "Indonesia")
         {
             DayText.text = "Hari: " + currentDay.ToString();
         }
-        else if (PlayerPrefs.GetString("language") == "English")
+        else if (!PlayerPrefs.HasKey("language") || PlayerPrefs.GetString("language") == "English")
         {
             DayText.text = "Day: " + currentDay.ToString();
         }

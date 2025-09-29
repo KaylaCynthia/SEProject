@@ -1,5 +1,16 @@
+<table>
+  <tr>
+    <td align="left" width="50%">
+      <img width="100%" alt="gif1" src="https://github.com/user-attachments/assets/845029eb-1805-43c8-920e-d0dd0433405b">
+    </td>
+    <td align="right" width="50%">
+      <img width="100%" alt="gif2" src="https://github.com/user-attachments/assets/4d7e8ad2-cc41-47f5-9a08-ebe4d37a15ae">
+    </td>
+  </tr>
+</table>
+
 <p align="center">
-  <img width="100%" alt="gif" src="https://github.com/user-attachments/assets/845029eb-1805-43c8-920e-d0dd0433405b">
+  <img width="100%" alt="gif" src="">
 </p>
 
 ## 

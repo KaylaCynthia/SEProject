@@ -1,17 +1,8 @@
-<!-- <table>
-  <tr>
-    <td align="left" width="50%">
-      <img width="100%" alt="gif1" src="">
-    </td>
-    <td align="right" width="50%">
-      <img width="100%" alt="gif2" src="">
-    </td>
-  </tr>
-</table>
-
 <p align="center">
-  <img width="100%" alt="gif3" src="">
+  <img width="100%" alt="gif" src="https://github.com/user-attachments/assets/845029eb-1805-43c8-920e-d0dd0433405b">
 </p> -->
+
+## 
 
 ##  📜Scripts and Features
 
@@ -29,21 +20,20 @@ This heartwarming game can simulate chopping vegetables, cooking soups or stews,
 
 <br>
 
-
-## 🔴About
-GrowYuk!, a cozy cooking simulation management game where you can cook and serve food for pregnant women, or women with children. This game aims to educate the amount of nutrition needed to foster pregnancy or toddlers. I wrote the inventory system, cooking mechanics, daily receipt mechanics, customer spawner, bento managing, and game manager. This are some details of GrowYuk!'s development presented.
+## 👤Developer & Roles
+- Natania Maria Kurniawan (Team Manager)
+- Angelina Jennifer Graciela (Game Designer)
+- Clarabelle Karin Wijaya (Game Artist)
+- Jeslyn Marianne Djunaidy (UI/UX Programmer)
+- Kayla Cynthia Lukman (Game Programmer)
 <br>
 
 ## 🕹️Play Game
 Currently in development phase
 <br>
 
-## 👤Developer & Contributions
-- Natania Maria Kurniawan (Team Manager)
-- Angelina Jennifer Graciela (Game Designer)
-- Clarabelle Karin Wijaya (Game Artist)
-- Jeslyn Marianne Djunaidy (UI/UX Programmer)
-- Kayla Cynthia Lukman (Game Programmer)
+## 🔴About
+GrowYuk!, a cozy cooking simulation management game where you can cook and serve food for pregnant women, or women with children. This game aims to educate the amount of nutrition needed to foster pregnancy or toddlers. I wrote the inventory system, cooking mechanics, daily receipt mechanics, customer spawner, bento managing, and game manager. This are some details of GrowYuk!'s development presented. I used 14 days to complete all the mechanics that are needed for the game (8 hours a day).
 <br>
 
 ## 📂Files description

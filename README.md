@@ -9,11 +9,9 @@
   </tr>
 </table>
 
-<p align="center">
+<!-- <p align="center">
   <img width="100%" alt="gif" src="">
-</p>
-
-## 
+</p> -->
 
 ##  📜Scripts and Features
 
